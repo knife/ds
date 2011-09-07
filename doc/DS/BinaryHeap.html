@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>Class: DS::BinaryHeap</title>
+
+  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body id="top" class="class">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="../ds/trees/binary_heap_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="ds/trees/binary_heap.rb">ds/trees/binary_heap.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link">CompleteBinaryTree</p>
+        
+      </div>
+      
+
+      
+
+      
+
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-new">::new</a></li>
+          
+          <li><a href="#method-i-heapify">#heapify</a></li>
+          
+          <li><a href="#method-i-heapify-21">#heapify!</a></li>
+          
+          <li><a href="#method-i-insert">#insert</a></li>
+          
+          <li><a href="#method-i-relation">#relation</a></li>
+          
+          <li><a href="#method-i-set_relation">#set_relation</a></li>
+          
+          <li><a href="#method-i-to_a">#to_a</a></li>
+          
+        </ul>
+      </div>
+      
+
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="../DS.html">DS</a></li>
+        
+          <li><a href="../DS/Array2D.html">DS::Array2D</a></li>
+        
+          <li><a href="../DS/BinaryHeap.html">DS::BinaryHeap</a></li>
+        
+          <li><a href="../DS/BinarySearchTree.html">DS::BinarySearchTree</a></li>
+        
+          <li><a href="../DS/BinaryTree.html">DS::BinaryTree</a></li>
+        
+          <li><a href="../DS/CompleteBinaryTree.html">DS::CompleteBinaryTree</a></li>
+        
+          <li><a href="../DS/CyclicList.html">DS::CyclicList</a></li>
+        
+          <li><a href="../DS/Digraph.html">DS::Digraph</a></li>
+        
+          <li><a href="../DS/Edge.html">DS::Edge</a></li>
+        
+          <li><a href="../DS/ExpandableArray.html">DS::ExpandableArray</a></li>
+        
+          <li><a href="../DS/Graph.html">DS::Graph</a></li>
+        
+          <li><a href="../DS/GraphAsList.html">DS::GraphAsList</a></li>
+        
+          <li><a href="../DS/GraphAsMatrix.html">DS::GraphAsMatrix</a></li>
+        
+          <li><a href="../DS/GraphAsTriMatrix.html">DS::GraphAsTriMatrix</a></li>
+        
+          <li><a href="../DS/List.html">DS::List</a></li>
+        
+          <li><a href="../DS/ListElement.html">DS::ListElement</a></li>
+        
+          <li><a href="../DS/Queue.html">DS::Queue</a></li>
+        
+          <li><a href="../DS/Ring.html">DS::Ring</a></li>
+        
+          <li><a href="../DS/Stack.html">DS::Stack</a></li>
+        
+          <li><a href="../DS/Tree.html">DS::Tree</a></li>
+        
+          <li><a href="../DS/TreeWalker.html">DS::TreeWalker</a></li>
+        
+          <li><a href="../DS/TriMatrix.html">DS::TriMatrix</a></li>
+        
+          <li><a href="../Array.html">Array</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="class">DS::BinaryHeap</h1>
+
+    <div id="description" class="description">
+      
+    </div><!-- description -->
+
+    
+    
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
+
+      
+
+      
+
+      
+      <!-- Attributes -->
+      <div id="attribute-method-details" class="method-section section">
+        <h3 class="section-header">Attributes</h3>
+
+        
+        <div id="data-attribute-method" class="method-detail">
+          <a name="data"></a>
+          
+          <a name="data="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">data</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+      </div><!-- attribute-method-details -->
+      
+
+      <!-- Methods -->
+      
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
+
+      
+        <div id="new-method" class="method-detail ">
+          <a name="method-c-new"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Create new Heap from args. Given block sets the heap relation. Default heap
+relation is Max Heap.</p>
+            
+
+            
+            <div class="method-source-code" id="new-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-ivar">@relation</span> = <span class="ruby-identifier">block</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@relation</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">parent</span>,<span class="ruby-identifier">child</span><span class="ruby-operator">|</span> <span class="ruby-identifier">parent</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">child</span>}
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">heapify!</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- new-method -->
+
+      
+      </div><!-- public-class-method-details -->
+    
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="heapify-method" class="method-detail ">
+          <a name="method-i-heapify"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">heapify</span><span
+              class="method-args">(i)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Maintain heap condition for i node. O(log)</p>
+            
+
+            
+            <div class="method-source-code" id="heapify-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">heapify</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-identifier">left</span> =  <span class="ruby-identifier">left_index</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-identifier">left</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+
+  <span class="ruby-identifier">right</span> = <span class="ruby-identifier">right_index</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-identifier">right</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">right</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+
+  <span class="ruby-identifier">largest</span> = [<span class="ruby-identifier">i</span>,<span class="ruby-identifier">left</span>,<span class="ruby-identifier">right</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">relation</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)<span class="ruby-operator">?</span><span class="ruby-value">-1</span><span class="ruby-operator">:</span><span class="ruby-value">1</span>}.<span class="ruby-identifier">first</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">largest</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">i</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>], <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">largest</span>] = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">largest</span>], <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-identifier">heapify</span>(<span class="ruby-identifier">largest</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- heapify-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- heapify-method -->
+
+      
+        <div id="heapify-21-method" class="method-detail ">
+          <a name="method-i-heapify-21"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">heapify!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Arranges data in heap. O(n)</p>
+            
+
+            
+            <div class="method-source-code" id="heapify-21-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">heapify!</span>
+  (<span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>).<span class="ruby-identifier">downto</span>(<span class="ruby-value">0</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">heapify</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- heapify-21-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- heapify-21-method -->
+
+      
+        <div id="insert-method" class="method-detail ">
+          <a name="method-i-insert"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">insert</span><span
+              class="method-args">(value)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>Inserts new value to heap maintaining the heap relation. Returns heap
+itself. O(log)</p>
+            
+
+            
+            <div class="method-source-code" id="insert-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">child</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+  <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent_index</span>(<span class="ruby-identifier">child</span>)
+
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">parent</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">relation</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-identifier">child</span>)
+    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">child</span>], <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">parent</span>] = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">parent</span>], <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">child</span>]
+    <span class="ruby-identifier">child</span> = <span class="ruby-identifier">parent</span>
+    <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent_index</span>(<span class="ruby-identifier">child</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- insert-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- insert-method -->
+
+      
+        <div id="relation-method" class="method-detail ">
+          <a name="method-i-relation"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">relation</span><span
+              class="method-args">(parent,child)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="relation-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">relation</span>(<span class="ruby-identifier">parent</span>,<span class="ruby-identifier">child</span>)
+  <span class="ruby-ivar">@relation</span>.<span class="ruby-identifier">call</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-identifier">parent</span>],<span class="ruby-ivar">@data</span>[<span class="ruby-identifier">child</span>])
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- relation-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- relation-method -->
+
+      
+        <div id="set_relation-method" class="method-detail ">
+          <a name="method-i-set_relation"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">set_relation</span><span
+              class="method-args">(&relation)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="set_relation-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_relation</span>(&amp;<span class="ruby-identifier">relation</span>)
+  <span class="ruby-ivar">@relation</span> = <span class="ruby-identifier">relation</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- set_relation-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- set_relation-method -->
+
+      
+        <div id="to_a-method" class="method-detail ">
+          <a name="method-i-to_a"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">to_a</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="to_a-source">
+<pre>
+<span class="ruby-comment"># File ds/trees/binary_heap.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>
+  <span class="ruby-ivar">@data</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- to_a-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- to_a-method -->
+
+      
+      </div><!-- public-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
+
+  </div><!-- documentation -->
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

@@ -1,0 +1,25 @@
+Wed, 07 Sep 2011 18:43:04 +0200
+./ds/trees/tree_walker.rb	Wed, 07 Sep 2011 14:13:05 +0200
+./ext/ext.rb	Wed, 07 Sep 2011 18:40:36 +0200
+./ds/lists/ring.rb	Wed, 07 Sep 2011 14:31:10 +0200
+./ds/matrixes/tri_matrix.rb	Wed, 07 Sep 2011 18:12:55 +0200
+./ds/graphs/edge.rb	Tue, 06 Sep 2011 10:40:52 +0200
+./ds.rb	Tue, 06 Sep 2011 11:42:45 +0200
+./ds/graphs/graph_as_matrix.rb	Wed, 07 Sep 2011 18:40:22 +0200
+./ds/matrixes/array_2d.rb	Wed, 07 Sep 2011 13:44:19 +0200
+./ds/graphs/graph_as_tri_matrix.rb	Tue, 06 Sep 2011 10:38:18 +0200
+./ds/trees/complete_binary_tree.rb	Wed, 07 Sep 2011 14:20:10 +0200
+./ds/matrixes/expandable_array.rb	Fri, 02 Sep 2011 11:42:46 +0200
+./ds/queues/queue.rb	Wed, 07 Sep 2011 17:34:47 +0200
+./ds/stacks/stack.rb	Wed, 07 Sep 2011 14:43:18 +0200
+./ds/trees/binary_tree.rb	Sun, 04 Sep 2011 10:58:10 +0200
+./ds/graphs/digraph.rb	Tue, 06 Sep 2011 10:41:41 +0200
+./ds/trees/binary_heap.rb	Mon, 05 Sep 2011 10:45:08 +0200
+./ds/graphs/graph.rb	Tue, 06 Sep 2011 10:40:27 +0200
+./ds/lists/list.rb	Wed, 07 Sep 2011 18:00:38 +0200
+./ds/version.rb	Wed, 07 Sep 2011 18:42:16 +0200
+./ds/trees/binary_search_tree.rb	Wed, 07 Sep 2011 18:40:20 +0200
+./ds/trees/tree.rb	Wed, 07 Sep 2011 14:55:50 +0200
+./ds/graphs/graph_as_list.rb	Mon, 05 Sep 2011 11:32:32 +0200
+./ds/lists/cyclic_list.rb	Wed, 07 Sep 2011 14:31:11 +0200
+./ds/lists/list_element.rb	Wed, 07 Sep 2011 14:26:32 +0200
