@@ -25,7 +25,7 @@ module DS
     def BinarySearchTree.valid?(other)
       walker = TreeWalker.new(other)
       walker.traverse(:inorder)
-      walker.visited.sorted?
+      walker.visited.extend(ArrayX).sorted?
     end
 
   end

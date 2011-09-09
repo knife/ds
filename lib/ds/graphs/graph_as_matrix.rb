@@ -22,8 +22,8 @@ module DS
     #Adds new edges to graph.
     def add_edges(edges)
       for e in edges
-        x = @map.push_uniq e.from
-        y = @map.push_uniq e.to
+        x = @map.extend(ArrayX).push_uniq e.from
+        y = @map.extend(ArrayX).push_uniq e.to
 
         @store[x,y] = e.weight
         @max = [@max, x, y].max

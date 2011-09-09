@@ -1,6 +1,6 @@
 require "ds/version"
 
-require "ext/ext"
+require "ds/ext/ext"
 
 require "ds/matrixes/expandable_array"
 require "ds/matrixes/array_2d"
@@ -19,6 +19,7 @@ require "ds/trees/binary_tree"
 require "ds/trees/binary_search_tree"
 require "ds/trees/complete_binary_tree"
 require "ds/trees/binary_heap"
+require "ds/trees/trie"
 
 require "ds/lists/list_element"
 require "ds/lists/list"
