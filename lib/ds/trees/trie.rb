@@ -1,14 +1,10 @@
 module DS
   class Trie < Tree
 
-    @@alphabet = %w{- a b c d e f g h i j k l m n o p q r s t u v w y z} 
-
-    def self.set_alphabet(arr)
-      @@alphabet = arr
-    end
+    ALPHABET = %w{- a b c d e f g h i j k l m n o p q r s t u v w x y z} 
 
     def alphabet
-      @@alphabet
+      self.class::ALPHABET
     end
     
     def initialize(value=nil)
@@ -27,16 +23,17 @@ module DS
     protected
     def key(chr)
       raise ArgumentError,  "Argument chr is nil" unless chr
-      alphabet.index(chr) || -1  
+      k=alphabet.index(chr) 
+      if k.nil?
+        raise ArgumentError, "Character not found"
+      else
+        k
+      end
     end
 
     def priv_insert(s, value)
       if s.empty?
-        if @data.nil?
-          @data = [value]
-        else
-          @data.push value
-        end
+          @data = value
       else
         index = key(s.first)
         subtree = if @children[index]
