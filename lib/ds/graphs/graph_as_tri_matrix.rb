@@ -4,7 +4,7 @@ module DS
     def initialize(edges)
       @store = TriMatrix.new(0)
       @max = 0
-      @map = []
+      @map = OrderedSet.new
       @v = 0
 
       add_edges(edges)

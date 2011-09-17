@@ -5,6 +5,8 @@ describe ArrayX do
   before do
     @asc = [1,3,6,9,10,13].extend(ArrayX)
     @desc = [9,8,7,7,4,3,2].extend(ArrayX)
+    @short = [1,2].extend(ArrayX)
+
     @empty = [].extend(ArrayX)
     @one = [3].extend(ArrayX)
     @not_sorted = [3,4,9,1,1,2,8].extend(ArrayX)
@@ -15,16 +17,27 @@ describe ArrayX do
     assert @asc.sorted?
     assert @empty.sorted?
     assert @one.sorted?
+    assert @short.sorted? 
     refute @not_sorted.sorted?
+    assert @desc.sorted?(:desc)
+    refute @desc.sorted?(:asc)
+    assert @asc.sorted?(:asc)
+    refute @asc.sorted?(:desc)
+    refute @not_sorted.sorted?(:des)
+    refute @not_sorted.sorted?(:asc)
+    assert @short.sorted?(:asc)
+    refute @short.sorted?(:desc)
+    
+    assert @one.sorted?(:asc)
+    assert @one.sorted?(:asc)
+
   end
 
-  it "#push_uniq should push element only if it is not already in array."  do
-    @asc.size.must_equal 6 
-    @asc.push_uniq(3).must_equal 1
-    @asc.size.must_equal 6
-
-    @empty.push_uniq(3).must_equal 0
-    @empty.must_equal [3]
+  it "#tail should return array without first element." do
+    @asc.tail.must_equal [3,6,9,10,13]
+    @short.tail.must_equal [2]
+    @one.tail.must_equal []
+    @empty.tail.must_be_nil
   end
 end
 

@@ -7,7 +7,7 @@ module DS
 
       @v = 0 #vertex count
        
-      @map = [] #maps objects to matrix indexes.
+      @map = OrderedSet.new #maps objects to matrix indexes.
 
       add_edges(edges)
     end
@@ -22,8 +22,8 @@ module DS
     #Adds new edges to graph.
     def add_edges(edges)
       for e in edges
-        x = @map.extend(ArrayX).push_uniq e.from
-        y = @map.extend(ArrayX).push_uniq e.to
+        x = @map.push e.from
+        y = @map.push e.to
 
         @store[x,y] = e.weight
         @max = [@max, x, y].max
@@ -34,9 +34,11 @@ module DS
     #Returns all neighbors for given vertex.
     def neighbors(v)
       n = []
+      vertexes = @map.to_a
       v = @map.index(v)
+
       0.upto @max do |i|
-        n << @map[i] if @store[v,i] > 0
+        n << vertexes[i] if @store[v,i] > 0
       end
       n
     end
@@ -46,8 +48,10 @@ module DS
       v1 = @map.index(x)
       v2 = @map.index(y)
 
+      vertexes = @map.to_a
+
       @store[v1,v2] = 0
-      if (degree @map[@max]) == 0
+      if (degree vertexes[@max]) == 0
         @max -= 1
       end
       @v -= 1
@@ -58,7 +62,7 @@ module DS
       s = @map.index x
       t = @map.index y
       if @store[s,t] > 0
-        Edge.new(@map[s], @map[t], @store[s,t])
+        Edge.new(x, y, @store[s,t])
       else
         nil
       end
@@ -98,14 +102,16 @@ module DS
 
     #Vertex iterator
     def each_vertex
-      (0..@max).each {|v| yield @map[v]}
+      vertexes = @map.to_a
+      (0..@max).each {|v| yield vertexes[v]}
     end
 
     #Edge iterator
     def each_edge
+      vertexes = @map.to_a
       for v0 in 0..@max
         for v1 in 0..v0-1
-          yield Edge.new(@map[v0],@map[v1],@store[v0,v1]) if @store[v0,v1] > 0
+          yield Edge.new(vertexes[v0],vertexes[v1],@store[v0,v1]) if @store[v0,v1] > 0
         end    
       end    
     end
