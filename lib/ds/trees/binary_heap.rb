@@ -46,7 +46,7 @@ module DS
       self
     end
 
-    #Maintain heap condition for i node.
+    #Maintains heap condition for i node.
     #O(log)
     def heapify(i)
       left =  left_index(i)
@@ -62,6 +62,25 @@ module DS
         heapify(largest)
       end
     end
+
+    #Removes element from heap maintaining heap relation.
+    def shift
+      result = @data.shift
+      @data.unshift @data.pop
+      heapify(0)
+      result
+    end
+
+    def length
+      @data.size 
+    end
+
+    alias :size :length
+
+    def empty?
+      @data.empty?
+    end
+
 
     def to_a
       @data

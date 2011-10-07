@@ -18,6 +18,11 @@ describe BinaryHeap do
     @heap.insert(13).to_a.must_equal  [13,9,11,5,8,4,6]
   end
 
+  it "#shift should remove element from heap maintaining heap relation." do
+    @heap.shift.must_equal 11
+    @heap.to_a.must_equal [9,8,6,5,4]
+  end
+
   describe "Minimal Heap" do
 
     before do
