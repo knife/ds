@@ -2,6 +2,5 @@ require 'rubygems'
 require 'minitest/autorun'
 require "minitest/benchmark" if ENV['BENCH']
 
-require 'ds'
+require 'lib/ds.rb'
 include DS
-
