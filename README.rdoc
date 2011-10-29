@@ -1,5 +1,4 @@
-DS -- Data Structures
-==============
+= DS
 
 DS provides some common data structures not implement in Ruby natively.
 The DS supports the folowing data structures:
@@ -31,14 +30,12 @@ The DS supports the folowing data structures:
   * Digraph
 
 
-Instalation
------------
+== Instalation
   
   gem install ds
 
 
-Usage
------
+== Usage
 
   require 'ds'
   stack = DS::Stack.new
@@ -47,7 +44,7 @@ Usage
   include DS
   stack = Stack.new
 
-## Queues
+=== Queues
 
 Creating new queue (implemented as Array).  
   q = Queue.new
@@ -80,7 +77,7 @@ Priority queue (implemented as Heap)
   q.peek => :nevermind
 
 
-## Pair
+=== Pair
   
   p = Pair.new(1,2)
   p.key => 1
@@ -90,7 +87,7 @@ Priority queue (implemented as Heap)
 
 
 
-## Stack
+=== Stack
 
   stack = Stack.new
   stack.empty? # true
@@ -102,7 +99,7 @@ Priority queue (implemented as Heap)
   stack.pop # :second
   stack.size # 1
 
-## List
+=== List
 
   arr = [1,2,3,4]
   list = List.new(arr)
@@ -126,7 +123,7 @@ Enumerable methods are also available
   list.inject(0){ |mem, var| mem = mem + var } # 10
   list.find { |e| e == 1.0  } # 1
 
-## Ring
+=== Ring
 
   ring = Ring.from_array([1,2,3,4,5,6,7])
   ring.looped? => true
@@ -134,7 +131,7 @@ Enumerable methods are also available
   ring.eliminate_by(2) => 1
   
 
-## Trees
+=== Trees
 
 Building tree
 
@@ -177,7 +174,7 @@ Postorder
 Preorder
   walker.traverse(:inorder) # [9,5,11,2,12,8,14]
 
-## Binary Heap
+=== Binary Heap
 
   heap = BinaryHeap.new(9,8,4,5,11,6)
   heap.shift #returns max element (11)
@@ -189,13 +186,13 @@ Min Heap
   heap.shift #returns min element (4)
 
 
-## Trie - allows very quick search: O(k) where k is word length.
+=== Trie - allows very quick search: O(k) where k is word length.
   trie = Trie.new
   trie.insert("thing",true);
   trie.find("thing")  # =>  true
 
 
-## Graph
+=== Graph
 
 Creating new Graph
     
