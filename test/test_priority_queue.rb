@@ -47,7 +47,68 @@ describe PriorityQueue do
       x = @queue.dequeue
       @queue.length.must_equal 1
       x.must_equal :important
+
+    end
+  end
+
+  describe "Priority Queue with duplications" do
+
+    before do
+      @dup_queue = PriorityQueue.new
+      @dup_queue.enqueue :same_important, 2
+      @dup_queue.enqueue :important, 2
+      @dup_queue.enqueue :not_important, 1
     end
 
+    it "should not be empty" do
+      refute @dup_queue.empty?
+      @dup_queue.length.must_equal 3
+    end
+
+    it "#peek should return element with highest priority." do
+      assert [:important,:same_important].include? @dup_queue.peek
+      @dup_queue.dequeue
+      assert [:important,:same_important].include? @dup_queue.peek
+      @dup_queue.dequeue
+      @dup_queue.peek.must_equal :not_important
+    end
+
+    it "#enqueue and #push should add element to priority queue." do
+      @dup_queue.push :nevermind, 0
+      @dup_queue.push :another_important, 2
+      @dup_queue.length.must_equal 5
+    end
+
+    it "#dequeue and #shift should remove element with highest priority." do
+      x  = @dup_queue.dequeue
+      assert [:important,:same_important].include? x
+      @dup_queue.length.must_equal 2
+
+      @dup_queue.enqueue :important, 2
+      @dup_queue.length.must_equal 3
+      @dup_queue.dequeue.must_equal :important
+      @dup_queue.dequeue.must_equal :important
+    end
+  end
+
+
+  if ENV['BENCH']
+    describe "performance" do
+
+      before do
+        @queue = PriorityQueue.new
+        11000.times do |n|
+          @queue.push :elem, rand(10)
+        end
+      end
+
+
+      bench_performance_constant "#shift should be const operation.", 0.99 do |n|
+        n.times do
+          @queue.shift
+        end
+      end
+
+    end
   end
 end

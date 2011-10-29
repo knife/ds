@@ -1,0 +1,216 @@
+DS -- Data Structures
+==============
+
+DS provides some common data structures not implement in Ruby natively.
+The DS supports the folowing data structures:
+* Stacks
+  * Stack
+* Queues
+  * Queue
+  * PriorityQueue
+* Pair
+* Lists
+  * List
+  * CyclicList
+  * Ring
+* Trees
+  * Tree
+  * BinaryTree
+  * CompleteBinaryTree
+  * BinarySearchTree
+  * BinaryHeap
+  * Trie
+* Matrixes
+  * Array2D
+  * ExpandableArray
+  * TriMatrix
+* Sets
+  * OrderedSet
+* Graphs
+  * Graph
+  * Digraph
+
+
+Instalation
+-----------
+  
+  gem install ds
+
+
+Usage
+-----
+
+  require 'ds'
+  stack = DS::Stack.new
+
+  # To not have to type "DS::" before each class, use:
+  include DS
+  stack = Stack.new
+
+## Queues
+
+Creating new queue (implemented as Array).  
+  q = Queue.new
+
+Creating new queue (implemented as List)
+  q1 = Queue.create
+  q1 = Queue.new(:list)
+
+  q.enqueue :first
+  q.enqueue :second
+  q.peek => :first
+  q.length => 2
+  q.empty? => false
+  q.dequeue => :first
+  q.dequeue => :second
+  q.empty? => true
+
+
+Priority queue (implemented as Heap)
+  
+  q = PriorityQueue.new
+  q.push(:important, 3)
+  q.push(:very_important, 5)
+  q.push(:nevermind, 1)
+
+  q.shift => :very_important
+  q.peek => :important
+  q.length=> 2
+  q.shift => :important
+  q.peek => :nevermind
+
+
+## Pair
+  
+  p = Pair.new(1,2)
+  p.key => 1
+  p.first => 1
+  p.value => 2
+  p.second => 2
+
+
+
+## Stack
+
+  stack = Stack.new
+  stack.empty? # true
+  stack.push :first
+  stack.push :second
+  stack.size # 2
+  stack.peek # :second
+  stack.empty? # false
+  stack.pop # :second
+  stack.size # 1
+
+## List
+
+  arr = [1,2,3,4]
+  list = List.new(arr)
+  list.length # 4
+  list.append(5).to_a # [1,2,3,4,5] 
+  list.prepend(0).to_a # [0,1,2,3,4,5]
+  list.remove(2).to_a # [0,1,3,4,5]
+
+  list.head.data # 0
+  list.tail.data # 5
+
+  list.first # 0
+  list.last # 5
+
+  list.ziped? # false
+  list.reverse!.to_a # [5,4,3,1,0]
+
+Enumerable methods are also available
+  
+  list.map{ |e| e } # [1,2,3,4]
+  list.inject(0){ |mem, var| mem = mem + var } # 10
+  list.find { |e| e == 1.0  } # 1
+
+## Ring
+
+  ring = Ring.from_array([1,2,3,4,5,6,7])
+  ring.looped? => true
+  ring.cycle_size => 7
+  ring.eliminate_by(2) => 1
+  
+
+## Trees
+
+Building tree
+
+  t = Tree.new(2)
+  c1 = t << 5
+  c2 = t << 8
+  t << 9
+
+  c1 << 4
+  c1 << 10
+  c3 = c2 << 3
+
+  t.leaf? # false
+  c3.leaf? # true
+
+  t.height # 3
+  t.width # 3
+  t.leaf_count # 4
+  
+  t.mirror! # mirrors tree
+  t.levels # {1=>1,2=>3, 
+
+Enumerable Module is included.
+  t.map{ |node| node.data } => [2,5,8,9,4,10,3]
+
+Binary Tree
+  
+  bin_tree = BinaryTree.new
+  [2,5,8,9,11,12,14].each{|x| @bin_tree.insert(x)}
+
+  bin_tree.left # 5
+  bin_tree.right # 8
+
+
+
+Iterating (in BFS order)
+  t.each{ |x| x }
+Postorder  
+  walker.traverse(:postorder) #  [9,11,5,12,14,8,2]
+Preorder
+  walker.traverse(:inorder) # [9,5,11,2,12,8,14]
+
+## Binary Heap
+
+  heap = BinaryHeap.new(9,8,4,5,11,6)
+  heap.shift #returns max element (11)
+  heap.to_a [9,8,6,5,4]
+
+Min Heap
+  arr = [9,8,4,5,11,6]
+  min_heap =  BinaryHeap.new(*arr){|parent,child| parent < child}
+  heap.shift #returns min element (4)
+
+
+## Trie - allows very quick search: O(k) where k is word length.
+  trie = Trie.new
+  trie.insert("thing",true);
+  trie.find("thing")  # =>  true
+
+
+## Graph
+
+Creating new Graph
+    
+  edges = []
+  edges << Edge.new('Lukas','Marc')
+  edges << Edge.new('Lukas','Tom')
+  edges << Edge.new('Marc','Jack')
+  edges << Edge.new('Tom','Marc')
+  graph = Graph.create(edges)
+
+Methods:
+
+  graph.vertex_size => 4
+  graph.degree("Marc") => 3
+  graph.edge?("Marc","Tom") => true
+  graph.edge?("Tom","Jack") => false
+
+

@@ -272,19 +272,19 @@ module DS
 
     #Prints list.
     def print
-      each { |e| p }
+      each { |e| p e }
     end
 
     #Converts list to array.
     def to_a
-      map { |e| e}
+      map { |e| e.data}
     end
 
     #Default list iterator.
     def each
       elem = @head
       while elem
-        yield elem.data
+        yield elem
         elem = elem.next
       end
     end

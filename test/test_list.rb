@@ -115,8 +115,9 @@ describe List do
   end
 
   it "should include Enumerable methods." do
-    @list.map{ |e| e }.must_equal [1,2,3,4]
-    @list.inject(0){ |mem, var| mem = mem + var }.must_equal 10
+    @list.map{ |e| e.data }.must_equal [1,2,3,4]
+    @list.inject(0){ |mem, var| mem = mem + var.data }.must_equal 10
+    @list.find { |e| e.data == 1.0  }.data.must_equal 1
   end
 
 
@@ -134,5 +135,35 @@ describe List do
 
   end
 
+  if ENV['BENCH']
+    describe "performance" do
+
+      before do
+        10000.times do |n|
+          @list.append 4
+        end
+      end
+
+
+      bench_performance_constant "#append should be const operation.", 0.999 do |n|
+        n.times do
+          @list.append 3
+        end
+      end
+
+      bench_performance_constant "#prepend should be const operation.", 0.999 do |n|
+        n.times do
+          @list.prepend 3
+        end
+      end
+
+      bench_performance_linear "#reverse! should be linear operation.", 0.999 do |n|
+        list =List.from_array((1..n).to_a.sort_by{rand})
+        list.reverse!
+      end
+
+    end
   end
+
+end
 

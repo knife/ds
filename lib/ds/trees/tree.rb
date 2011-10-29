@@ -64,7 +64,7 @@ module DS
     end
   
     #Returns subtree height.
-    def h(tree)
+    def self.h(tree)
       unless tree.leaf?
         tree.children.map{|t| h(t) }.max + 1
       else
@@ -74,12 +74,12 @@ module DS
 
     #Returns tree height.
     def height
-      h(self)
+      Tree.h(self)
     end
 
     #Returns node which lies closest to the root. 
     def lowest_height
-      find{ |node| node.leaf? }.data
+      find{ |node| node.leaf? }
     end
 
     #Mirrors tree.

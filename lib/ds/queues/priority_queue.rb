@@ -1,7 +1,7 @@
 module DS
   class PriorityQueue < Queue
 
-    #Create new priority queue.Internaly uses list to store elements.
+    #Create new priority queue. Internaly uses heap to store elements.
     def initialize
       @store = BinaryHeap.new {|parent,child| parent.key >= child.key}
     end
@@ -15,9 +15,13 @@ module DS
     
     alias :push :enqueue
 
-    #Removes element from queue with highest priority. 
-    def dequeue 
-      @store.shift.value
+    #Removes element with highest priority from queue . 
+    def dequeue
+      if x = @store.shift
+        x.value
+      else
+        x
+      end
     end
 
     alias :shift :dequeue

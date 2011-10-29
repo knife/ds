@@ -81,7 +81,6 @@ module DS
       @data.empty?
     end
 
-
     def to_a
       @data
     end

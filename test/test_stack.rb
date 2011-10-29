@@ -66,7 +66,6 @@ describe  Stack do
           end
         end
 
-
         bench_performance_constant "#pop should be const operation.", 0.999 do |n|
           n.times do
             @stack.pop
@@ -81,7 +80,6 @@ describe  Stack do
 
       end
     end
-
   end
 end
 

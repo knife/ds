@@ -13,7 +13,7 @@ module DS
       end
     end
     
-    #Create new queue.Internaly uses list to store elements.
+    #Create new queue. Internaly uses list to store elements.
     def Queue.create
       new(:list)
     end

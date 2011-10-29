@@ -48,6 +48,7 @@ describe TreeWalker do
 
     it "should traverse in BFS order." do
       @bin_walker.traverse(:bfs).must_equal [2,5,8,9,11,12,14]
+
     end
 
     it "should traverse in postorder." do

@@ -35,7 +35,7 @@ describe BinaryTree do
   end
 
   it "#lowest_height should return node which lies closest to the root." do
-    assert @bin_tree.lowest_height.must_equal 9 
+    assert @bin_tree.lowest_height.data.must_equal 9 
   end
 
   it "#mirror should mirror tree." do
