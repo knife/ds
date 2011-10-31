@@ -10,20 +10,35 @@ describe CompleteBinaryTree do
     @tree.root.must_equal 1
   end
 
+  it "#left_index should return index of left child" do
+    @tree.left_index(0).must_equal 1
+    @tree.left_index(1).must_equal 3
+  end
+
+  it "#right_index should return index of left child" do
+    @tree.right_index(0).must_equal 2
+    @tree.right_index(1).must_equal 4
+  end
+
+  it "#parent_index should return index of left child" do
+    @tree.parent_index(1).must_equal 0
+    @tree.parent_index(3).must_equal 1
+  end
+
   it "#left should return left child" do
-    @tree.left(1).must_equal 2
-    @tree.left(2).must_equal 4
+    @tree.left(0).must_equal 2
+    @tree.left(1).must_equal 4
   end
 
   it "#right should return right child" do
-    @tree.right(1).must_equal 3
-    @tree.right(2).must_equal 5
+    @tree.right(0).must_equal 3
+    @tree.right(1).must_equal 5
   end
 
   it "#parent should return parent." do
+    @tree.parent(3).must_equal 2
     @tree.parent(4).must_equal 2
-    @tree.parent(5).must_equal 2
-    @tree.parent(2).must_equal 1
+    @tree.parent(1).must_equal 1
   end
 
 end

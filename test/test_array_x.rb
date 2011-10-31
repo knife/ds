@@ -32,6 +32,13 @@ describe ArrayX do
     assert @one.sorted?(:asc)
 
   end
+  
+  it "#duplications? should check if array has duplicates." do
+    refute @asc.duplications?
+    assert @desc.duplications?
+    assert @not_sorted.duplications?
+    refute @empty.duplications?
+  end
 
   it "#tail should return array without first element." do
     @asc.tail.must_equal [3,6,9,10,13]

@@ -14,10 +14,22 @@ module DS
       heapify!
     end
 
+    #Create new Maximum Heap from args.
+    def BinaryHeap.max(*args)
+      new(*args){|parent,child| parent >= child}
+    end
+
+    #Create new Minimum Heap from args.
+    def BinaryHeap.min(*args)
+      new(*args){|parent,child| parent < child}
+    end
+
+    #Sets relation for Heap.
     def set_relation(&relation)
       @relation = relation
     end
 
+    #Evaluates Heap relation.
     def relation(parent,child)
       @relation.call(@data[parent],@data[child])
     end
@@ -28,22 +40,6 @@ module DS
       (@data.size/2).downto(0) do |i|
         heapify(i)
       end
-    end
-
-    #Inserts new value to heap maintaining the heap relation.
-    #Returns heap itself.
-    #O(log)
-    def insert(value)
-      @data.push value
-      child = @data.size-1
-      parent = parent_index(child)
-
-      while parent >= 0 and !relation(parent,child)
-        @data[child], @data[parent] = @data[parent], @data[child]
-        child = parent
-        parent = parent_index(child)
-      end
-      self
     end
 
     #Maintains heap condition for i node.
@@ -70,6 +66,24 @@ module DS
       heapify(0)
       result
     end
+
+    #Inserts new value to heap maintaining the heap relation.
+    #Returns heap itself.
+    #O(log)
+    def insert(value)
+      @data.push value
+      child = @data.size-1
+      parent = parent_index(child)
+
+      while parent >= 0 and !relation(parent,child)
+        @data[child], @data[parent] = @data[parent], @data[child]
+        child = parent
+        parent = parent_index(child)
+      end
+      self
+    end
+
+
 
     def length
       @data.size 

@@ -13,9 +13,9 @@ describe Array2D do
       @zero_matrix[0,0].must_equal 0 
     end
 
-    it "#to_a should return matrix flattened to array." do
-      @zero_matrix.to_a.must_be_instance_of Array
-      @zero_matrix.to_a.must_equal [0,0,0,0] 
+    it "#flatten should return matrix flattened to array." do
+      @zero_matrix.flatten.must_be_instance_of Array
+      @zero_matrix.flatten.must_equal [0,0,0,0] 
     end
 
     it "#should extend magically." do
@@ -35,9 +35,9 @@ describe Array2D do
       refute @discrete_matrix[0,0]
     end
 
-    it "#to_a should return matrix flattened to array." do
-      @discrete_matrix.to_a.must_be_instance_of Array
-      @discrete_matrix.to_a.must_equal [false,false,false,false,false,false,false,false,false] 
+    it "#flatten should return matrix flattened to array." do
+      @discrete_matrix.flatten.must_be_instance_of Array
+      @discrete_matrix.flatten.must_equal [false,false,false,false,false,false,false,false,false] 
     end
 
     it "#should extend magically." do

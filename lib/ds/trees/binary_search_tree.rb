@@ -1,6 +1,7 @@
 module DS
   class BinarySearchTree < BinaryTree
 
+    #Creates new search tree from array.
     def self.from_array(arr)
       tree = BinarySearchTree.new(arr.shift)
       arr.each do |e|
@@ -9,6 +10,7 @@ module DS
       tree
     end
 
+    #Inserts new element.
     def insert x
       if x > @data and right.nil?
         self.right = BinarySearchTree.new(x)
@@ -21,7 +23,7 @@ module DS
       end
     end
 
-
+    #Checks if tree is valid Binary Search Tree.
     def BinarySearchTree.valid?(other)
       walker = TreeWalker.new(other)
       walker.traverse(:inorder)

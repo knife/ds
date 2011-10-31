@@ -28,6 +28,10 @@ module DS
     end
 
     def to_a
+      @store
+    end
+
+    def flatten
       @store.flatten
     end
 

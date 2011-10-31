@@ -22,6 +22,11 @@ module DS
       true
     end
 
+    #Checks if array has duplicates.
+    def duplications?
+      size != uniq.size 
+    end
+
     #Returns array tail.
     def tail
       self[1..-1]

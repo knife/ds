@@ -1,11 +1,13 @@
 module DS
   class OrderedSet
 
+    #Creates new Ordered Set.
     def initialize
       @size = 0
       @store = {}
     end
 
+    #Adds new element to set
     def push e
       if index = @store[e]
         index
@@ -15,6 +17,7 @@ module DS
       end
     end
 
+    #Returns element index.
     def index e
       @store[e]
     end

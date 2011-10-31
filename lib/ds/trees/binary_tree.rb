@@ -1,6 +1,14 @@
 module DS
   class BinaryTree < Tree
 
+    #Inserts a new subtree.
+    def << (value)
+      subtree = BinaryTree.new(value)
+      @children << subtree
+      return subtree
+    end
+
+    #Returns left subtree
     def left
       if @children.empty?
         nil
@@ -9,10 +17,12 @@ module DS
       end
     end
 
+    #Sets left subtree
     def left=(value)
       @children[0] = value
     end
 
+    #Returns right subtree
     def right
       if @children.empty?
         nil
@@ -21,15 +31,11 @@ module DS
       end
     end
 
+    #Sets right subtree
     def right=(value)
       @children[1] = value
     end
 
-    def << (value)
-      subtree = BinaryTree.new(value)
-      @children << subtree
-      return subtree
-    end
 
     #Inserts new element in BSF order
     def insert(x)

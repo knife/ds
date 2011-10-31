@@ -1,13 +1,14 @@
-= DS
+= DS - Data Structures
 
 DS provides some common data structures not implement in Ruby natively.
+
 The DS supports the folowing data structures:
+* Pair
 * Stacks
   * Stack
 * Queues
   * Queue
   * PriorityQueue
-* Pair
 * Lists
   * List
   * CyclicList
@@ -16,18 +17,18 @@ The DS supports the folowing data structures:
   * Tree
   * BinaryTree
   * CompleteBinaryTree
-  * BinarySearchTree
   * BinaryHeap
+  * BinarySearchTree
   * Trie
+* Graphs
+  * Graph
+  * Digraph
 * Matrixes
   * Array2D
   * ExpandableArray
   * TriMatrix
 * Sets
   * OrderedSet
-* Graphs
-  * Graph
-  * Digraph
 
 
 == Instalation
@@ -44,96 +45,137 @@ The DS supports the folowing data structures:
   include DS
   stack = Stack.new
 
-=== Queues
-
-Creating new queue (implemented as Array).  
-  q = Queue.new
-
-Creating new queue (implemented as List)
-  q1 = Queue.create
-  q1 = Queue.new(:list)
-
-  q.enqueue :first
-  q.enqueue :second
-  q.peek => :first
-  q.length => 2
-  q.empty? => false
-  q.dequeue => :first
-  q.dequeue => :second
-  q.empty? => true
-
-
-Priority queue (implemented as Heap)
-  
-  q = PriorityQueue.new
-  q.push(:important, 3)
-  q.push(:very_important, 5)
-  q.push(:nevermind, 1)
-
-  q.shift => :very_important
-  q.peek => :important
-  q.length=> 2
-  q.shift => :important
-  q.peek => :nevermind
-
-
 === Pair
-  
-  p = Pair.new(1,2)
-  p.key => 1
-  p.first => 1
-  p.value => 2
-  p.second => 2
 
+Creating new Pair
+  p = Pair.new(1,2)
+
+Accessors defined on Pair object:
+
+  p.key #=> 1
+  p.first #=> 1
+  p.value #=> 2
+  p.second #=> 2
+
+  p.second = 2
 
 
 === Stack
 
+Creating new Stack (implemented as Array).  
   stack = Stack.new
-  stack.empty? # true
+
+The following methods available on a Stack:
+
+* push
+* pop
+* size
+* empty?
+* size
+
+Examples:
+  stack.empty? #=> true
   stack.push :first
   stack.push :second
-  stack.size # 2
-  stack.peek # :second
-  stack.empty? # false
-  stack.pop # :second
-  stack.size # 1
+  stack.size #=> 2
+  stack.peek #=> :second
+  stack.empty? #=> false
+  stack.pop #=> :second
+  stack.size #=> 1
+
+
+=== Queues
+
+Creating new Queue (implemented as Array).  
+  q = Queue.new
+
+Creating new Queue (implemented as List)
+  q1 = Queue.create
+  q1 = Queue.new(:list)
+
+The following methods available on a Queue:
+
+* enqueue(push)
+* dequeue(shift)
+* peek
+* length
+* empty?
+
+Examples:
+  q.enqueue :first
+  q.push :second
+  q.peek #=> :first
+  q.length #=> 2
+  q.empty? #=> false
+  q.dequeue #=> :first
+  q.shift #=> :second
+  q.empty? #=> true
+
+
+=== Priority Queue 
+
+Creating new Priority Queue (implemented as Heap)
+  
+  q = PriorityQueue.new
+
+Examples:
+  q.push(:important, 3)
+  q.push(:very_important, 5)
+  q.push(:nevermind, 1)
+
+  q.shift #=> :very_important
+  q.peek #=> :important
+  q.length #=> 2
+  q.shift  #=> :important
+  q.peek  #=> :nevermind
+
 
 === List
 
+Creating new List
+  l = List.new(3)
+or 
   arr = [1,2,3,4]
-  list = List.new(arr)
-  list.length # 4
-  list.append(5).to_a # [1,2,3,4,5] 
-  list.prepend(0).to_a # [0,1,2,3,4,5]
-  list.remove(2).to_a # [0,1,3,4,5]
+  list = List.from_array(arr)
 
-  list.head.data # 0
-  list.tail.data # 5
+Examples:
 
-  list.first # 0
-  list.last # 5
+Simple operation on lists
+  list.length #=> 4
+  list.append(5).to_a #=> [1,2,3,4,5] 
+  list.prepend(0).to_a #=> [0,1,2,3,4,5]
+  list.remove(list.head).to_a #=> [1,2,3,4,5]
+  list.shift #=> 1
 
-  list.ziped? # false
-  list.reverse!.to_a # [5,4,3,1,0]
+Accessing first and last element
+  list.head.data #=> 2
+  list.tail.data #=> 5
+
+  list.first #=> 2
+  list.last #=> 5
+
+Other operations
+  list.ziped? #=> false
+  list.reverse!.to_a #=> [5,4,3,1,0]
 
 Enumerable methods are also available
   
-  list.map{ |e| e } # [1,2,3,4]
-  list.inject(0){ |mem, var| mem = mem + var } # 10
-  list.find { |e| e == 1.0  } # 1
+  list.map{ |e| e.data } #=> [1,2,3,4]
+  list.inject(0){ |mem, var| mem = mem + var.data } #=> 10
 
 === Ring
 
+Creating new Ring
   ring = Ring.from_array([1,2,3,4,5,6,7])
+
+Examples:
   ring.looped? => true
   ring.cycle_size => 7
   ring.eliminate_by(2) => 1
   
-
 === Trees
 
-Building tree
+Building Tree
 
   t = Tree.new(2)
   c1 = t << 5
@@ -144,53 +186,114 @@ Building tree
   c1 << 10
   c3 = c2 << 3
 
-  t.leaf? # false
-  c3.leaf? # true
+Examples:
+  t.leaf? #=> false
+  c3.leaf? #=> true
 
-  t.height # 3
-  t.width # 3
-  t.leaf_count # 4
+  t.height #=> 3
+  t.width #=> 3
+  t.leaf_count #=> 4
   
-  t.mirror! # mirrors tree
-  t.levels # {1=>1,2=>3, 
+  t.mirror! #=> mirrors tree
+  t.levels #=> {1=>1,2=>3, 3=>3} 
+
+Other methods
+* get_leaves
+* isometric
 
 Enumerable Module is included.
-  t.map{ |node| node.data } => [2,5,8,9,4,10,3]
+  t.map{ |node| node.data } #=> [2,5,8,9,4,10,3]
 
-Binary Tree
-  
+
+=== Binary Tree
+
+BinaryTree is sublass of Tree class.
+
+Building tree
   bin_tree = BinaryTree.new
-  [2,5,8,9,11,12,14].each{|x| @bin_tree.insert(x)}
+  [2,5,8,9,11,12,14].each{|x| @bin_tree.insert(x)} #build complete binary Tree
 
-  bin_tree.left # 5
-  bin_tree.right # 8
+Accessors defined on BinaryTree object:
+  bin_tree.left #=> 5
+  bin_tree.right #=> 8
 
+=== CompleteBinaryTree
 
+CompleteBinaryTree does not inherit from Tree class! Nodes are stored
+internally in array.
 
-Iterating (in BFS order)
-  t.each{ |x| x }
-Postorder  
-  walker.traverse(:postorder) #  [9,11,5,12,14,8,2]
-Preorder
-  walker.traverse(:inorder) # [9,5,11,2,12,8,14]
+Creating
+  cbt = CompleteBinaryTree.new(1,2,3,4,5,6,7)
+
+Examples
+  cbt.root #=> 1
+  cbt.left(0) #=> 2
+  cbt.right(0) #=> 3
+  cbt.parent(1) #=> 0
+  
+  cbt.left_index(0) #=> 1
+  cbt.right_index(1) #=> 4
+  cpt.parent_index(1) #=> 0
 
 === Binary Heap
 
-  heap = BinaryHeap.new(9,8,4,5,11,6)
-  heap.shift #returns max element (11)
-  heap.to_a [9,8,6,5,4]
+BinaryHeap inherits from CompleteBinaryTree class. Binary Heap allows very fast
+access to maximum or minimum element of the tree.
 
-Min Heap
-  arr = [9,8,4,5,11,6]
-  min_heap =  BinaryHeap.new(*arr){|parent,child| parent < child}
-  heap.shift #returns min element (4)
+Creating
+
+Maximum Binary Heap 
+  max_heap = BinaryHeap.new(9,8,4,5,11,6)
+or
+  max_heap = BinaryHeap.max(9,8,4,5,11,6)
+
+Minimum Binary Heap
+  min_heap = BinaryHeap.min(9,8,4,5,11,6)
+or
+  BinaryHeap.new(9,8,4,5,11,6){|parent,child| parent < child}
+
+You can set heap relation by passing block to BinaryHeap constructor.
 
 
-=== Trie - allows very quick search: O(k) where k is word length.
+Examples
+  max_heap.shift #returns max element (11)
+  max_heap.to_a [9,8,6,5,4]
+  max_heap.insert 15
+  max_heap.shift #=> 15
+
+  min_heap.shift #returns min element (4)
+
+
+=== SearchBinaryTree
+
+Creating
+  bst = BinarySearchTree.from_array([8,1,5,2,7,6,3])
+
+Examples
+  walker = TreeWalker.new(b)
+  walker.traverse(:inorder).must_equal [1,2,3,5,6,7,8]
+
+=== Trie 
+Trie allows very quick search: O(k) where k is word length.
+
+Creating 
   trie = Trie.new
+  
+Examples
   trie.insert("thing",true);
   trie.find("thing")  # =>  true
 
+
+=== Traversing tree 
+
+Iterating in BFS order
+  t.each{ |x| x }
+Iterating in postorder  
+  walker.traverse(:postorder) 
+Iterating in inorder
+  walker.traverse(:inorder) 
+Iterating in preorder
+  walker.traverse(:preorder)
 
 === Graph
 
@@ -203,11 +306,54 @@ Creating new Graph
   edges << Edge.new('Tom','Marc')
   graph = Graph.create(edges)
 
-Methods:
+Examples:
 
-  graph.vertex_size => 4
-  graph.degree("Marc") => 3
-  graph.edge?("Marc","Tom") => true
-  graph.edge?("Tom","Jack") => false
+  graph.vertex_size #=> 4
+  graph.degree("Marc") #=> 3
+  graph.edge?("Marc","Tom") #=> true
+  graph.edge?("Tom","Jack") #=> false
+  graph.add_edges([Edge.new("Marc","Kate")])
+  graph.remove("Marc","Jack")
+
+
+=== Matrixes
+
+=== Array2D
+
+Creating
+  discrete_matrix = Array2D.new(2,0)
+
+Examples
+  discrete_matrix.to_a  #=> [[0,0],[0,0]]
+  discrete_matrix[3,3] #=> 0
+
+Extends automatically like simple Array
+
+=== ExpandableArray
+
+  arr = ExpandableArray.new(0,0)
+  arr[4]  = 1 #=> [0,0,0,0,4]
+
+=== TriMatrix
+
+Creating new Triangular Matrix
+  tri_matrix = TriMatrix.new
+  tri_matrix[0,1] = true
+  tri_matrix[0,2] = true
+
+Examples
+  tri_matrix[0,1] == tri_matrix[1,0] #=> true
+
+
+=== OrderedSet
+
+Creating new Ordered Set
+  set = OrderedSet.new
+
+Examples
+  set.push(:first)  #=>  0
+  set.push(:second) #=> 1
+  set.index(:first) #=> 0
+  set.to_a #=> [:first, :second]
 
 
