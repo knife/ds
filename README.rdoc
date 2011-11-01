@@ -2,7 +2,8 @@
 
 DS provides some common data structures not implement in Ruby natively.
 
-The DS supports the folowing data structures:
+The DS gem supports the folowing data structures:
+
 * Pair
 * Stacks
   * Stack
@@ -35,7 +36,6 @@ The DS supports the folowing data structures:
   
   gem install ds
 
-
 == Usage
 
   require 'ds'
@@ -47,25 +47,28 @@ The DS supports the folowing data structures:
 
 === Pair
 
+Pair is simple key-value data structure.
+
 Creating new Pair
-  p = Pair.new(1,2)
+  p = Pair.new(3,9)
 
 Accessors defined on Pair object:
 
-  p.key #=> 1
-  p.first #=> 1
-  p.value #=> 2
-  p.second #=> 2
-
-  p.second = 2
-
+  p.key #=> 3
+  p.first #=> 3
+  p.value #=> 9
+  p.second #=> 9
+  p.second = 27
 
 === Stack
+
+Stack is very simple data structure which allows access only to the top element.
+More: http://en.wikipedia.org/wiki/Stack_(abstract_data_type)
 
 Creating new Stack (implemented as Array).  
   stack = Stack.new
 
-The following methods available on a Stack:
+The following methods are available on a Stack:
 
 * push
 * pop
@@ -86,6 +89,13 @@ Examples:
 
 === Queues
 
+Queues is First-In-First-Out (FIFO) data structure.
+Which means that first element added to the queue will be the first one to be removed.
+More: http://en.wikipedia.org/wiki/Queue_(data_structure)
+
+
+==== Queue
+
 Creating new Queue (implemented as Array).  
   q = Queue.new
 
@@ -93,7 +103,7 @@ Creating new Queue (implemented as List)
   q1 = Queue.create
   q1 = Queue.new(:list)
 
-The following methods available on a Queue:
+The following methods are available on a Queue:
 
 * enqueue(push)
 * dequeue(shift)
@@ -112,9 +122,13 @@ Examples:
   q.empty? #=> true
 
 
-=== Priority Queue 
+==== Priority Queue 
 
-Creating new Priority Queue (implemented as Heap)
+PriorityQueue is special form of Queue (PriorityQueue inherits from Queue).
+In opposite to simple Queue, in PriorityQueue each element is associated with a "priority".
+More: http://en.wikipedia.org/wiki/Priority_queue
+
+Creating new Priority Queue (implemented as BinaryHeap)
   
   q = PriorityQueue.new
 
@@ -130,10 +144,17 @@ Examples:
   q.peek  #=> :nevermind
 
 
+=== Lists
+
 === List
+List is an ordered collection of values. Each element of list has pointer to the next
+element (last element points to nil).
+More: http://en.wikipedia.org/wiki/List_(data_structure)
+
 
 Creating new List
-  l = List.new(3)
+  l = List.new(1)
+  l.append(2)
 or 
   arr = [1,2,3,4]
   list = List.from_array(arr)
@@ -154,8 +175,7 @@ Accessing first and last element
   list.first #=> 2
   list.last #=> 5
 
-Other operations
-  list.ziped? #=> false
+Reversing
   list.reverse!.to_a #=> [5,4,3,1,0]
 
 Enumerable methods are also available
@@ -163,17 +183,33 @@ Enumerable methods are also available
   list.map{ |e| e.data } #=> [1,2,3,4]
   list.inject(0){ |mem, var| mem = mem + var.data } #=> 10
 
-=== Ring
+Other operations
+* insert_before
+* insert_after
+* zip?
+* merge
+
+
+==== Ring
+
+Ring is a Cyclic List where the last element(head) points to the first element(tail).
+More: http://en.wikipedia.org/wiki/Ring_(data_structure)
 
 Creating new Ring
   ring = Ring.from_array([1,2,3,4,5,6,7])
 
 Examples:
-  ring.looped? => true
-  ring.cycle_size => 7
-  ring.eliminate_by(2) => 1
-  
+  ring.looped? #=> true
+  ring.cycle_size #=> 7
+  ring.eliminate_by(2) #=> 1
+ 
+
 === Trees
+
+==== Tree
+
+A tree is a data structure consisting of nodes organised as a hierarchy. 
+More: http://en.wikipedia.org/wiki/Tree_(data_structure)
 
 Building Tree
 
@@ -194,20 +230,21 @@ Examples:
   t.width #=> 3
   t.leaf_count #=> 4
   
-  t.mirror! #=> mirrors tree
   t.levels #=> {1=>1,2=>3, 3=>3} 
 
 Other methods
 * get_leaves
-* isometric
+* isometric?
+* mirror!
 
 Enumerable Module is included.
   t.map{ |node| node.data } #=> [2,5,8,9,4,10,3]
 
 
-=== Binary Tree
+==== Binary Tree
 
-BinaryTree is sublass of Tree class.
+BinaryTree is sublass of Tree class. In BinaryTree each node can have at most two children.
+More: http://en.wikipedia.org/wiki/Binary_tree 
 
 Building tree
   bin_tree = BinaryTree.new
@@ -217,10 +254,28 @@ Accessors defined on BinaryTree object:
   bin_tree.left #=> 5
   bin_tree.right #=> 8
 
-=== CompleteBinaryTree
+==== BinarySearchTree
 
-CompleteBinaryTree does not inherit from Tree class! Nodes are stored
+BST is Binary Tree which has the following properties:
+* The left subtree of a node contains only nodes with keys less than the node's key.
+* The right subtree of a node contains only nodes with keys greater than the node's key.
+* Both the left and right subtrees must also be binary search trees.
+
+Creating
+  bst = BinarySearchTree.from_array([8,1,5,2,7,6,3])
+
+Examples
+  walker = TreeWalker.new(b)
+  walker.traverse(:inorder).must_equal [1,2,3,5,6,7,8]
+
+
+==== CompleteBinaryTree
+
+A complete binary tree is a binary tree in which every level, except possibly
+the last, is completely filled, and all nodes are as far left as possible. 
+CompleteBinaryTree is binary tree but does not inherit from Tree and BinaryTree class! Nodes are stored
 internally in array.
+More: http://en.wikipedia.org/wiki/Complete_binary_tree
 
 Creating
   cbt = CompleteBinaryTree.new(1,2,3,4,5,6,7)
@@ -235,10 +290,12 @@ Examples
   cbt.right_index(1) #=> 4
   cpt.parent_index(1) #=> 0
 
-=== Binary Heap
 
-BinaryHeap inherits from CompleteBinaryTree class. Binary Heap allows very fast
+==== Binary Heap
+
+BinaryHeap is  Complete Binary Tree  in which every node satisfies heap property. Binary Heap allows very fast
 access to maximum or minimum element of the tree.
+More: http://en.wikipedia.org/wiki/Binary_heap
 
 Creating
 
@@ -254,27 +311,18 @@ or
 
 You can set heap relation by passing block to BinaryHeap constructor.
 
-
 Examples
   max_heap.shift #returns max element (11)
-  max_heap.to_a [9,8,6,5,4]
+  max_heap.to_a #=> [9,8,6,5,4]
   max_heap.insert 15
   max_heap.shift #=> 15
 
   min_heap.shift #returns min element (4)
 
 
-=== SearchBinaryTree
-
-Creating
-  bst = BinarySearchTree.from_array([8,1,5,2,7,6,3])
-
-Examples
-  walker = TreeWalker.new(b)
-  walker.traverse(:inorder).must_equal [1,2,3,5,6,7,8]
-
-=== Trie 
-Trie allows very quick search: O(k) where k is word length.
+==== Trie 
+Trie is an ordered tree data structure which allows very quick search: O(k), where k is word length.
+More: http://en.wikipedia.org/wiki/Trie
 
 Creating 
   trie = Trie.new
@@ -284,10 +332,10 @@ Examples
   trie.find("thing")  # =>  true
 
 
-=== Traversing tree 
+==== Traversing tree 
 
-Iterating in BFS order
-  t.each{ |x| x }
+walker = TreeWalker.new(b)
+
 Iterating in postorder  
   walker.traverse(:postorder) 
 Iterating in inorder
@@ -295,7 +343,16 @@ Iterating in inorder
 Iterating in preorder
   walker.traverse(:preorder)
 
+Iterating in BFS order
+  t.each{ |x| x }
+
+
 === Graph
+A graph data structure consists of a finite (and possibly mutable) set of
+ordered pairs, called edges or arcs, of certain entities called nodes or
+vertices.
+More: http://en.wikipedia.org/wiki/Graph_(data_structure)
+
 
 Creating new Graph
     
@@ -304,7 +361,16 @@ Creating new Graph
   edges << Edge.new('Lukas','Tom')
   edges << Edge.new('Marc','Jack')
   edges << Edge.new('Tom','Marc')
+
+New graph implemented as Triangular Matrix
   graph = Graph.create(edges)
+
+New graph implemented as Matrix
+  graph = Graph.new(edges,:matrix)
+
+New graph implemented as Adjency List
+  graph = Graph.new(edges,:list)
+
 
 Examples:
 
@@ -314,11 +380,16 @@ Examples:
   graph.edge?("Tom","Jack") #=> false
   graph.add_edges([Edge.new("Marc","Kate")])
   graph.remove("Marc","Jack")
+  graph.neighbors('Tom') #=> ["Marc","Lucas"]
+
+Iterating
+  graph.each_edge{|e| p e}
+  graph.each_vertex{ |v| p v }
 
 
 === Matrixes
 
-=== Array2D
+==== Array2D
 
 Creating
   discrete_matrix = Array2D.new(2,0)
@@ -329,12 +400,12 @@ Examples
 
 Extends automatically like simple Array
 
-=== ExpandableArray
+==== ExpandableArray
 
   arr = ExpandableArray.new(0,0)
   arr[4]  = 1 #=> [0,0,0,0,4]
 
-=== TriMatrix
+==== TriMatrix
 
 Creating new Triangular Matrix
   tri_matrix = TriMatrix.new
@@ -344,8 +415,9 @@ Creating new Triangular Matrix
 Examples
   tri_matrix[0,1] == tri_matrix[1,0] #=> true
 
+=== Sets
 
-=== OrderedSet
+==== OrderedSet
 
 Creating new Ordered Set
   set = OrderedSet.new
