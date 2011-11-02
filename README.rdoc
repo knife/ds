@@ -152,7 +152,7 @@ Examples:
 
 List is an ordered collection of values. Each element of list has pointer to the next
 element (last element points to nil).
-More: {List}{http://en.wikipedia.org/wiki/List_(data_structure)]
+More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 
 Creating new List
   l = List.new(1)
