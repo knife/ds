@@ -63,7 +63,7 @@ Accessors defined on Pair object:
 === Stack
 
 Stack is very simple data structure which allows access only to the top element.
-More: http://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+More: {Stack}[http://en.wikipedia.org/wiki/Stack_(abstract_data_type)]
 
 Creating new Stack (implemented as Array).  
   stack = Stack.new
@@ -87,11 +87,12 @@ Examples:
   stack.size #=> 1
 
 
+
 === Queues
 
 Queues is First-In-First-Out (FIFO) data structure.
 Which means that first element added to the queue will be the first one to be removed.
-More: http://en.wikipedia.org/wiki/Queue_(data_structure)
+More: {Queue}[http://en.wikipedia.org/wiki/Queue_(data_structure)]
 
 
 ==== Queue
@@ -126,7 +127,7 @@ Examples:
 
 PriorityQueue is special form of Queue (PriorityQueue inherits from Queue).
 In opposite to simple Queue, in PriorityQueue each element is associated with a "priority".
-More: http://en.wikipedia.org/wiki/Priority_queue
+{Queue}[http://en.wikipedia.org/wiki/Priority_queue]
 
 Creating new Priority Queue (implemented as BinaryHeap)
   
@@ -144,13 +145,14 @@ Examples:
   q.peek  #=> :nevermind
 
 
+
 === Lists
 
 === List
+
 List is an ordered collection of values. Each element of list has pointer to the next
 element (last element points to nil).
-More: http://en.wikipedia.org/wiki/List_(data_structure)
-
+More: [List]{http://en.wikipedia.org/wiki/List_(data_structure)}
 
 Creating new List
   l = List.new(1)
@@ -193,7 +195,7 @@ Other operations
 ==== Ring
 
 Ring is a Cyclic List where the last element(head) points to the first element(tail).
-More: http://en.wikipedia.org/wiki/Ring_(data_structure)
+More: {Ring}[http://en.wikipedia.org/wiki/Ring_(data_structure)]
 
 Creating new Ring
   ring = Ring.from_array([1,2,3,4,5,6,7])
@@ -204,12 +206,13 @@ Examples:
   ring.eliminate_by(2) #=> 1
  
 
+
 === Trees
 
 ==== Tree
 
 A tree is a data structure consisting of nodes organised as a hierarchy. 
-More: http://en.wikipedia.org/wiki/Tree_(data_structure)
+More: {Tree}[http://en.wikipedia.org/wiki/Tree_(data_structure)]
 
 Building Tree
 
@@ -244,15 +247,16 @@ Enumerable Module is included.
 ==== Binary Tree
 
 BinaryTree is sublass of Tree class. In BinaryTree each node can have at most two children.
-More: http://en.wikipedia.org/wiki/Binary_tree 
+More: {BinaryTree}[http://en.wikipedia.org/wiki/Binary_tree]
 
 Building tree
   bin_tree = BinaryTree.new
-  [2,5,8,9,11,12,14].each{|x| @bin_tree.insert(x)} #build complete binary Tree
+  [2,5,8,9,11,12,14].each{|x| bin_tree.insert(x)} #build complete binary Tree
 
 Accessors defined on BinaryTree object:
   bin_tree.left #=> 5
   bin_tree.right #=> 8
+
 
 ==== BinarySearchTree
 
@@ -275,7 +279,7 @@ A complete binary tree is a binary tree in which every level, except possibly
 the last, is completely filled, and all nodes are as far left as possible. 
 CompleteBinaryTree is binary tree but does not inherit from Tree and BinaryTree class! Nodes are stored
 internally in array.
-More: http://en.wikipedia.org/wiki/Complete_binary_tree
+More: {Complete Binary Tree}[http://en.wikipedia.org/wiki/Complete_binary_tree]
 
 Creating
   cbt = CompleteBinaryTree.new(1,2,3,4,5,6,7)
@@ -295,7 +299,7 @@ Examples
 
 BinaryHeap is  Complete Binary Tree  in which every node satisfies heap property. Binary Heap allows very fast
 access to maximum or minimum element of the tree.
-More: http://en.wikipedia.org/wiki/Binary_heap
+More: {Binary Heap}[http://en.wikipedia.org/wiki/Binary_heap]
 
 Creating
 
@@ -321,8 +325,9 @@ Examples
 
 
 ==== Trie 
+
 Trie is an ordered tree data structure which allows very quick search: O(k), where k is word length.
-More: http://en.wikipedia.org/wiki/Trie
+More: {Trie}[http://en.wikipedia.org/wiki/Trie]
 
 Creating 
   trie = Trie.new
@@ -332,27 +337,41 @@ Examples
   trie.find("thing")  # =>  true
 
 
-==== Traversing tree 
+==== Traversing Tree 
+
+b= BinaryTree.new
+[2,5,8,9,11,12,14].each{|x| b.insert(x)} 
 
 walker = TreeWalker.new(b)
 
 Iterating in postorder  
-  walker.traverse(:postorder) 
+  walker.traverse(:postorder) #=> [9,11,5,12,14,8,2]
 Iterating in inorder
-  walker.traverse(:inorder) 
+  walker.traverse(:inorder) #=> [9,5,11,2,12,8,14] 
 Iterating in preorder
-  walker.traverse(:preorder)
+  walker.traverse(:preorder) #=> [2,5,9,11,8,12,14]
 
 Iterating in BFS order
-  t.each{ |x| x }
+  walker.each{ |x| x } #=> [2,5,8,9,11,12,14]
 
 
-=== Graph
+You can also pass block to traverse method
+  walker.traverse(:inorder){|n| p n.data**2}
+
+If you want to change value of tree nodes, use recalculate! method
+  walker.recalculate!(b,:preorder,0){|x,memo| memo = memo+x.data} 
+
+
+
+=== Graphs
+
 A graph data structure consists of a finite (and possibly mutable) set of
 ordered pairs, called edges or arcs, of certain entities called nodes or
 vertices.
-More: http://en.wikipedia.org/wiki/Graph_(data_structure)
+More: {Graph}[http://en.wikipedia.org/wiki/Graph_(data_structure)]
 
+
+====Graph
 
 Creating new Graph
     
@@ -371,7 +390,6 @@ New graph implemented as Matrix
 New graph implemented as Adjency List
   graph = Graph.new(edges,:list)
 
-
 Examples:
 
   graph.vertex_size #=> 4
@@ -387,9 +405,43 @@ Iterating
   graph.each_vertex{ |v| p v }
 
 
+==== Digraph
+
+Creating Directed Weighted Graph is simple like that:
+  
+  edges = []
+
+  edges << Edge.new(:A,:C,5)
+  edges << Edge.new(:A,:D,3)
+  edges << Edge.new(:A,:G,14)
+  edges << Edge.new(:C,:E,3)
+  edges << Edge.new(:C,:F,2)
+  edges << Edge.new(:D,:C,11)
+  edges << Edge.new(:D,:E,7)
+  edges << Edge.new(:D,:G,6)
+  edges << Edge.new(:G,:E,7)
+  edges << Edge.new(:E,:B,5)
+  edges << Edge.new(:G,:B,6)
+  edges << Edge.new(:F,:B,7)
+
+  wdigraph = Digraph.create(edges)
+
+Examples
+  wdigraph.get_edge(:D,:C).weight #=> 11
+  wdigraph.degree(:E) #=> 4
+  wdigraph.in_degree(:E) #=> 3
+  wdigraph.out_degree(:E) #=> 1
+  wdigraph.bfs(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
+
+
+
+
 === Matrixes
 
 ==== Array2D
+
+Simple two dimensional array(matrix).  
+Array2D extends automatically like simple Array.
 
 Creating
   discrete_matrix = Array2D.new(2,0)
@@ -398,16 +450,19 @@ Examples
   discrete_matrix.to_a  #=> [[0,0],[0,0]]
   discrete_matrix[3,3] #=> 0
 
-Extends automatically like simple Array
+
 
 ==== ExpandableArray
 
   arr = ExpandableArray.new(0,0)
   arr[4]  = 1 #=> [0,0,0,0,4]
 
-==== TriMatrix
 
-Creating new Triangular Matrix
+==== TriMatrix
+Triangular matrix is a special kind of matrix where M[x,y] = M[y,x].
+More: {Triangular Matrixe}[http://en.wikipedia.org/wiki/Triangular_matrix]
+
+Creating
   tri_matrix = TriMatrix.new
   tri_matrix[0,1] = true
   tri_matrix[0,2] = true
@@ -415,9 +470,13 @@ Creating new Triangular Matrix
 Examples
   tri_matrix[0,1] == tri_matrix[1,0] #=> true
 
+
+
 === Sets
 
 ==== OrderedSet
+OrderedSet is a set whose elements are ordered. In opposite to Array duplicates
+are not allowed.
 
 Creating new Ordered Set
   set = OrderedSet.new

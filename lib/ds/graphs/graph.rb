@@ -23,12 +23,49 @@ module DS
       new(edges,:tri_matrix) 
     end
 
-    def add(x,y)
-      @g.add(x,y)
+    #Adds new edge to graph.
+    def add(x,y,weight=1)
+      e = Edge.new(x,y,weight)
+      add_edges([e])
     end
 
+    #Adds new edges to graph.
+    def add_edges(edges)
+      @g.add_edges(edges)
+    end
+    
+
+    #Removes conection between vertex x and y.
     def remove(x,y)
       @g.remove(x,y) 
+    end
+
+    #Returns all neighbors for given vertex.
+    def neighbors v
+      @g.neighbors v
+    end
+
+    #Returns vertex degree.
+    def degree x
+      @g.degree x
+    end
+
+    #Checks if two elements are connected.
+    def edge? x,y
+      @g.edge? x,y
+    end
+
+    #Returns Edge(x,y) if exist.
+    def get_edge x, y
+      @g.get_edge x,y
+    end
+
+    def vertex_size
+      @g.vertex_size
+    end
+
+    def edge_size
+      @g.vmax+1
     end
 
     def each_vertex &block
@@ -39,9 +76,6 @@ module DS
       @g.each_edge &block
     end
 
-    def neighbors v
-      @g.neighbors v
-    end
 
     def bfs s
       colors = {}
@@ -78,30 +112,6 @@ module DS
       res
     end
 
-    def add_edges(edges)
-      @g.add_edges(edges)
-    end
     
-    #Returns vertex degree. Second parameter determines direction - :in incoming
-    #edges, :out - outcoming edges, :all - incoming and outcoming edges.
-    def degree x
-      @g.degree x
-    end
-
-    def edge? x,y
-      @g.edge? x,y
-    end
-
-    def get_edge x, y
-      @g.get_edge x,y
-    end
-
-    def vertex_size
-      @g.vertex_size
-    end
-
-    def edge_size
-      @g.vmax+1
-    end
   end
 end

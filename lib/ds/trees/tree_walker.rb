@@ -65,6 +65,7 @@ module DS
 
 
 
+    #Traverses tree with tracking level.
     def traverse_with_h(tree,height=nil,&block)
 
       tree.children.each do |t|
