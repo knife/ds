@@ -21,11 +21,11 @@ describe Queue do
   describe "Not empty queue" do
 
     before do
-      @queue = Queue.new
+      @queue = DS::Queue.new
       @queue.enqueue 1
       @queue.enqueue 2
 
-      @queue2 = Queue.create
+      @queue2 = DS::Queue.create
       @queue2.enqueue 1
       @queue2.enqueue 2
     end
