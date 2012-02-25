@@ -5,6 +5,9 @@ describe List do
   before do
     @list = List.from_array([1,2,3,4])
     @list2 = List.from_array([4,5,7])
+
+    @numbers =  List.from_array((1..10).to_a)
+    @even_numbers = List.from_array([2,4,6,8,10])
   end
 
   it "#from_array should transform array to list." do
@@ -49,12 +52,17 @@ describe List do
     @list.insert_before(7,@list.tail)
     @list.to_a.must_equal [8,1,9,2,3,7,4]
 
+    proc { @list.insert_before(1,nil)}.must_raise  ListError
   end
 
   it "#insert_after should insert new element after another." do
     second = @list.head.next
     @list.insert_after(9,second)
     @list.to_a.must_equal [1,2,9,3,4]
+
+    tail = @list.tail
+    @list.insert_after(11,tail)
+    @list.to_a.must_equal [1,2,9,3,4,11]
   end
 
 
@@ -100,6 +108,11 @@ describe List do
     @list2.merge(@list).to_a.must_equal [1,2,3,4,4,5,7]
   end
 
+  it "#merge should be symetric operation." do
+    @list.merge(@list2).to_a.must_equal [1,2,3,4,4,5,7]
+  end
+
+
   it "#orderize should order elements by evaluating block." do
     not_sorted_list = List.from_array([3,-1,0,-8,2,0,1])
     not_sorted_list.orderize{|elem| elem <=> 0}.to_a.must_equal [-1,-8,0,0,3,2,1]
@@ -107,11 +120,22 @@ describe List do
 
   it "#remove! should remove all elements that occur on the other list." do
     @list.remove!(@list2).to_a.must_equal [1,2,3]
+    @numbers.remove!(@even_numbers).to_a.must_equal [1,3,5,7,9]
+  end
+  
+  it "#remove! should remove all elements that occur on the other list#2." do
+    @list2.remove!(@list).to_a.must_equal [5,7]
   end
 
   it "#looped? should check if list has cycle." do
     refute @list2.looped?
     refute @list.looped?
+  end
+
+  it "#each_with_index should iterate list." do
+    h = {}
+    @list.each_with_index{|e,i| h[i] = e.data}
+    h.must_equal({0 => 1, 1 => 2, 2 => 3, 3 => 4})
   end
 
   it "should include Enumerable methods." do
@@ -137,8 +161,10 @@ describe List do
 
   if ENV['BENCH']
     describe "performance" do
-
+    
       before do
+        @arr = (1..10_000).to_a.sort_by{rand}
+
         10000.times do |n|
           @list.append 4
         end
@@ -158,7 +184,7 @@ describe List do
       end
 
       bench_performance_linear "#reverse! should be linear operation.", 0.999 do |n|
-        list =List.from_array((1..n).to_a.sort_by{rand})
+        list =List.from_array(@arr[0..n])
         list.reverse!
       end
 

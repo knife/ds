@@ -63,7 +63,7 @@ describe Digraph do
 
     it "#add_edge should add new edge." do
       @digraph.add_edges([Edge.new("Marc","Kate")])
-      @digraph.vertex_size.must_equal 6
+      @digraph.vertex_size.must_equal 5
       assert @digraph.edge?("Marc","Kate")
       refute @digraph.edge?("Kate","Marc")
       refute @digraph.edge?("Tom","Kate")

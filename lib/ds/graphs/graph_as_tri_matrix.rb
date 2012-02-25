@@ -5,7 +5,6 @@ module DS
       @store = TriMatrix.new(0)
       @max = 0
       @map = OrderedSet.new
-      @v = 0
 
       add_edges(edges)
     end

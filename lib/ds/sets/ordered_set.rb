@@ -1,5 +1,6 @@
 module DS
   class OrderedSet
+    attr_reader :size
 
     #Creates new Ordered Set.
     def initialize
@@ -25,6 +26,7 @@ module DS
     def to_a
       @store.sort{|a,b| a[1]<=>b[1]}.map{|e| e.first}
     end
+
 
   end
 end

@@ -10,6 +10,10 @@ describe BinaryTree do
     @izo_tree = BinaryTree.new
     [2,7,8,3,11,12,14].each{|x| @izo_tree.insert(x)}
 
+    @small_tree = BinaryTree.new(2)
+    @small_tree << BinaryTree.new(7)
+    @small_tree << BinaryTree.new(8)
+
     @bin_walker = TreeWalker.new(@bin_tree)
 
   end
@@ -45,6 +49,8 @@ describe BinaryTree do
 
   it "#isometric should check if tree is isometric to antother." do
     assert @bin_tree.izometric?(@izo_tree)
+    assert @izo_tree.izometric?(@bin_tree)
+    refute @bin_tree.izometric?(@small_tree)
   end
 
 end

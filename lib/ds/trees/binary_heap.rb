@@ -24,10 +24,6 @@ module DS
       new(*args){|parent,child| parent < child}
     end
 
-    #Sets relation for Heap.
-    def set_relation(&relation)
-      @relation = relation
-    end
 
     #Evaluates Heap relation.
     def relation(parent,child)
@@ -61,9 +57,12 @@ module DS
 
     #Removes element from heap maintaining heap relation.
     def shift
-      result = @data.shift
-      @data.unshift @data.pop
-      heapify(0)
+      if @data.size > 0
+        result = @data.shift
+        return result if @data.size.zero?
+        @data.unshift @data.pop
+        heapify(0)
+      end
       result
     end
 

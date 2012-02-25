@@ -47,7 +47,9 @@ describe PriorityQueue do
       x = @queue.dequeue
       @queue.length.must_equal 1
       x.must_equal :important
-
+      @queue.dequeue.must_equal :not_important
+      @queue.length.must_equal 0
+      @queue.dequeue.must_be_nil
     end
   end
 
@@ -96,18 +98,36 @@ describe PriorityQueue do
     describe "performance" do
 
       before do
+        
         @queue = PriorityQueue.new
-        11000.times do |n|
+        10000.times do |n|
           @queue.push :elem, rand(10)
         end
+
+        @empty_queue = PriorityQueue.new
       end
 
 
-      bench_performance_constant "#shift should be const operation.", 0.99 do |n|
+      bench_performance_constant "#accessing max element should be const operation.", 0.999 do |n|
         n.times do
-          @queue.shift
+          @queue.peek
         end
       end
+
+
+      bench_performance_constant "#removing max element should be log operation.", 0.999 do |n|
+        n.times do
+          @queue.dequeue
+        end
+      end
+
+      bench_performance_constant "creating new priority queue should be linear operation.", 0.999 do |n|
+        n.times do
+          @empty_queue.push :elem, rand(10)
+        end
+      end
+
+
 
     end
   end

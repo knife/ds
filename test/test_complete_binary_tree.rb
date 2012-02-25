@@ -4,6 +4,13 @@ describe CompleteBinaryTree do
 
   before do
     @tree = CompleteBinaryTree.new(1,2,3,4,5,6,7)
+    @empty_tree = CompleteBinaryTree.new
+  end
+
+  it "#<< should add new element." do
+    @empty_tree << 1
+    @empty_tree << 2
+    @empty_tree.root.must_equal 1
   end
 
   it "#root should return root of the tree." do
@@ -40,6 +47,12 @@ describe CompleteBinaryTree do
     @tree.parent(4).must_equal 2
     @tree.parent(1).must_equal 1
   end
+
+  it "#children should return children." do
+    @tree.children(0).must_equal [2,3]
+  end
+
+
 
 end
  

@@ -32,7 +32,7 @@ module DS
         walk(tree,:postorder,&block)
       when :preorder
         walk(tree,:preorder, &block)
-      when (:inorder)
+      when :inorder
         raise ArgumentError unless tree.kind_of? BinaryTree
         walk(tree,order,&block)
       end
@@ -74,8 +74,6 @@ module DS
 
       if block_given?
         yield tree, height
-      else 
-        @visited << tree.data
       end
 
     end
@@ -104,9 +102,9 @@ module DS
 
         when :inorder
           raise ArgumentError unless  self.tree.is_a? BinaryTree
-          recalculate!(tree.left,order,&block)
+          recalculate!(tree.left,order,memo,&block)
 
-            tree.data = yield tree.memo
+            tree.data = yield tree, memo
             memo = tree.data
 
           recalculate!(tree.right,order,memo,&block)
@@ -114,7 +112,6 @@ module DS
         end
       end
     end
-
 
 
     #Summarize tree
@@ -126,6 +123,9 @@ module DS
         self.tree
       when :topdown
         recalculate!(self.tree,:preorder,0){|x,memo| memo = memo+x.data} 
+        self.tree
+      when :inorder
+        recalculate!(self.tree,:inorder,0){|x,memo| memo = memo+x.data if x.data and memo} 
         self.tree
       end
     end

@@ -17,6 +17,11 @@ describe Array2D do
       @zero_matrix.flatten.must_be_instance_of Array
       @zero_matrix.flatten.must_equal [0,0,0,0] 
     end
+    
+    it "#to_a should return internal representation (nested arrays)" do
+      @zero_matrix.to_a.must_be_instance_of Array
+      @zero_matrix.to_a.must_equal [[0,0],[0,0]]
+    end
 
     it "#should extend magically." do
       @zero_matrix[3,3].must_equal 0
@@ -38,6 +43,11 @@ describe Array2D do
     it "#flatten should return matrix flattened to array." do
       @discrete_matrix.flatten.must_be_instance_of Array
       @discrete_matrix.flatten.must_equal [false,false,false,false,false,false,false,false,false] 
+    end
+
+    it "#to_a should return internal representation (nested arrays)" do
+      @discrete_matrix.to_a.must_be_instance_of Array
+      @discrete_matrix.to_a.must_equal [[false,false,false],[false,false,false],[false,false,false]]
     end
 
     it "#should extend magically." do

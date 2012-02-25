@@ -37,9 +37,18 @@ describe Graph do
     refute @graph.edge?("Tom","Kate")
   end
 
+  it "#add should add new edge to graph." do
+    @graph.add('Jack','Lukas')
+    @graph.vertex_size.must_equal 4
+    assert @graph.edge?("Jack","Lukas")
+    assert @graph.edge?("Lukas","Jack")
+  end
+
+
+
   it "#remove_edge should remove edge." do
     @graph.remove("Marc","Jack")
-    @graph.vertex_size.must_equal 3
+    @graph.vertex_size.must_equal 4
     refute @graph.edge?("Marc","Jack")
     refute @graph.edge?("Jack","Marc")
   end

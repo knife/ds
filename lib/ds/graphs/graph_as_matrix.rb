@@ -5,18 +5,9 @@ module DS
       @store = Array2D.new
       @max = 0
 
-      @v = 0 #vertex count
-       
       @map = OrderedSet.new #maps objects to matrix indexes.
 
       add_edges(edges)
-    end
-
-    #Checks if two elements are connected.
-    def edge? x,y
-      v1 = @map.index(x)
-      v2 = @map.index(y)
-      @store[v1,v2] > 0
     end
 
     #Adds new edges to graph.
@@ -26,8 +17,8 @@ module DS
         y = @map.push e.to
 
         @store[x,y] = e.weight
+
         @max = [@max, x, y].max
-        @v = @v +  1
       end
     end
 
@@ -54,7 +45,6 @@ module DS
       if (degree vertexes[@max]) == 0
         @max -= 1
       end
-      @v -= 1
     end
 
     #Returns Edge(x,y) if exist.
@@ -68,13 +58,16 @@ module DS
       end
     end
 
-    def vmax
-      @max
+    #Checks if two elements are connected.
+    def edge? x,y
+      v1 = @map.index(x)
+      v2 = @map.index(y)
+      @store[v1,v2] > 0
     end
-
+    
     #Returns vertex counter.
     def vertex_size
-      @v
+      @map.size
     end
 
 

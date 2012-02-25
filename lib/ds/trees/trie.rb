@@ -12,24 +12,23 @@ module DS
       @data = value
     end
 
-    def insert(s, value)
-      priv_insert(s.scan(/./), value)
+    def insert(s, value=true)
+      letters = s.scan(/./)
+      raise ArgumentError, "Not allowed symbol." unless (letters - alphabet).empty?
+      priv_insert(letters, value)
     end
 
     def find(s)
-      priv_find(s.scan(/./))
+      letters = s.scan(/./)
+      raise ArgumentError, "Not allowed symbol." unless (letters - alphabet).empty?
+      priv_find(letters)
     end
 
     protected
     def key(chr)
-      raise ArgumentError,  "Argument chr is nil" unless chr
       k=alphabet.index(chr) 
-      if k.nil?
-        raise ArgumentError, "Character not found"
-      else
-        k
-      end
     end
+
 
     def priv_insert(s, value)
       if s.empty?
@@ -47,21 +46,16 @@ module DS
     end
 
     def priv_find(search)
-      if @children[0]
-        @children[0].value
+      if search.empty?
+        @data
       else
-        if search.empty?
-          @data
+        index = key(search.first)
+        if @children[index]
+          @children[index].priv_find(search[1..-1])
         else
-          index = key(search.first)
-          if @children[index]
-            @children[index].priv_find(search[1..-1])
-          else
-            nil
-          end
+          nil
         end
       end
     end
-
   end
 end

@@ -55,7 +55,7 @@ module DS
           el = el.next
         end
 
-        raise "Element not found" unless el
+        raise ListError, "Element not found" unless el
 
         prev.next = el.next
         el.next = nil
@@ -106,7 +106,7 @@ module DS
         end
 
         if el.nil?
-          raise "List element not found"
+          raise ListError, "List element not found"
         else
           prev.next = x
           x.next = el
@@ -212,9 +212,17 @@ module DS
           b = b.next
         end
 
-        a = a.next
-        prev.next = a
-        b = b.next
+        if prev.nil?
+          prev =  a
+          a = a.next
+          prev.next = nil
+          self.head = a 
+          b = b.next
+        else
+          a = a.next
+          prev.next = a
+          b = b.next
+        end
       end
       self
     end
@@ -267,13 +275,8 @@ module DS
 
       @head = prev
       self
-
     end
 
-    #Prints list.
-    def print
-      each { |e| p e }
-    end
 
     #Converts list to array.
     def to_a
@@ -289,15 +292,9 @@ module DS
       end
     end
 
-    def each_with_index
-      elem = @head
-      i = 0
-      while elem
-        yield elem,i
-        elem = elem.next
-        i = i + 1
-      end
-    end
-
   end
+
+  class ListError < StandardError
+  end
+
 end

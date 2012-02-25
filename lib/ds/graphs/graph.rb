@@ -6,14 +6,12 @@ module DS
     #Create new graph from array of edges. Second parameter determines
     #graph internal implementation: :list (Adjency List), :tri_matrix (Triangular
     #Matrix), :matrix (Matrix).
-    def initialize(edges,store = :list)
+    def initialize(edges,store = :matrix)
       case store
       when :matrix
         @g = GraphAsMatrix.new(edges)
       when :tri_matrix
         @g = GraphAsTriMatrix.new(edges)
-      else
-        @g = GraphAsList.new(edges)
       end
     end
 
@@ -62,10 +60,6 @@ module DS
 
     def vertex_size
       @g.vertex_size
-    end
-
-    def edge_size
-      @g.vmax+1
     end
 
     def each_vertex &block
