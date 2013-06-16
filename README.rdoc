@@ -387,8 +387,6 @@ New graph implemented as Triangular Matrix
 New graph implemented as Matrix
   graph = Graph.new(edges,:matrix)
 
-New graph implemented as Adjency List
-  graph = Graph.new(edges,:list)
 
 Examples:
 
