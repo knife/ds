@@ -27,7 +27,6 @@ require "ds/trees/binary_heap"
 require "ds/trees/trie"
 
 require "ds/graphs/edge"
-require "ds/graphs/graph_as_list"
 require "ds/graphs/graph_as_matrix"
 require "ds/graphs/graph_as_tri_matrix"
 require "ds/graphs/graph"
