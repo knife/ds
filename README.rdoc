@@ -33,7 +33,7 @@ The DS gem supports the folowing data structures:
 
 
 == Instalation
-  
+
   gem install ds
 
 == Usage
@@ -65,7 +65,7 @@ Accessors defined on Pair object:
 Stack is very simple data structure which allows access only to the top element.
 More: {Stack}[http://en.wikipedia.org/wiki/Stack_(abstract_data_type)]
 
-Creating new Stack (implemented as Array).  
+Creating new Stack (implemented as Array).
   stack = Stack.new
 
 The following methods are available on a Stack:
@@ -97,7 +97,7 @@ More: {Queue}[http://en.wikipedia.org/wiki/Queue_(data_structure)]
 
 ==== Queue
 
-Creating new Queue (implemented as Array).  
+Creating new Queue (implemented as Array).
   q = Queue.new
 
 Creating new Queue (implemented as List)
@@ -123,14 +123,14 @@ Examples:
   q.empty? #=> true
 
 
-==== Priority Queue 
+==== Priority Queue
 
 PriorityQueue is special form of Queue (PriorityQueue inherits from Queue).
 In opposite to simple Queue, in PriorityQueue each element is associated with a "priority".
 More: {Priority Queue}[http://en.wikipedia.org/wiki/Priority_queue]
 
 Creating new Priority Queue (implemented as BinaryHeap)
-  
+
   q = PriorityQueue.new
 
 Examples:
@@ -144,6 +144,16 @@ Examples:
   q.shift  #=> :important
   q.peek  #=> :nevermind
 
+Defining an alternate definition of priority (here, lower number means higher priority):
+  q = PriorityQueue.new{|a,b| a<b}
+  q.push(:three, 3)
+  q.push(:one, 1)
+  q.shift #=> :one
+
+  q = PriorityQueue.new{|a,b| a>b}
+  q.push(:three, 3)
+  q.push(:one, 1)
+  q.shift #=> :three
 
 
 === Lists
@@ -157,7 +167,7 @@ More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 Creating new List
   l = List.new(1)
   l.append(2)
-or 
+or
   arr = [1,2,3,4]
   list = List.from_array(arr)
 
@@ -165,7 +175,7 @@ Examples:
 
 Simple operation on lists
   list.length #=> 4
-  list.append(5).to_a #=> [1,2,3,4,5] 
+  list.append(5).to_a #=> [1,2,3,4,5]
   list.prepend(0).to_a #=> [0,1,2,3,4,5]
   list.remove(list.head).to_a #=> [1,2,3,4,5]
   list.shift #=> 1
@@ -181,7 +191,7 @@ Reversing
   list.reverse!.to_a #=> [5,4,3,1,0]
 
 Enumerable methods are also available
-  
+
   list.map{ |e| e.data } #=> [1,2,3,4]
   list.inject(0){ |mem, var| mem = mem + var.data } #=> 10
 
@@ -204,14 +214,14 @@ Examples:
   ring.looped? #=> true
   ring.cycle_size #=> 7
   ring.eliminate_by(2) #=> 1
- 
+
 
 
 === Trees
 
 ==== Tree
 
-A tree is a data structure consisting of nodes organised as a hierarchy. 
+A tree is a data structure consisting of nodes organised as a hierarchy.
 More: {Tree}[http://en.wikipedia.org/wiki/Tree_(data_structure)]
 
 Building Tree
@@ -232,8 +242,8 @@ Examples:
   t.height #=> 3
   t.width #=> 3
   t.leaf_count #=> 4
-  
-  t.levels #=> {1=>1,2=>3, 3=>3} 
+
+  t.levels #=> {1=>1,2=>3, 3=>3}
 
 Other methods
 * get_leaves
@@ -276,7 +286,7 @@ Examples
 ==== CompleteBinaryTree
 
 A complete binary tree is a binary tree in which every level, except possibly
-the last, is completely filled, and all nodes are as far left as possible. 
+the last, is completely filled, and all nodes are as far left as possible.
 CompleteBinaryTree is binary tree but does not inherit from Tree and BinaryTree class! Nodes are stored
 internally in array.
 More: {Complete Binary Tree}[http://en.wikipedia.org/wiki/Complete_binary_tree]
@@ -289,7 +299,7 @@ Examples
   cbt.left(0) #=> 2
   cbt.right(0) #=> 3
   cbt.parent(1) #=> 0
-  
+
   cbt.left_index(0) #=> 1
   cbt.right_index(1) #=> 4
   cpt.parent_index(1) #=> 0
@@ -303,7 +313,7 @@ More: {Binary Heap}[http://en.wikipedia.org/wiki/Binary_heap]
 
 Creating
 
-Maximum Binary Heap 
+Maximum Binary Heap
   max_heap = BinaryHeap.new(9,8,4,5,11,6)
 or
   max_heap = BinaryHeap.max(9,8,4,5,11,6)
@@ -324,30 +334,30 @@ Examples
   min_heap.shift #returns min element (4)
 
 
-==== Trie 
+==== Trie
 
 Trie is an ordered tree data structure which allows very quick search: O(k), where k is word length.
 More: {Trie}[http://en.wikipedia.org/wiki/Trie]
 
-Creating 
+Creating
   trie = Trie.new
-  
+
 Examples
   trie.insert("thing",true);
   trie.find("thing")  # =>  true
 
 
-==== Traversing Tree 
+==== Traversing Tree
 
   b= BinaryTree.new
-  [2,5,8,9,11,12,14].each{|x| b.insert(x)} 
+  [2,5,8,9,11,12,14].each{|x| b.insert(x)}
 
 walker = TreeWalker.new(b)
 
-Iterating in postorder  
+Iterating in postorder
   walker.traverse(:postorder) #=> [9,11,5,12,14,8,2]
 Iterating in inorder
-  walker.traverse(:inorder) #=> [9,5,11,2,12,8,14] 
+  walker.traverse(:inorder) #=> [9,5,11,2,12,8,14]
 Iterating in preorder
   walker.traverse(:preorder) #=> [2,5,9,11,8,12,14]
 
@@ -359,7 +369,7 @@ You can also pass block to traverse method
   walker.traverse(:inorder){|n| p n.data**2}
 
 If you want to change value of tree nodes, use recalculate! method
-  walker.recalculate!(b,:preorder,0){|x,memo| memo = memo+x.data} 
+  walker.recalculate!(b,:preorder,0){|x,memo| memo = memo+x.data}
 
 
 
@@ -374,7 +384,7 @@ More: {Graph}[http://en.wikipedia.org/wiki/Graph_(data_structure)]
 ====Graph
 
 Creating new Graph
-    
+
   edges = []
   edges << Edge.new('Lukas','Marc')
   edges << Edge.new('Lukas','Tom')
@@ -406,7 +416,7 @@ Iterating
 ==== Digraph
 
 Creating Directed Weighted Graph is simple like that:
-  
+
   edges = []
 
   edges << Edge.new(:A,:C,5)
@@ -438,7 +448,7 @@ Examples
 
 ==== Array2D
 
-Simple two dimensional array(matrix).  
+Simple two dimensional array(matrix).
 Array2D extends automatically like simple Array.
 
 Creating

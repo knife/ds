@@ -93,12 +93,45 @@ describe PriorityQueue do
     end
   end
 
+  describe 'priority queue with alternate ordering' do
+    before do
+      @queue = PriorityQueue.new{|a,b| a<b}
+      @queue.enqueue :important, 1
+      @queue.enqueue :not_important, 2
+    end
+
+    it "should not be empty." do
+      refute @queue.empty?
+      @queue.length.must_equal 2
+    end
+
+    it "#peek should return element with highest priority." do
+      @queue.peek.must_equal :important
+    end
+
+
+    it "#enqueue and #push should add element to priority queue." do
+      @queue.enqueue :very_important, 5
+      @queue.push :nevermind, 0
+      @queue.length.must_equal 4
+    end
+
+    it "#dequeue and #shift should remove element with highest priority." do
+      x = @queue.dequeue
+      @queue.length.must_equal 1
+      x.must_equal :important
+      @queue.dequeue.must_equal :not_important
+      @queue.length.must_equal 0
+      @queue.dequeue.must_be_nil
+    end
+  end
+
 
   if ENV['BENCH']
     describe "performance" do
 
       before do
-        
+
         @queue = PriorityQueue.new
         10000.times do |n|
           @queue.push :elem, rand(10)
