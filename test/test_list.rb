@@ -104,28 +104,11 @@ describe List do
     @list.reverse!.length.must_equal 4
   end
 
-  it "#merge should merge two list into one." do
-    @list2.merge(@list).to_a.must_equal [1,2,3,4,4,5,7]
-  end
-
-  it "#merge should be symetric operation." do
-    @list.merge(@list2).to_a.must_equal [1,2,3,4,4,5,7]
-  end
-
-
   it "#orderize should order elements by evaluating block." do
     not_sorted_list = List.from_array([3,-1,0,-8,2,0,1])
     not_sorted_list.orderize{|elem| elem <=> 0}.to_a.must_equal [-1,-8,0,0,3,2,1]
   end
 
-  it "#remove! should remove all elements that occur on the other list." do
-    @list.remove!(@list2).to_a.must_equal [1,2,3]
-    @numbers.remove!(@even_numbers).to_a.must_equal [1,3,5,7,9]
-  end
-  
-  it "#remove! should remove all elements that occur on the other list#2." do
-    @list2.remove!(@list).to_a.must_equal [5,7]
-  end
 
   it "#looped? should check if list has cycle." do
     refute @list2.looped?
