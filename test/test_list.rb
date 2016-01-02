@@ -20,6 +20,18 @@ describe List do
     @list2.length.must_equal 3
   end
 
+  it "#get should return list element if element is on the list" do
+    x = @list.head.next
+    found = @list.get(x)
+    found.must_be_kind_of ListElement 
+  end
+
+
+  it "#get! should raise error if element is not found on the list" do
+    x = @list2.head.next
+    proc {  @list.get!(x) }.must_raise  Exception
+  end
+
 
   it "#append should add element to the end of the list." do
     x = 5

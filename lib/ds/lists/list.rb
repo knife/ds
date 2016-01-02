@@ -1,4 +1,6 @@
 module DS
+  class ListError < StandardError; end
+
   # Implements simple list data structure.
   class List
     include Enumerable
@@ -22,9 +24,8 @@ module DS
 
     # Appends new element to list.
     def append(x)
-      last_elem = self.tail
       if !empty?
-        @tail = last_elem.append(x)
+        @tail = tail.append(x)
       else
         @head = ListElement.new(x)
         @tail = @head
@@ -39,6 +40,7 @@ module DS
       el.next = @head
       @head = el
     end
+
 
     # Removes element x from list.
     def remove(x)
@@ -66,28 +68,40 @@ module DS
       remove(head).data
     end
 
+    def get(x)
+      el = head
+      while el && el != x
+        el = el.next 
+      end
+      el
+    end
+
+    def get!(x)
+      found = get(x)
+      fail 'Element not found' unless found
+    end
+
     # Inserts element x after another element.
     def insert_after(x, rel)
       x = ListElement.new(x)
 
       el = head
-      el = el.next while el && el != rel
-
-      raise "Element not found" unless el
+      while el && el != rel
+        el = el.next 
+      end
+      fail 'Element not found' unless el
 
       x.next = el.next
       el.next = x
 
-      if x.tail?
-        self.tail = x
-      end
+      self.tail = x if x.tail?
     end
 
     # Inserts element x before another element.
     def insert_before(x, rel)
-      x = ListElement.new(x)  
+      x = ListElement.new(x)
 
-      #inserting at the beginnig of the list 
+      # inserting at the beginnig of the list
       if rel == head
         x.next = head
         self.head = x
@@ -96,20 +110,19 @@ module DS
       else
         el = head
         prev = head
-        while el and el != rel
+        while el && el != rel
           prev = el
           el = el.next
         end
 
         if el.nil?
-          raise ListError, "List element not found"
+          fail ListError, 'List element not found'
         else
           prev.next = x
           x.next = el
         end
       end
     end
-
 
     # Checks if list is empty.
     def empty?
@@ -132,7 +145,7 @@ module DS
 
     # Checks if list is linked at the end with other list.
     def zip?(other)
-      tail.equal? other.tail 
+      tail.equal? other.tail
     end
 
     # Returns joint element if exists, otherwise returns nil.
@@ -142,16 +155,14 @@ module DS
 
       while elem && elem2
 
-        #traversing by 1
+        # traversing by 1
         elem = elem.next
 
-        #traversing by 2
+        # traversing by 2
         elem2 = elem2.next
         elem2 = elem2.next if elem2
 
-        if elem2.equal? elem
-          return elem
-        end
+        return elem if elem2.equal? elem
       end
 
       nil
@@ -177,16 +188,14 @@ module DS
       counter
     end
 
-
     # Orderize list by evaluating block. Block should evaluate to one of these
     # values: 1,0,-1 (same as Comparable).
     def orderize
-
       zero = List.new
       plus = List.new
       minus = List.new
 
-      el = self.head
+      el = head
 
       while el
         case yield el.data
@@ -197,20 +206,18 @@ module DS
         when -1
           minus_tail = minus.append(el.data)
         end
-
         el = el.next
       end
 
       minus_tail.next = zero.head
       zero_tail.next = plus.head
-      return minus
+      minus
     end
-
 
     # Reverses list.
     def reverse!
-      @tail = self.head
-      prev = self.head
+      @tail = head
+      prev = head
       elem = prev.next
       prev.next = nil
       while elem
@@ -224,13 +231,12 @@ module DS
       self
     end
 
-
-    #Converts list to array.
+    # Converts list to array.
     def to_a
-      map { |e| e.data}
+      map(&:data)
     end
 
-    #Default list iterator.
+    # Default list iterator.
     def each
       elem = @head
       while elem
@@ -239,6 +245,4 @@ module DS
       end
     end
   end
-
-  class ListError < StandardError; end
 end
