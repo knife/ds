@@ -162,6 +162,21 @@ module DS
       !!joint
     end
 
+    # Returns cycle size or nil if list has no cycles
+    def cycle_size
+      return unless looped?
+      counter = 0
+      if start = joint
+        counter = 1
+        elem = joint.next
+        while elem != start
+          elem = elem.next
+          counter += 1
+        end
+      end
+      counter
+    end
+
 
     # Orderize list by evaluating block. Block should evaluate to one of these
     # values: 1,0,-1 (same as Comparable).

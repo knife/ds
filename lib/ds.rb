@@ -11,7 +11,6 @@ require "ds/sets/ordered_set"
 
 require "ds/lists/list_element"
 require "ds/lists/list"
-require "ds/lists/cyclic_list"
 require "ds/lists/ring"
 
 require "ds/stacks/stack"

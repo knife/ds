@@ -1,6 +1,6 @@
 module DS
   # Ring - represent list which head is linked with tail.
-  class Ring < CyclicList
+  class Ring < List
     # Creates ring from array.
     def self.from_array(arr)
       list = Ring.new(arr.shift)
