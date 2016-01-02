@@ -10,6 +10,7 @@ describe ArrayX do
     @empty = [].extend(ArrayX)
     @one = [3].extend(ArrayX)
     @not_sorted = [3,4,9,1,1,2,8].extend(ArrayX)
+    @not_sorted2 = [2,3,1].extend(ArrayX)
   end
 
   it "#sorted? should check if array is already sorted." do
@@ -27,10 +28,9 @@ describe ArrayX do
     refute @not_sorted.sorted?(:asc)
     assert @short.sorted?(:asc)
     refute @short.sorted?(:desc)
-    
     assert @one.sorted?(:asc)
     assert @one.sorted?(:asc)
-
+    refute @not_sorted2.sorted?
   end
   
   it "#duplications? should check if array has duplicates." do

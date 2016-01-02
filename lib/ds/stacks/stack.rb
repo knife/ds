@@ -1,15 +1,12 @@
 module DS
-  
-  #Class implements Stack data structure.
-  #Internaly uses array to store elements.
-
+  # Class implements Stack data structure.
+  # Internaly uses array to store elements.
   class Stack
-    
     def initialize
       @store = []
     end
 
-    #Returns the stack size.
+    # Returns the stack size.
     def size
       @store.size
     end
@@ -18,7 +15,7 @@ module DS
     def pop
       @store.pop
     end
-    
+
     # Adds element to the top of the stack.
     def push(x)
       @store.push x
@@ -35,5 +32,3 @@ module DS
     end
   end
 end
-
-

@@ -1,17 +1,13 @@
 module DS
-   
-  #Implements two dimensional array.  
+  # Implements two dimensional array. 
   class Array2D
-
-
-    #Creates new two dimensional array. Init is the default value of the array.
-    def initialize(size=1,init=0)
+    # Creates new two dimensional array. Init is the default value of the array.
+    def initialize(size=1, init=0)
       @init = init
-      @store = Array.new(size){Array.new(size){init}}
+      @store = Array.new(size) { Array.new(size) { init } }
     end
 
-    
-    def [](x,y)
+    def [](x, y)
       if @store[x].nil?
         @store[x] = []
         @init
@@ -22,7 +18,7 @@ module DS
       end
     end
 
-    def []=(x,y,v)
+    def []=(x, y, v)
       @store[x] = [] if @store[x].nil?
       @store[x][y] = v
     end
@@ -34,6 +30,5 @@ module DS
     def flatten
       @store.flatten
     end
-
   end
 end

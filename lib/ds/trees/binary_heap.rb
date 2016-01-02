@@ -1,53 +1,53 @@
 module DS
+  # Create new Heap from args.
   class BinaryHeap < CompleteBinaryTree
     attr_accessor :data
-    
-    #Create new Heap from args.
-    #Given block sets the heap relation. Default heap relation is Max Heap.
+
+    # Create new Heap from args.
+    # Given block sets the heap relation. Default heap relation is Max Heap.
     def initialize(*args, &block)
       if block_given?
         @relation = block
       else
-        @relation = Proc.new{|parent,child| parent >= child}
+        @relation = proc { |parent, child| parent >= child }
       end
       @data = args.to_a
       heapify!
     end
 
-    #Create new Maximum Heap from args.
-    def BinaryHeap.max(*args)
-      new(*args){|parent,child| parent >= child}
+    # Create new Maximum Heap from args.
+    def self.max(*args)
+      new(*args) { |parent, child| parent >= child }
     end
 
-    #Create new Minimum Heap from args.
-    def BinaryHeap.min(*args)
-      new(*args){|parent,child| parent < child}
+    # Create new Minimum Heap from args.
+    def self.min(*args)
+      new(*args) { |parent, child| parent < child }
     end
 
-
-    #Evaluates Heap relation.
-    def relation(parent,child)
-      @relation.call(@data[parent],@data[child])
+    # Evaluates Heap relation.
+    def relation(parent, child)
+      @relation.call(@data[parent], @data[child])
     end
 
-    #Arranges data in heap.
-    #O(n)
+    # Arranges data in heap.
+    # O(n)
     def heapify!
-      (@data.size/2).downto(0) do |i|
+      (@data.size / 2).downto(0) do |i|
         heapify(i)
       end
     end
 
-    #Maintains heap condition for i node.
-    #O(log)
+    # Maintains heap condition for i node.
+    # O(log)
     def heapify(i)
-      left =  left_index(i)
+      left = left_index(i)
       left = nil if left >= @data.size
 
       right = right_index(i)
       right = nil if right >= @data.size
 
-      largest = [i,left,right].compact.sort{|x,y| relation(x,y)?-1:1}.first
+      largest = [i, left, right].compact.sort { |x, y| relation(x, y) ? -1 : 1 }.first
 
       if largest != i
         @data[i], @data[largest] = @data[largest], @data[i]
@@ -55,7 +55,7 @@ module DS
       end
     end
 
-    #Removes element from heap maintaining heap relation.
+    # Removes element from heap maintaining heap relation.
     def shift
       if @data.size > 0
         result = @data.shift
@@ -66,15 +66,15 @@ module DS
       result
     end
 
-    #Inserts new value to heap maintaining the heap relation.
-    #Returns heap itself.
-    #O(log)
+    # Inserts new value to heap maintaining the heap relation.
+    # Returns heap itself.
+    # O(log)
     def insert(value)
       @data.push value
-      child = @data.size-1
+      child = @data.size - 1
       parent = parent_index(child)
 
-      while parent >= 0 and !relation(parent,child)
+      while parent >= 0 && !relation(parent, child)
         @data[child], @data[parent] = @data[parent], @data[child]
         child = parent
         parent = parent_index(child)
@@ -82,13 +82,11 @@ module DS
       self
     end
 
-
-
     def length
-      @data.size 
+      @data.size
     end
 
-    alias :size :length
+    alias_method :size, :length
 
     def empty?
       @data.empty?
@@ -97,6 +95,5 @@ module DS
     def to_a
       @data
     end
-
   end
 end

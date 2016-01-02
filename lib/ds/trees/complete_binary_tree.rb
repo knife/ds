@@ -1,60 +1,58 @@
 module DS
+  # Complete Binary Tree
   class CompleteBinaryTree
-   
-    #Creates new tree (stored in array).
+    # Creates new tree (stored in array).
     def initialize(*args)
-      if args.empty? 
+      if args.empty?
         @data = []
       else
         @data = args.to_a
       end
     end
 
-    #Inserts new element.
-    def << (value)
+    # Inserts new element.
+    def <<(value)
       @data.push value
     end
 
-    #Returns root element.
+    # Returns root element.
     def root
       @data.first
     end
 
-    #Returns index of left child.
+    # Returns index of left child.
     def left_index(i)
-      2*i+1  
+      2 * i + 1
     end
 
-    #Returns index of right child.
+    # Returns index of right child.
     def right_index(i)
-      2*i+2
+      2 * i + 2
     end
 
-    #Returns index of parent.
+    # Returns index of parent.
     def parent_index(i)
-      (i+1)/2 - 1
+      (i + 1) / 2 - 1
     end
 
-    #Returns children of node i.
+    # Returns children of node i.
     def children(i)
       [@data[left_index(i)], @data[right_index(i)]]
     end
 
-    #Returns left child of node i.
+    # Returns left child of node i.
     def left(i)
       @data[left_index(i)]
     end
 
-    #Returns left child of node i.
+    # Returns left child of node i.
     def right(i)
       @data[right_index(i)]
     end
 
-    #Returns parent of node i.
+    # Returns parent of node i.
     def parent(i)
       @data[parent_index(i)]
     end
-
   end
 end
-

@@ -19,12 +19,12 @@ module DS
       return subtree
     end
 
-    #Checks if node is leaf.
+    # Checks if node is leaf.
     def leaf?
       self.children.empty?
     end
 
-    #Returns leaf list.
+    # Returns leaf list.
     def get_leaves(tree=self)
       list = List.new
       walker = TreeWalker.new(self)
@@ -32,7 +32,7 @@ module DS
       list
     end
 
-    #Returns the number of leaves for given subtree.
+    # Returns the number of leaves for given subtree.
     def leaf_count(tree=self)
       if tree.leaf?
         1
@@ -42,8 +42,8 @@ module DS
     end
 
     
-    #Returns number of nodes for each tree level.
-    #{1=>1, 2=>4, 3=>5}
+    # Returns number of nodes for each tree level.
+    # {1=>1, 2=>4, 3=>5}
     def levels
       walker = TreeWalker.new(self)
       nodes={}
@@ -58,12 +58,12 @@ module DS
       nodes
     end
 
-    #Returns tree width.
+    # Returns tree width.
     def width
         levels.values.max
     end
   
-    #Returns subtree height.
+    # Returns subtree height.
     def self.h(tree)
       unless tree.leaf?
         tree.children.map{|t| h(t) }.max + 1
@@ -72,17 +72,17 @@ module DS
       end
     end
 
-    #Returns tree height.
+    # Returns tree height.
     def height
       Tree.h(self)
     end
 
-    #Returns node which lies closest to the root. 
+    # Returns node which lies closest to the root. 
     def lowest_height
       find{ |node| node.leaf? }
     end
 
-    #Mirrors tree.
+    # Mirrors tree.
     def mirror!(tree=self)
       unless tree.leaf?
         tree.children.reverse!
@@ -90,7 +90,7 @@ module DS
       end
     end
 
-    #Checks if tree is isometric to another tree.
+    # Checks if tree is isometric to another tree.
     def izometric?(other)
       tree = self
       unless tree.leaf? and other.leaf?
@@ -104,7 +104,7 @@ module DS
     end
 
 
-    #Iterates tree in BFS order.
+    # Iterates tree in BFS order.
     def each
       TreeWalker.new(self).traverse{ |t| yield t }
     end

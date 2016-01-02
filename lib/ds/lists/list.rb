@@ -1,28 +1,26 @@
 module DS
-
-  #Implements simple list data structure. 
+  # Implements simple list data structure.
   class List
-
     include Enumerable
 
     attr_accessor :head, :tail
 
-    #Creates new list. 
-    def initialize(x=nil)
+    # Creates new list.
+    def initialize(x = nil)
       @head = ListElement.new(x)
       @tail = @head
     end
 
-    #Creates list from array.
+    # Creates list from array.
     def self.from_array(arr)
       list = new(arr.shift)
       tail = list.head
-      arr.each{ |e| tail = tail.append(e) }
+      arr.each { |e| tail = tail.append(e) }
       list.tail = tail
       list
     end
 
-    #Appends new element to list. 
+    # Appends new element to list.
     def append(x)
       last_elem = self.tail
       if !empty?
@@ -33,16 +31,16 @@ module DS
       end
     end
 
-    alias :<< :append
+    alias_method :<<, :append
 
-    #Prepends new element to list.
+    # Prepends new element to list.
     def prepend(x)
       el = ListElement.new(x)
       el.next = @head
       @head = el
     end
 
-    #Removes element x from list.
+    # Removes element x from list.
     def remove(x)
       if x == head
         self.head = head.next
@@ -50,12 +48,12 @@ module DS
       else
 
         el = head
-        while el and el != x
-          prev = el 
+        while el && el != x
+          prev = el
           el = el.next
         end
 
-        raise ListError, "Element not found" unless el
+        fail ListError, 'Element not found' unless el
 
         prev.next = el.next
         el.next = nil
@@ -63,19 +61,17 @@ module DS
       x
     end
 
-    #Removes list head.
+    # Removes list head.
     def shift
       remove(head).data
     end
 
-    #Inserts element x after another element.
-    def insert_after(x,rel)
+    # Inserts element x after another element.
+    def insert_after(x, rel)
       x = ListElement.new(x)
 
       el = head
-      while el and el != rel
-        el = el.next
-      end
+      el = el.next while el && el != rel
 
       raise "Element not found" unless el
 
@@ -87,8 +83,8 @@ module DS
       end
     end
 
-    #Inserts element x before another element.
-    def insert_before(x,rel)
+    # Inserts element x before another element.
+    def insert_before(x, rel)
       x = ListElement.new(x)  
 
       #inserting at the beginnig of the list 
@@ -96,7 +92,7 @@ module DS
         x.next = head
         self.head = x
 
-      #inserting in the tail of the list
+      # inserting in the tail of the list
       else
         el = head
         prev = head
@@ -115,12 +111,12 @@ module DS
     end
 
 
-    #Checks if list is empty.
+    # Checks if list is empty.
     def empty?
       head.data.nil?
     end
 
-    #Returns last element of the list.
+    # Returns last element of the list.
     def last
       tail.data
     end
@@ -129,22 +125,22 @@ module DS
       head.data
     end
 
-    #Returns length of the list.
+    # Returns length of the list.
     def length
       count
     end
 
-    #Checks if list is linked at the end with other list.
+    # Checks if list is linked at the end with other list.
     def zip?(other)
       tail.equal? other.tail 
     end
 
-    #Returns joint element if exists, otherwise returns nil.
+    # Returns joint element if exists, otherwise returns nil.
     def joint
       elem = head
       elem2 = elem.next
 
-      while elem and elem2
+      while elem && elem2
 
         #traversing by 1
         elem = elem.next
@@ -161,14 +157,14 @@ module DS
       nil
     end
 
-    #Returns true if list has cycle.
+    # Returns true if list has cycle.
     def looped?
       !!joint
     end
 
 
-    #Orderize list by evaluating block. Block should evaluate to one of these
-    #values: 1,0,-1 (same as Comparable).
+    # Orderize list by evaluating block. Block should evaluate to one of these
+    # values: 1,0,-1 (same as Comparable).
     def orderize
 
       zero = List.new
@@ -260,7 +256,7 @@ module DS
       result
     end
 
-    #Reverses list.
+    # Reverses list.
     def reverse!
       @tail = self.head
       prev = self.head
@@ -291,10 +287,7 @@ module DS
         elem = elem.next
       end
     end
-
   end
 
-  class ListError < StandardError
-  end
-
+  class ListError < StandardError; end
 end

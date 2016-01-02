@@ -1,53 +1,51 @@
 module DS
-  
-  #Class implements queue data structure.
-  
+  # Class implements queue data structure.
   class Queue
-
-    #Create new queue. First parameter determines how the queue will be represented internally.
+    # Create new queue.
+    # First parameter determines how the queue will be represented internally.
     def initialize(store = :array)
-      if store == :array 
+      if store == :array
         @store = []
       else
         @store = List.new
       end
     end
-    
-    #Create new queue. Internaly uses list to store elements.
-    def Queue.create
+
+    # Create new queue. Internaly uses list to store elements.
+    def self.create
       new(:list)
     end
-    
-    #Adds element to queue and returns queue itself.
+
+    # Adds element to queue and returns queue itself.
     def enqueue(x)
       @store << x
       self
     end
 
-    alias :push :enqueue
-    
-    #Removes element from queue and returns it.
+    alias_method :push, :enqueue
+
+    # Removes element from queue and returns it.
     def dequeue
       @store.shift
     end
 
-    alias :shift :dequeue
-  
-    #Returns element from forehead of queue.
+    alias_method :shift, :dequeue
+
+    # Returns element from forehead of queue.
     def peek
       @store.first
     end
 
-    #Returns length of queue. If queue is empty returns 0.
+    # Returns length of queue. If queue is empty returns 0.
     def length
       @store.length
     end
-    
-    #Checks if queue is empty.
+
+    alias_method :size, :length
+
+    # Checks if queue is empty.
     def empty?
       @store.empty?
     end
-
   end
 end
-

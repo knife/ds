@@ -32,7 +32,7 @@ module DS
 
     def priv_insert(s, value)
       if s.empty?
-          @data = value
+        @data = value
       else
         index = key(s.first)
         subtree = if @children[index]
