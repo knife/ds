@@ -41,7 +41,6 @@ module DS
       @head = el
     end
 
-
     # Removes element x from list.
     def remove(x)
       if x == head
@@ -70,9 +69,7 @@ module DS
 
     def get(x)
       el = head
-      while el && el != x
-        el = el.next 
-      end
+      el = el.next while el && el != x
       el
     end
 
@@ -86,9 +83,7 @@ module DS
       x = ListElement.new(x)
 
       el = head
-      while el && el != rel
-        el = el.next 
-      end
+      el = el.next while el && el != rel
       fail 'Element not found' unless el
 
       x.next = el.next

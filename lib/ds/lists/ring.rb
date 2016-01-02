@@ -13,22 +13,5 @@ module DS
     def length
       cycle_size
     end
-
-    # Removes ring elements by k until there is only one element in list.
-    def eliminate_by(k)
-      elem = head
-      prev = elem
-      k -= 1
-
-      while prev != elem.next
-        k.times  do
-          prev = elem
-          elem = elem.next
-        end
-        prev.next = elem.next
-        elem = prev.next
-      end
-      prev.data
-    end
   end
 end

@@ -19,10 +19,5 @@ describe "Cyclic List" do
   it "should has cycle." do
     @ring.cycle_size.must_equal 7
   end
-
-  it "#eliminate_by should remove elements by given offset until there is one element." do
-    @ring.eliminate_by(3).must_equal 4
-    @ring.eliminate_by(2).must_equal 1
-  end
 end
 
