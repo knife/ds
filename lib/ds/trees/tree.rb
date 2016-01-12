@@ -77,7 +77,7 @@ module DS
 
     # Returns node which lies closest to the root.
     def lowest_height
-      find { |node| node.leaf? }
+      find(&:leaf?)
     end
 
     # Mirrors tree.
@@ -91,7 +91,7 @@ module DS
     # Checks if tree is isometric to another tree.
     def izometric?(other)
       tree = self
-      unless tree.leaf? and other.leaf?
+      unless tree.leaf? && other.leaf?
         if tree.children.size == other.children.size
           tree.children.each_with_index { |t, i| return false unless t.izometric?(other.children[i]) }
         else
@@ -107,7 +107,7 @@ module DS
     end
 
     def to_a
-      map { |node| node.data }
+      map(&:data)
     end
   end
 end

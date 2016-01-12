@@ -24,7 +24,7 @@ module DS
 
       case order
       when :bfs
-        traverse_bfs &block
+        traverse_bfs(&block)
       when :postorder
         walk(tree, :postorder, &block)
       when :preorder
@@ -114,7 +114,7 @@ module DS
         recalculate!(tree, :preorder, 0) { |x, memo| memo += x.data }
         tree
       when :inorder
-        recalculate!(tree, :inorder, 0) { |x, memo| memo += x.data if x.data and memo }
+        recalculate!(tree, :inorder, 0) { |x, memo| memo += x.data if x.data && memo }
         tree
       end
     end

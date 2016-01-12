@@ -50,11 +50,7 @@ module DS
     def get_edge(x, y)
       s = @map.index x
       t = @map.index y
-      if @store[s, t] > 0
-        Edge.new(x, y, @store[s, t])
-      else
-        nil
-      end
+      Edge.new(x, y, @store[s, t]) if @store[s, t] > 0
     end
 
     # Checks if two elements are connected.
@@ -76,8 +72,8 @@ module DS
       sum_in = 0
       sum_out = 0
       0.upto @max do |i|
-        sum_in += 1 if @store[i, x] and @store[i, x] > 0
-        sum_out += 1 if @store[x, i] and @store[x, i] > 0
+        sum_in += 1 if @store[i, x] && @store[i, x] > 0
+        sum_out += 1 if @store[x, i] && @store[x, i] > 0
       end
 
       case direction

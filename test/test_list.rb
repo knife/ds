@@ -140,11 +140,11 @@ describe List do
   it '#each_with_index should iterate list.' do
     h = {}
     @list.each_with_index { |e, i| h[i] = e.data }
-    h.must_equal({ 0 => 1, 1 => 2, 2 => 3, 3 => 4 })
+    h.must_equal(0 => 1, 1 => 2, 2 => 3, 3 => 4)
   end
 
   it 'should include Enumerable methods.' do
-    @list.map { |e| e.data }.must_equal [1, 2, 3, 4]
+    @list.map(&:data).must_equal [1, 2, 3, 4]
     @list.inject(0) { |mem, var| mem += var.data }.must_equal 10
     @list.find { |e| e.data == 1.0 }.data.must_equal 1
   end

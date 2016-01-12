@@ -32,7 +32,7 @@ describe Tree do
   it '#get_leaves should return list of tree leaves.' do
     leaves = @tree.get_leaves
     leaves.must_be_kind_of List
-    leaves.to_a.collect { |e| e.data }.must_equal [4, 10, 3, 9]
+    leaves.to_a.collect(&:data).must_equal [4, 10, 3, 9]
   end
 
   it '#leaf_count should return number of tree leaves.' do
@@ -56,8 +56,8 @@ describe Tree do
   end
 
   it '#lowest_height should return node which lies closest to the root.' do
-   @tree.lowest_height.data.must_equal 9
- end
+    @tree.lowest_height.data.must_equal 9
+  end
 
   it '#mirror! should mirror tree.' do
     @tree.mirror!

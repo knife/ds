@@ -61,11 +61,11 @@ module DS
     end
 
     def each_vertex(&block)
-      @g.each_vertex &block
+      @g.each_vertex(&block)
     end
 
     def each_edge(&block)
-      @g.each_edge &block
+      @g.each_edge(&block)
     end
 
     def bfs(s)
@@ -90,7 +90,7 @@ module DS
       while !q.empty?
         u = q.dequeue
         @g.neighbors(u).each do |v|
-          if colors[v] === :white
+          if colors[v] == :white
             colors[v] = :grey
             d[v] = d[u] + 1
             parents[v] = u

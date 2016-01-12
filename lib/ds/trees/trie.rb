@@ -49,11 +49,7 @@ module DS
         @data
       else
         index = key(search.first)
-        if @children[index]
-          @children[index].priv_find(search[1..-1])
-        else
-          nil
-        end
+        @children[index].priv_find(search[1..-1]) if @children[index]
       end
     end
   end

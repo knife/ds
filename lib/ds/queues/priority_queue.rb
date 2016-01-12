@@ -17,7 +17,8 @@ module DS
 
     # Removes element with highest priority from queue .
     def dequeue
-      if x = @store.shift
+      x = @store.shift
+      if x
         x.value
       else
         x

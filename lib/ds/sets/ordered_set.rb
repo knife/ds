@@ -11,12 +11,11 @@ module DS
 
     # Adds new element to set
     def push(e)
-      if index = @store[e]
-        index
-      else
-        @size += 1
-        @store[e] = @size - 1
-      end
+      index = @store[e]
+      return index if index
+
+      @size += 1
+      @store[e] = @size - 1
     end
 
     # Returns element index.

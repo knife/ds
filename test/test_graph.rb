@@ -69,6 +69,6 @@ describe Graph do
     r = []
     @graph.each_vertex { |v| r.push v }
     r.size.must_equal 4
-    r.sort.must_equal ['Jack', 'Lukas', 'Marc', 'Tom']
+    r.sort.must_equal %w(Jack Lukas Marc Tom)
   end
 end

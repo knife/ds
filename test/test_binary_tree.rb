@@ -32,7 +32,7 @@ describe BinaryTree do
   end
 
   it '#get_leaves should return list of tree leaves.' do
-    @bin_tree.get_leaves.to_a.collect { |e| e.data }.must_equal [9, 11, 12, 14]
+    @bin_tree.get_leaves.to_a.collect(&:data).must_equal [9, 11, 12, 14]
   end
 
   it '#lowest_height should return node which lies closest to the root.' do

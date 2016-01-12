@@ -189,16 +189,17 @@ module DS
 
     # Returns true if list has cycle.
     def looped?
-      !!joint
+      !joint.nil?
     end
 
     # Returns cycle size or nil if list has no cycles
     def cycle_size
       return unless looped?
       counter = 0
-      if start = joint
+      start = joint
+      if start
         counter = 1
-        elem = joint.next
+        elem = start.next
         while elem != start
           elem = elem.next
           counter += 1
