@@ -3,20 +3,20 @@ module DS
     attr_accessor :visited
     attr_accessor :tree
 
-    #Creates new tree iterator.
+    # Creates new tree iterator.
     def initialize(tree=nil)
       @visited = [] 
       @tree = tree
     end
 
-    #Traversing tree in given order:
-    #bfs - Breadth-first search - default
-    #postorder - postorder search
-    #preorder - preorder search
-    #inorder - inorder search - only for Binary Trees
+    # Traversing tree in given order:
+    # bfs - Breadth-first search - default
+    # postorder - postorder search
+    # preorder - preorder search
+    # inorder - inorder search - only for Binary Trees
     #
-    #If block is  given, passes each visited subtree to block.
-    #Returns values of nodes  in given order
+    # If block is  given, passes each visited subtree to block.
+    # Returns values of nodes  in given order
 
     def traverse(order=:bfs,&block)
       reset 
@@ -37,7 +37,7 @@ module DS
       return visited
     end
 
-    #Traverses tree in BFS order.
+    # Traverses tree in BFS order.
     def traverse_bfs
       q = Queue.new
       q.push @tree
@@ -54,13 +54,13 @@ module DS
       end
     end
 
-    #Resets tree walker.
+    # Resets tree walker.
     def reset
       @visited.clear
       self
     end
 
-    #Traverses tree with tracking level.
+    # Traverses tree with tracking level.
     def traverse_with_h(tree,height=nil,&block)
       tree.children.each do |t|
         traverse_with_h(t,height+1,&block)
@@ -71,7 +71,7 @@ module DS
       end
     end
 
-    #Recalculates tree by evaluating block on every node.
+    # Recalculates tree by evaluating block on every node.
     def recalculate!(tree,order,memo=nil,&block)
       if tree
 
@@ -95,8 +95,8 @@ module DS
           raise ArgumentError unless self.tree.is_a? BinaryTree
           recalculate!(tree.left,order,memo,&block)
 
-            tree.data = yield tree, memo
-            memo = tree.data
+          tree.data = yield tree, memo
+          memo = tree.data
 
           recalculate!(tree.right,order,memo,&block)
 
@@ -104,7 +104,7 @@ module DS
       end
     end
 
-    #Summarize tree
+    # Summarize tree
     def summarize(direction=:bottomup)
       case direction
       when :bottomup

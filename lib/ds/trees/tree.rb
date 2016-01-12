@@ -5,13 +5,13 @@ module DS
     attr_accessor :data
     attr_reader :children
 
-    #Returns a new tree. 
+    # Returns a new tree. 
     def initialize(value=nil)
       @data = value
       @children = []
     end
 
-    #Inserts a new subtree.
+    # Inserts a new subtree.
     def << (value)
       subtree = Tree.new(value)
       @children << subtree
@@ -59,7 +59,7 @@ module DS
 
     # Returns tree width.
     def width
-        levels.values.max
+      levels.values.max
     end
   
     # Returns subtree height.

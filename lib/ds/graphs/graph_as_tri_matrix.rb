@@ -8,7 +8,7 @@ module DS
       add_edges(edges)
     end
 
-    #Returns vertex degree.  
+    # Returns vertex degree.  
     def degree(x)
       x = @map.index(x)
       sum = 0

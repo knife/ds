@@ -4,12 +4,12 @@ module DS
       @store = Array2D.new
       @max = 0
 
-      @map = OrderedSet.new #maps objects to matrix indexes.
+      @map = OrderedSet.new # maps objects to matrix indexes.
 
       add_edges(edges)
     end
 
-    #Adds new edges to graph.
+    # Adds new edges to graph.
     def add_edges(edges)
       for e in edges
         x = @map.push e.from
@@ -21,7 +21,7 @@ module DS
       end
     end
 
-    #Returns all neighbors for given vertex.
+    # Returns all neighbors for given vertex.
     def neighbors(v)
       n = []
       vertexes = @map.to_a
@@ -33,7 +33,7 @@ module DS
       n
     end
 
-    #Removes conection between vertex x and y.
+    # Removes conection between vertex x and y.
     def remove(x,y)
       v1 = @map.index(x)
       v2 = @map.index(y)
@@ -46,8 +46,8 @@ module DS
       end
     end
 
-    #Returns Edge(x,y) if exist.
-    def get_edge x,y
+    # Returns Edge(x,y) if exist.
+    def get_edge(x,y)
       s = @map.index x
       t = @map.index y
       if @store[s,t] > 0
@@ -57,20 +57,20 @@ module DS
       end
     end
 
-    #Checks if two elements are connected.
-    def edge? x,y
+    # Checks if two elements are connected.
+    def edge?(x,y)
       v1 = @map.index(x)
       v2 = @map.index(y)
       @store[v1,v2] > 0
     end
     
-    #Returns vertex counter.
+    # Returns vertex counter.
     def vertex_size
       @map.size
     end
 
-    #Returns vertex degree. Second parameter determines direction - :in incoming
-    #edges, :out - outcoming edges, :all - incoming and outcoming edges.
+    # Returns vertex degree. Second parameter determines direction - :in incoming
+    # edges, :out - outcoming edges, :all - incoming and outcoming edges.
     def degree(x,direction=:all)
       x = @map.index(x)
       sum_in = 0
@@ -90,13 +90,13 @@ module DS
       end
     end
 
-    #Vertex iterator
+    # Vertex iterator
     def each_vertex
       vertexes = @map.to_a
       (0..@max).each {|v| yield vertexes[v]}
     end
 
-    #Edge iterator
+    # Edge iterator
     def each_edge
       vertexes = @map.to_a
       for v0 in 0..@max

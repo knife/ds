@@ -56,13 +56,13 @@ describe Tree do
   end
 
     
-   it "#lowest_height should return node which lies closest to the root." do
-    @tree.lowest_height.data.must_equal 9 
-  end
+  it "#lowest_height should return node which lies closest to the root." do
+   @tree.lowest_height.data.must_equal 9 
+ end
 
   it "#mirror! should mirror tree." do
-     @tree.mirror!
-     @tree.to_a.must_equal [2,9,8,5,3,10,4]
+    @tree.mirror!
+    @tree.to_a.must_equal [2,9,8,5,3,10,4]
   end
 end
 

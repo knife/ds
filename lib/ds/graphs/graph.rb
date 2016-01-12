@@ -2,9 +2,9 @@ module DS
   class Graph
     Infinity = 1 << 64
 
-    #Create new graph from array of edges. Second parameter determines
-    #graph internal implementation: :list (Adjency List), :tri_matrix (Triangular
-    #Matrix), :matrix (Matrix).
+    # Create new graph from array of edges. Second parameter determines
+    # graph internal implementation: :list (Adjency List), :tri_matrix (Triangular
+    # Matrix), :matrix (Matrix).
     def initialize(edges,store = :matrix)
       case store
       when :matrix
@@ -14,46 +14,46 @@ module DS
       end
     end
 
-    #Create new graph from array of edges. Internally graph will be represented
-    #by Triangular Matrix.
+    # Create new graph from array of edges. Internally graph will be represented
+    # by Triangular Matrix.
     def self.create(edges)
       new(edges,:tri_matrix) 
     end
 
-    #Adds new edge to graph.
+    # Adds new edge to graph.
     def add(x,y,weight=1)
       e = Edge.new(x,y,weight)
       add_edges([e])
     end
 
-    #Adds new edges to graph.
+    # Adds new edges to graph.
     def add_edges(edges)
       @g.add_edges(edges)
     end
     
 
-    #Removes conection between vertex x and y.
+    # Removes conection between vertex x and y.
     def remove(x,y)
       @g.remove(x,y) 
     end
 
-    #Returns all neighbors for given vertex.
-    def neighbors v
+    # Returns all neighbors for given vertex.
+    def neighbors(v)
       @g.neighbors v
     end
 
-    #Returns vertex degree.
-    def degree x
+    # Returns vertex degree.
+    def degree(x)
       @g.degree x
     end
 
-    #Checks if two elements are connected.
-    def edge? x,y
+    # Checks if two elements are connected.
+    def edge?(x,y)
       @g.edge? x,y
     end
 
-    #Returns Edge(x,y) if exist.
-    def get_edge x, y
+    # Returns Edge(x,y) if exist.
+    def get_edge(x, y)
       @g.get_edge x,y
     end
 
@@ -61,15 +61,15 @@ module DS
       @g.vertex_size
     end
 
-    def each_vertex &block
+    def each_vertex(&block)
       @g.each_vertex &block
     end
 
-    def each_edge &block
+    def each_edge(&block)
       @g.each_edge &block
     end
 
-    def bfs s
+    def bfs(s)
       colors = {}
       parents = {}
       res = []
