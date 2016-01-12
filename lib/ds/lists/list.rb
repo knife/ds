@@ -80,7 +80,7 @@ module DS
 
     def at(index)
       found = nil
-      each_with_index do |element,i|
+      each_with_index do |element, i|
         if i == index
           found = element
           break
@@ -93,7 +93,7 @@ module DS
       at(index)
     end
 
-    def []=(index,val)
+    def []=(index, val)
       found = at(index)
       if found
         found.data = val

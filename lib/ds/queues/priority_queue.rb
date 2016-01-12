@@ -12,10 +12,10 @@ module DS
       @store.insert(pair)
       self
     end
-    
+
     alias_method :push, :enqueue
 
-    # Removes element with highest priority from queue . 
+    # Removes element with highest priority from queue .
     def dequeue
       if x = @store.shift
         x.value

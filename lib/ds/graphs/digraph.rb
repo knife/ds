@@ -1,7 +1,7 @@
 module DS
   class Digraph < Graph
     def self.create(args)
-      new(args,:matrix)
+      new(args, :matrix)
     end
 
     # Returns number of incoming edges to given vertex.

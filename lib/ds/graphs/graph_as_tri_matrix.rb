@@ -8,15 +8,14 @@ module DS
       add_edges(edges)
     end
 
-    # Returns vertex degree.  
+    # Returns vertex degree.
     def degree(x)
       x = @map.index(x)
       sum = 0
       0.upto @max do |i|
-        sum += @store[x,i] if @store[x,i] 
+        sum += @store[x, i] if @store[x, i]
       end
       sum
     end
   end
 end
-

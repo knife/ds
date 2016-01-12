@@ -1,8 +1,8 @@
 module DS
-  # Implements two dimensional array. 
+  # Implements two dimensional array.
   class Array2D
     # Creates new two dimensional array. Init is the default value of the array.
-    def initialize(size=1, init=0)
+    def initialize(size = 1, init = 0)
       @init = init
       @store = Array.new(size) { Array.new(size) { init } }
     end

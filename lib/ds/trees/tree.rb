@@ -5,14 +5,14 @@ module DS
     attr_accessor :data
     attr_reader :children
 
-    # Returns a new tree. 
-    def initialize(value=nil)
+    # Returns a new tree.
+    def initialize(value = nil)
       @data = value
       @children = []
     end
 
     # Inserts a new subtree.
-    def << (value)
+    def <<(value)
       subtree = Tree.new(value)
       @children << subtree
       subtree
@@ -24,31 +24,30 @@ module DS
     end
 
     # Returns leaf list.
-    def get_leaves(tree=self)
+    def get_leaves(tree = self)
       list = List.new
       walker = TreeWalker.new(self)
-      walker.traverse(:postorder){|t| list.append(t) if t.leaf? }
+      walker.traverse(:postorder) { |t| list.append(t) if t.leaf? }
       list
     end
 
     # Returns the number of leaves for given subtree.
-    def leaf_count(tree=self)
+    def leaf_count(tree = self)
       if tree.leaf?
         1
       else
-        tree.children.inject(0){|m,t| m += leaf_count(t)} 
+        tree.children.inject(0) { |m, t| m += leaf_count(t) }
       end
     end
 
-    
     # Returns number of nodes for each tree level.
     # {1=>1, 2=>4, 3=>5}
     def levels
       walker = TreeWalker.new(self)
-      nodes={}
+      nodes = {}
 
-      walker.traverse_with_h(self,1) do |t,level|
-        if nodes[level] 
+      walker.traverse_with_h(self, 1) do |t, level|
+        if nodes[level]
           nodes[level] += 1
         else
           nodes[level] = 1
@@ -61,11 +60,11 @@ module DS
     def width
       levels.values.max
     end
-  
+
     # Returns subtree height.
     def self.h(tree)
       unless tree.leaf?
-        tree.children.map{|t| h(t) }.max + 1
+        tree.children.map { |t| h(t) }.max + 1
       else
         1
       end
@@ -76,16 +75,16 @@ module DS
       Tree.h(self)
     end
 
-    # Returns node which lies closest to the root. 
+    # Returns node which lies closest to the root.
     def lowest_height
-      find{ |node| node.leaf? }
+      find { |node| node.leaf? }
     end
 
     # Mirrors tree.
-    def mirror!(tree=self)
+    def mirror!(tree = self)
       unless tree.leaf?
         tree.children.reverse!
-        tree.children.each{|t| mirror!(t)}
+        tree.children.each { |t| mirror!(t) }
       end
     end
 
@@ -94,7 +93,7 @@ module DS
       tree = self
       unless tree.leaf? and other.leaf?
         if tree.children.size == other.children.size
-          tree.children.each_with_index{|t,i| return false unless t.izometric?(other.children[i])}
+          tree.children.each_with_index { |t, i| return false unless t.izometric?(other.children[i]) }
         else
           return false
         end
@@ -104,12 +103,11 @@ module DS
 
     # Iterates tree in BFS order.
     def each
-      TreeWalker.new(self).traverse{ |t| yield t }
+      TreeWalker.new(self).traverse { |t| yield t }
     end
 
     def to_a
-      map{ |node| node.data }
+      map { |node| node.data }
     end
   end
 end
-
