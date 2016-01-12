@@ -26,7 +26,7 @@ module DS
     # Returns leaf list.
     def get_leaves(tree = self)
       list = List.new
-      walker = TreeWalker.new(self)
+      walker = TreeWalker.new(tree)
       walker.traverse(:postorder) { |t| list.append(t) if t.leaf? }
       list
     end
@@ -36,7 +36,7 @@ module DS
       if tree.leaf?
         1
       else
-        tree.children.inject(0) { |m, t| m += leaf_count(t) }
+        tree.children.inject(0) { |m, t| m + leaf_count(t) }
       end
     end
 
@@ -46,7 +46,7 @@ module DS
       walker = TreeWalker.new(self)
       nodes = {}
 
-      walker.traverse_with_h(self, 1) do |t, level|
+      walker.traverse_with_h(self, 1) do |_t, level|
         if nodes[level]
           nodes[level] += 1
         else

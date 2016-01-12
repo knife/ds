@@ -30,7 +30,7 @@ module DS
       when :preorder
         walk(tree, :preorder, &block)
       when :inorder
-        fail ArgumentError unless tree.kind_of? BinaryTree
+        fail ArgumentError unless tree.is_a? BinaryTree
         walk(tree, order, &block)
       end
 
@@ -108,13 +108,13 @@ module DS
     def summarize(direction = :bottomup)
       case direction
       when :bottomup
-        recalculate!(tree, :postorder, 0) { |ar| ar.inject(0) { |x, memo| memo += x } }
+        recalculate!(tree, :postorder, 0) { |ar| ar.inject(0) { |x, memo| memo + x } }
         tree
       when :topdown
-        recalculate!(tree, :preorder, 0) { |x, memo| memo += x.data }
+        recalculate!(tree, :preorder, 0) { |x, memo| memo + x.data }
         tree
       when :inorder
-        recalculate!(tree, :inorder, 0) { |x, memo| memo += x.data if x.data && memo }
+        recalculate!(tree, :inorder, 0) { |x, memo| memo + x.data if x.data && memo }
         tree
       end
     end

@@ -90,7 +90,7 @@ describe PriorityQueue do
     describe 'performance' do
       before do
         @queue = PriorityQueue.new
-        10_000.times do |n|
+        10_000.times do
           @queue.push :elem, rand(10)
         end
 

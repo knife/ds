@@ -26,7 +26,7 @@ module DS
     protected
 
     def key(chr)
-      k = alphabet.index(chr)
+      alphabet.index(chr)
     end
 
     def priv_insert(s, value)
