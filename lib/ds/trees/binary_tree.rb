@@ -45,8 +45,8 @@ module DS
       elsif right.nil?
         self.right = BinaryTree.new(x)
       else
-        q.push self.left
-        q.push self.right
+        q.push left
+        q.push right
         loop do
           node = q.shift
           if node.left.nil?

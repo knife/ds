@@ -66,7 +66,7 @@ describe Queue do
     if ENV['BENCH']
       describe "performance" do
         before do
-          100000.times do |n|
+          100_000.times do |n|
             @queue.push 4
             @queue2.push 4
           end

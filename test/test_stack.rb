@@ -56,7 +56,7 @@ describe Stack do
     if ENV['BENCH']
       describe "performance" do
         before do
-          100000.times do |n|
+          100_000.times do |n|
             @stack.push 4
           end
         end

@@ -15,12 +15,12 @@ module DS
     def << (value)
       subtree = Tree.new(value)
       @children << subtree
-      return subtree
+      subtree
     end
 
     # Checks if node is leaf.
     def leaf?
-      self.children.empty?
+      children.empty?
     end
 
     # Returns leaf list.
@@ -99,7 +99,7 @@ module DS
           return false
         end
       end
-      return true
+      true
     end
 
     # Iterates tree in BFS order.

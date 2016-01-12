@@ -34,7 +34,7 @@ module DS
         walk(tree,order,&block)
       end
 
-      return visited
+      visited
     end
 
     # Traverses tree in BFS order.
@@ -108,14 +108,14 @@ module DS
     def summarize(direction=:bottomup)
       case direction
       when :bottomup
-        recalculate!(self.tree,:postorder,0){|ar| ar.inject(0){|x,memo| memo += x}}
-        self.tree
+        recalculate!(tree,:postorder,0){|ar| ar.inject(0){|x,memo| memo += x}}
+        tree
       when :topdown
-        recalculate!(self.tree,:preorder,0){|x,memo| memo = memo+x.data} 
-        self.tree
+        recalculate!(tree,:preorder,0){|x,memo| memo += x.data} 
+        tree
       when :inorder
-        recalculate!(self.tree,:inorder,0){|x,memo| memo = memo+x.data if x.data and memo} 
-        self.tree
+        recalculate!(tree,:inorder,0){|x,memo| memo += x.data if x.data and memo} 
+        tree
       end
     end
 

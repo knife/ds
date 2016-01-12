@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["knife"]
   s.email       = ["satre@o2.pl"]
   s.homepage    = ""
-  s.summary     = %q{Some common data structures.}
+  s.summary     = %q(Some common data structures.)
   s.description = %q{Data structures (lists,stacks, trees, heaps, graphs..) in pure Ruby.}
 
   s.rubyforge_project = "ds"

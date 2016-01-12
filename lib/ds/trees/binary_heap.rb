@@ -50,7 +50,9 @@ module DS
       largest = [i, left, right].compact.sort { |x, y| relation(x, y) ? -1 : 1 }.first
 
       if largest != i
-        @data[i], @data[largest] = @data[largest], @data[i]
+        temp = @data[i]
+        @data[i] = @data[largest]
+        @data[largest] = temp
         heapify(largest)
       end
     end
@@ -75,7 +77,9 @@ module DS
       parent = parent_index(child)
 
       while parent >= 0 && !relation(parent, child)
-        @data[child], @data[parent] = @data[parent], @data[child]
+        temp = @data[child]
+        @data[child] = @data[parent]
+        @data[parent] = temp
         child = parent
         parent = parent_index(child)
       end
