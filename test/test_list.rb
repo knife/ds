@@ -32,6 +32,21 @@ describe List do
     proc {  @list.get!(x) }.must_raise  Exception
   end
 
+  it 'at should return element on given index' do
+    @list.at(2).data.must_equal 3
+    @list2.at(2).data.must_equal 7
+    @list.at(42).must_equal nil
+  end
+
+  it '#[] should return element on given index' do
+    @list[2].data.must_equal 3
+    @list2[2].data.must_equal 7
+  end
+
+  it '#[] should return change element on given index' do
+    @list[2] = 11
+    @list[2].data.must_equal 11
+  end
 
   it "#append should add element to the end of the list." do
     x = 5

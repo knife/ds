@@ -78,6 +78,31 @@ module DS
       fail 'Element not found' unless found
     end
 
+    def at(index)
+      found = nil
+      each_with_index do |element,i|
+        if i == index
+          found = element
+          break
+        end
+      end
+      found
+    end
+
+    def [](index)
+      at(index)
+    end
+
+    def []=(index,val)
+      found = at(index)
+      if found
+        found.data = val
+      else
+        fail 'Element not found'
+      end
+      val
+    end
+
     # Inserts element x after another element.
     def insert_after(x, rel)
       x = ListElement.new(x)
