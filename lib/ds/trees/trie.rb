@@ -29,7 +29,6 @@ module DS
       k=alphabet.index(chr) 
     end
 
-
     def priv_insert(s, value)
       if s.empty?
         @data = value

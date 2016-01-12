@@ -5,7 +5,6 @@ module DS
       new(args,:matrix)
     end
 
-
     #Returns number of incoming edges to given vertex.
     def in_degree x
       @g.degree x, :in

@@ -1,3 +1,5 @@
+gem 'minitest'
+
 if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start do
@@ -5,13 +7,10 @@ if ENV['COVERAGE']
   end
 end
 
-
 require 'rubygems'
-gem 'minitest'
 require 'minitest/autorun'
 require "minitest/benchmark" if ENV['BENCH']
 require "minitest/pride"
-
 
 require './lib/ds.rb'
 include DS

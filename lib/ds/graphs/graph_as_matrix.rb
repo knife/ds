@@ -70,7 +70,6 @@ module DS
       @map.size
     end
 
-
     #Returns vertex degree. Second parameter determines direction - :in incoming
     #edges, :out - outcoming edges, :all - incoming and outcoming edges.
     def degree(x,direction=:all)
@@ -91,7 +90,6 @@ module DS
         sum_out
       end
     end
-
 
     #Vertex iterator
     def each_vertex

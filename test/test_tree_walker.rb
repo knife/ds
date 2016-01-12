@@ -20,7 +20,6 @@ describe TreeWalker do
       @walker =  TreeWalker.new(@tree)
     end
 
-
     it "#traverse without arguments should traverse tree in BFS order." do
       @walker.traverse.must_equal [2,5,8,9,4,10,3]
     end
@@ -58,7 +57,6 @@ describe TreeWalker do
       @bin_walker.traverse(:preorder){|t| arr << t.data}
       arr.must_equal  [2,5,9,11,8,12,14]
     end
-
 
     it "should traverse in postorder." do
       @bin_walker.traverse(:postorder).must_equal  [9,11,5,12,14,8,2]

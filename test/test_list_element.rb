@@ -29,7 +29,6 @@ describe "List Element" do
     end
   end
 
-
   describe "initialized" do
 
     before do

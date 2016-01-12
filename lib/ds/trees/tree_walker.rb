@@ -4,13 +4,11 @@ module DS
     attr_accessor :visited
     attr_accessor :tree
 
-
     #Creates new tree iterator.
     def initialize(tree=nil)
       @visited = [] 
       @tree = tree
     end
-
 
     #Traversing tree in given order:
     #bfs - Breadth-first search - default
@@ -63,8 +61,6 @@ module DS
       self
     end
 
-
-
     #Traverses tree with tracking level.
     def traverse_with_h(tree,height=nil,&block)
 
@@ -78,7 +74,6 @@ module DS
 
     end
 
-
     #Recalculates tree by evaluating block on every node.
     def recalculate!(tree,order,memo=nil,&block)
       if tree
@@ -89,7 +84,6 @@ module DS
           arr =  tree.children.map{ |t| recalculate!(t,order,memo,&block) }
           result =  block.call(arr.push tree.data)
           tree.data = result
-
 
         when :preorder
             
@@ -113,7 +107,6 @@ module DS
       end
     end
 
-
     #Summarize tree
     def summarize(direction=:bottomup)
 
@@ -129,8 +122,6 @@ module DS
         self.tree
       end
     end
-
-
 
     private
 

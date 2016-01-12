@@ -44,7 +44,6 @@ describe Tree do
     @tree.levels.must_equal 1 => 1, 2 => 3, 3 => 3  
   end
 
-
   it "#height should return tree height." do
     @tree.height.must_equal 3
   end

@@ -70,7 +70,6 @@ module DS
       @g.each_edge &block
     end
 
-
     def bfs s
       colors = {}
       parents =  {}

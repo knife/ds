@@ -8,7 +8,6 @@ describe TriMatrix do
     @tri_matrix[0,2] = true
   end
 
-
   it "[x,y] should be same as [y,x]" do
     @tri_matrix[0,1].must_be_same_as @tri_matrix[1,0]
   end

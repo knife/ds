@@ -103,7 +103,6 @@ module DS
       return true
     end
 
-
     # Iterates tree in BFS order.
     def each
       TreeWalker.new(self).traverse{ |t| yield t }

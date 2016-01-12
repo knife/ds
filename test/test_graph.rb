@@ -44,8 +44,6 @@ describe Graph do
     assert @graph.edge?("Lukas","Jack")
   end
 
-
-
   it "#remove_edge should remove edge." do
     @graph.remove("Marc","Jack")
     @graph.vertex_size.must_equal 4

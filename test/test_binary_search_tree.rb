@@ -4,7 +4,6 @@ describe BinarySearchTree do
 
   before do
 
-
     t = BinarySearchTree.new(7)
     c1 = t.insert 5
     c2 = t.insert 8

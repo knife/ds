@@ -52,7 +52,5 @@ describe CompleteBinaryTree do
     @tree.children(0).must_equal [2,3]
   end
 
-
-
 end
  

@@ -34,7 +34,6 @@ describe  Stack do
     end
   end
 
-
   describe "Not empty stack" do
 
     it "should not be empty." do

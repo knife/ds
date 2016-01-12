@@ -17,7 +17,6 @@ describe Queue do
     end
   end
 
-
   describe "Not empty queue" do
 
     before do
@@ -43,7 +42,6 @@ describe Queue do
       @queue2.peek.must_equal 1
     end
 
-
     it "#enqueue and #push should add element to queue." do
       @queue.enqueue 3
       @queue.length.must_equal 3
@@ -68,7 +66,6 @@ describe Queue do
       x.must_equal 1
     end
 
-
     if ENV['BENCH']
       describe "performance" do
 
@@ -78,7 +75,6 @@ describe Queue do
             @queue2.push 4
           end
         end
-
 
         bench_performance_constant "#shift(array implementation) should be const operation.", 0.999 do |n|
           n.times do

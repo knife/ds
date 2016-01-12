@@ -1,12 +1,11 @@
 require 'help'
 
 describe List do
-
   before do
-    @list = List.from_array([1,2,3,4])
-    @list2 = List.from_array([4,5,7])
+    @list = List.from_array([1, 2, 3, 4])
+    @list2 = List.from_array([4, 5, 7])
 
-    @numbers =  List.from_array((1..10).to_a)
+    @numbers = List.from_array((1..10).to_a)
     @even_numbers = List.from_array([2,4,6,8,10])
   end
 
@@ -25,7 +24,6 @@ describe List do
     found = @list.get(x)
     found.must_be_kind_of ListElement 
   end
-
 
   it "#get! should raise error if element is not found on the list" do
     x = @list2.head.next
@@ -92,7 +90,6 @@ describe List do
     @list.to_a.must_equal [1,2,9,3,4,11]
   end
 
-
   it "#head should point to first element of the list." do
     @list.head.must_be_kind_of ListElement 
     @list2.head.must_be_kind_of ListElement
@@ -115,7 +112,6 @@ describe List do
     @list2.first.must_equal 4
   end
 
-
   it "#last should return value of the last list element." do
     @list.last.must_equal 4
     @list2.last.must_equal 7
@@ -136,7 +132,6 @@ describe List do
     not_sorted_list.orderize{|elem| elem <=> 0}.to_a.must_equal [-1,-8,0,0,3,2,1]
   end
 
-
   it "#looped? should check if list has cycle." do
     refute @list2.looped?
     refute @list.looped?
@@ -153,7 +148,6 @@ describe List do
     @list.inject(0){ |mem, var| mem = mem + var.data }.must_equal 10
     @list.find { |e| e.data == 1.0  }.data.must_equal 1
   end
-
 
   describe "Zipped list" do
 
@@ -179,7 +173,6 @@ describe List do
           @list.append 4
         end
       end
-
 
       bench_performance_constant "#append should be const operation.", 0.999 do |n|
         n.times do

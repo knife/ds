@@ -17,7 +17,6 @@ describe PriorityQueue do
     end
   end
 
-
   describe "Not empty priority queue" do
 
     before do
@@ -35,7 +34,6 @@ describe PriorityQueue do
     it "#peek should return element with highest priority." do
       @queue.peek.must_equal :important
     end
-
 
     it "#enqueue and #push should add element to priority queue." do
       @queue.enqueue :very_important, 5
@@ -93,7 +91,6 @@ describe PriorityQueue do
     end
   end
 
-
   if ENV['BENCH']
     describe "performance" do
 
@@ -107,13 +104,11 @@ describe PriorityQueue do
         @empty_queue = PriorityQueue.new
       end
 
-
       bench_performance_constant "#accessing max element should be const operation.", 0.999 do |n|
         n.times do
           @queue.peek
         end
       end
-
 
       bench_performance_constant "#removing max element should be log operation.", 0.999 do |n|
         n.times do
@@ -126,8 +121,6 @@ describe PriorityQueue do
           @empty_queue.push :elem, rand(10)
         end
       end
-
-
 
     end
   end
