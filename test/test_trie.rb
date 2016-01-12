@@ -1,7 +1,6 @@
 require 'help'
 
 describe Trie do
-
   before do
     @trie = Trie.new
     @dict = Trie.new
@@ -28,5 +27,4 @@ describe Trie do
     proc {@dict.find("m%$r")}.must_raise ArgumentError
     proc {@dict.insert("m%$r")}.must_raise ArgumentError
   end
-
 end

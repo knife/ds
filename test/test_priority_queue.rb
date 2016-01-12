@@ -1,9 +1,7 @@
 require 'help'
 
 describe PriorityQueue do
-
   describe "Empty Priority Queue" do
-
     before do
       @empty_queue = PriorityQueue.new
     end
@@ -18,7 +16,6 @@ describe PriorityQueue do
   end
 
   describe "Not empty priority queue" do
-
     before do
       @queue = PriorityQueue.new
       @queue.enqueue :important, 2
@@ -28,7 +25,6 @@ describe PriorityQueue do
     it "should not be empty." do
       refute @queue.empty?
       @queue.length.must_equal 2
-
     end
 
     it "#peek should return element with highest priority." do
@@ -52,7 +48,6 @@ describe PriorityQueue do
   end
 
   describe "Priority Queue with duplications" do
-
     before do
       @dup_queue = PriorityQueue.new
       @dup_queue.enqueue :same_important, 2
@@ -80,7 +75,7 @@ describe PriorityQueue do
     end
 
     it "#dequeue and #shift should remove element with highest priority." do
-      x  = @dup_queue.dequeue
+      x = @dup_queue.dequeue
       assert [:important,:same_important].include? x
       @dup_queue.length.must_equal 2
 
@@ -93,7 +88,6 @@ describe PriorityQueue do
 
   if ENV['BENCH']
     describe "performance" do
-
       before do
         
         @queue = PriorityQueue.new
@@ -121,7 +115,6 @@ describe PriorityQueue do
           @empty_queue.push :elem, rand(10)
         end
       end
-
     end
   end
 end

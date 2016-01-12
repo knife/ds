@@ -1,7 +1,6 @@
 require 'help'
 
 describe CompleteBinaryTree do
-
   before do
     @tree = CompleteBinaryTree.new(1,2,3,4,5,6,7)
     @empty_tree = CompleteBinaryTree.new
@@ -51,6 +50,5 @@ describe CompleteBinaryTree do
   it "#children should return children." do
     @tree.children(0).must_equal [2,3]
   end
-
 end
  

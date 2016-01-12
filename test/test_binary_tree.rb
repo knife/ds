@@ -1,9 +1,7 @@
 require 'help'
 
 describe BinaryTree do
-
   before do
-
     @bin_tree = BinaryTree.new
     [2,5,8,9,11,12,14].each{|x| @bin_tree.insert(x)}
 
@@ -15,7 +13,6 @@ describe BinaryTree do
     @small_tree << BinaryTree.new(8)
 
     @bin_walker = TreeWalker.new(@bin_tree)
-
   end
     
   it "#to_a should return tree converted to array." do
@@ -52,6 +49,5 @@ describe BinaryTree do
     assert @izo_tree.izometric?(@bin_tree)
     refute @bin_tree.izometric?(@small_tree)
   end
-
 end
 

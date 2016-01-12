@@ -1,9 +1,7 @@
 require 'help'
 
 describe BinarySearchTree do
-
   before do
-
     t = BinarySearchTree.new(7)
     c1 = t.insert 5
     c2 = t.insert 8
@@ -33,6 +31,5 @@ describe BinarySearchTree do
   it "not every Binary Tree is valid Binary Search Tree." do
     refute BinarySearchTree.valid?(@bin_tree)
   end
-
 end
  

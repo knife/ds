@@ -1,6 +1,5 @@
 module DS
   class Digraph < Graph
-
     def self.create(args)
       new(args,:matrix)
     end
@@ -14,6 +13,5 @@ module DS
     def out_degree x
       @g.degree x, :out
     end
-
   end
 end

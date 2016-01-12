@@ -1,14 +1,12 @@
 require 'help'
 
 describe "List Element" do
-
   before do
     @empty_el = ListElement.new
     @el = ListElement.new(1)
   end
 
   describe "not initialized" do
-
     before do
       @empty_el = ListElement.new
     end
@@ -30,7 +28,6 @@ describe "List Element" do
   end
 
   describe "initialized" do
-
     before do
       @el = ListElement.new(1)
     end
@@ -49,7 +46,5 @@ describe "List Element" do
       @el.next.must_be_instance_of ListElement
       @el.next.data.must_equal 2
     end
-
   end
-
 end

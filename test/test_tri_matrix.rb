@@ -1,7 +1,6 @@
 require 'help'
 
 describe TriMatrix do
-
   before do
     @tri_matrix = TriMatrix.new
     @tri_matrix[0,1] = true
@@ -15,7 +14,6 @@ describe TriMatrix do
   it "should store elements in array" do
     @tri_matrix.to_a.must_equal [0,true,0,true]
   end
-
 end
 
 

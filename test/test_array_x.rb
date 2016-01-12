@@ -1,7 +1,6 @@
 require 'help'
 
 describe ArrayX do
-
   before do
     @asc = [1,3,6,9,10,13].extend(ArrayX)
     @desc = [9,8,7,7,4,3,2].extend(ArrayX)

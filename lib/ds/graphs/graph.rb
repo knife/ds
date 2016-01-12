@@ -1,6 +1,5 @@
 module DS
   class Graph
-
     Infinity = 1 << 64
 
     #Create new graph from array of edges. Second parameter determines
@@ -72,7 +71,7 @@ module DS
 
     def bfs s
       colors = {}
-      parents =  {}
+      parents = {}
       res = []
       d = {}
       q = Queue.new

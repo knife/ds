@@ -1,11 +1,8 @@
 require 'help'
 
 describe Digraph do
-
   describe "without weighted edges" do
-
     before do
-
       edges = []
       edges << Edge.new('Lukas','Marc')
       edges << Edge.new('Lukas','Tom')
@@ -14,7 +11,6 @@ describe Digraph do
       edges << Edge.new('Tom','Marc')
 
       @digraph = Digraph.create(edges)
-
     end
 
     it "#degree should return vertex degree." do
@@ -75,11 +71,9 @@ describe Digraph do
       refute @digraph.edge?("Marc","Jack")
       assert @digraph.edge?("Jack","Marc")
     end
-
   end
 
   describe "with weighted edges" do
-
     before do
       edges = []
 

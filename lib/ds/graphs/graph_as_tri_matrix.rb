@@ -1,6 +1,5 @@
 module DS
   class GraphAsTriMatrix < GraphAsMatrix
-
     def initialize(edges)
       @store = TriMatrix.new(0)
       @max = 0
@@ -18,7 +17,6 @@ module DS
       end
       sum
     end
-
   end
 end
 

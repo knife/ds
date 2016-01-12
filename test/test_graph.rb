@@ -1,7 +1,6 @@
 require 'help'
 
 describe Graph do
-
   before do
     edges = []
     edges << Edge.new('Lukas','Marc')
@@ -72,7 +71,6 @@ describe Graph do
     r.size.must_equal 4
     r.sort.must_equal ['Jack','Lukas', 'Marc', 'Tom' ]
   end
-
 end
 
 

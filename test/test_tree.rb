@@ -1,7 +1,6 @@
 require 'help'
 
 describe Tree do
-
   before do
     t = Tree.new(2)
     c1 = t << 5
@@ -65,6 +64,5 @@ describe Tree do
      @tree.mirror!
      @tree.to_a.must_equal [2,9,8,5,3,10,4]
   end
-
 end
 

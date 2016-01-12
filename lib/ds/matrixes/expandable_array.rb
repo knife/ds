@@ -1,5 +1,4 @@
 module DS
-
   # Class provides access to any element in array. If index i
   # is greter than array size then elements from size to i are
   # filled with extender.

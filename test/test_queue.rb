@@ -1,9 +1,7 @@
 require 'help'
 
 describe Queue do
-
   describe "Empty Queue" do
-
     before do
       @empty_queue = Queue.new
     end
@@ -18,7 +16,6 @@ describe Queue do
   end
 
   describe "Not empty queue" do
-
     before do
       @queue = DS::Queue.new
       @queue.enqueue 1
@@ -68,7 +65,6 @@ describe Queue do
 
     if ENV['BENCH']
       describe "performance" do
-
         before do
           100000.times do |n|
             @queue.push 4
@@ -101,6 +97,5 @@ describe Queue do
         end
       end
     end
-
   end
 end

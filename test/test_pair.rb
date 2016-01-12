@@ -1,7 +1,6 @@
 require 'help'
 
 describe Pair do
-
   before do
     @pair = Pair.new(1,2)
   end

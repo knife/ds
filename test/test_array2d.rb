@@ -1,9 +1,7 @@
 require 'help'
 
 describe Array2D do
-
   describe "initialized with 0" do
-
     before do
       @zero_matrix = Array2D.new(2,0)
     end
@@ -30,7 +28,6 @@ describe Array2D do
   end
 
   describe "initialized with false" do
-
     before do
       @discrete_matrix = Array2D.new(3,false)
     end
@@ -54,7 +51,6 @@ describe Array2D do
       refute @discrete_matrix[3,3]
       @discrete_matrix[4,8].wont_be_nil
     end
-
   end
 end
 

@@ -1,6 +1,5 @@
 module DS
   class GraphAsMatrix
-
     def initialize(edges)
       @store = Array2D.new
       @max = 0
@@ -78,7 +77,7 @@ module DS
       sum_out = 0
       0.upto @max do |i|
         sum_in += 1 if @store[i,x] and @store[i,x] > 0
-        sum_out += 1 if @store[x,i]  and @store[x,i] > 0
+        sum_out += 1 if @store[x,i] and @store[x,i] > 0
       end
 
       case direction
@@ -106,6 +105,5 @@ module DS
         end    
       end    
     end
-
   end
 end

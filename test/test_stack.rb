@@ -1,7 +1,6 @@
 require 'help'
 
-describe  Stack do
-
+describe Stack do
   before do
     @stack = Stack.new
     @stack.push :first
@@ -9,7 +8,6 @@ describe  Stack do
   end
 
   describe "Empty stack" do
-
     before do
       @empty_stack = Stack.new
     end
@@ -35,7 +33,6 @@ describe  Stack do
   end
 
   describe "Not empty stack" do
-
     it "should not be empty." do
       refute @stack.empty?
     end
@@ -58,7 +55,6 @@ describe  Stack do
 
     if ENV['BENCH']
       describe "performance" do
-
         before do
           100000.times do |n|
             @stack.push 4
@@ -76,7 +72,6 @@ describe  Stack do
             @stack.push 3
           end
         end
-
       end
     end
   end

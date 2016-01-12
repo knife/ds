@@ -1,6 +1,5 @@
 module DS
   class TreeWalker
-
     attr_accessor :visited
     attr_accessor :tree
 
@@ -63,7 +62,6 @@ module DS
 
     #Traverses tree with tracking level.
     def traverse_with_h(tree,height=nil,&block)
-
       tree.children.each do |t|
         traverse_with_h(t,height+1,&block)
       end
@@ -71,7 +69,6 @@ module DS
       if block_given?
         yield tree, height
       end
-
     end
 
     #Recalculates tree by evaluating block on every node.
@@ -95,7 +92,7 @@ module DS
           end
 
         when :inorder
-          raise ArgumentError unless  self.tree.is_a? BinaryTree
+          raise ArgumentError unless self.tree.is_a? BinaryTree
           recalculate!(tree.left,order,memo,&block)
 
             tree.data = yield tree, memo
@@ -109,7 +106,6 @@ module DS
 
     #Summarize tree
     def summarize(direction=:bottomup)
-
       case direction
       when :bottomup
         recalculate!(self.tree,:postorder,0){|ar| ar.inject(0){|x,memo| memo += x}}
@@ -152,7 +148,7 @@ module DS
           end
 
         when :inorder
-          raise ArgumentError unless  self.tree.is_a? BinaryTree
+          raise ArgumentError unless self.tree.is_a? BinaryTree
           walk(tree.left,order,&block)
 
           if block_given?

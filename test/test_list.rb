@@ -27,7 +27,7 @@ describe List do
 
   it "#get! should raise error if element is not found on the list" do
     x = @list2.head.next
-    proc {  @list.get!(x) }.must_raise  Exception
+    proc { @list.get!(x) }.must_raise Exception
   end
 
   it 'at should return element on given index' do
@@ -77,7 +77,7 @@ describe List do
     @list.insert_before(7,@list.tail)
     @list.to_a.must_equal [8,1,9,2,3,7,4]
 
-    proc { @list.insert_before(1,nil)}.must_raise  ListError
+    proc { @list.insert_before(1,nil)}.must_raise ListError
   end
 
   it "#insert_after should insert new element after another." do
@@ -150,7 +150,6 @@ describe List do
   end
 
   describe "Zipped list" do
-
     before do
       last = @list.tail
       @zipped = List.from_array([1,2])
@@ -160,7 +159,6 @@ describe List do
     it "#zip? should return true" do
       assert @list.zip?(@zipped)
     end
-
   end
 
   if ENV['BENCH']
@@ -190,9 +188,7 @@ describe List do
         list =List.from_array(@arr[0..n])
         list.reverse!
       end
-
     end
   end
-
 end
 

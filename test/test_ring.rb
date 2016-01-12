@@ -1,7 +1,6 @@
 require 'help'
 
 describe "Cyclic List" do
-
   before do
     @ring = Ring.from_array([1,2,3,4,5,6,7])
   end

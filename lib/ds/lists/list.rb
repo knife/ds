@@ -100,7 +100,6 @@ module DS
       else
         fail 'Element not found'
       end
-      val
     end
 
     # Inserts element x after another element.

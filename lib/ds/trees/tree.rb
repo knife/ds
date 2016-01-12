@@ -1,6 +1,5 @@
 module DS
   class Tree
-
     include Enumerable
 
     attr_accessor :data

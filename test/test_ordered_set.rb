@@ -1,7 +1,6 @@
 require 'help'
 
 describe "OrderedSet" do
-
   before do
     @set = OrderedSet.new
     @set.push(:first).must_equal 0
@@ -23,6 +22,5 @@ describe "OrderedSet" do
     @set.push(:second)
     @set.to_a.must_equal [:first,:second]
   end
-
 end
 

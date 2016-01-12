@@ -1,7 +1,6 @@
 require "help"
 
 describe BinaryHeap do
-
   before do
     @arr = [9,8,4,5,11,6]
     @arr2 = [4,2,9,11,3,5,1]
@@ -15,7 +14,7 @@ describe BinaryHeap do
   end
 
   it "#insert should insert new element to the heap maintaining heap relation." do
-    @heap.insert(13).to_a.must_equal  [13,9,11,5,8,4,6]
+    @heap.insert(13).to_a.must_equal [13,9,11,5,8,4,6]
   end
 
   it "#shift should remove element from heap maintaining heap relation." do
@@ -34,7 +33,6 @@ describe BinaryHeap do
   end
 
   describe "Minimal Heap" do
-
     before do
       @min_heap = BinaryHeap.new(*@arr){|parent,child| parent < child}
       @min_heap2 = BinaryHeap.min(*@arr)
