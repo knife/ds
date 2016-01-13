@@ -6,6 +6,10 @@ module DS
       @store = BinaryHeap.new { |parent, child| parent.key >= child.key }
     end
 
+    def self.create
+      fail 'Method is not defined on PriorityQueue'
+    end
+
     # Adds element to queue with given priority.
     def enqueue(x, priority)
       pair = Pair.new(priority, x)

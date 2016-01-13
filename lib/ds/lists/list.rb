@@ -41,27 +41,6 @@ module DS
       @head = el
     end
 
-    # Removes element x from list.
-    def remove(x)
-      if x == head
-        self.head = head.next
-        x.next = nil
-      else
-
-        el = head
-        while el && el != x
-          prev = el
-          el = el.next
-        end
-
-        fail ListError, 'Element not found' unless el
-
-        prev.next = el.next
-        el.next = nil
-      end
-      x
-    end
-
     # Removes list head.
     def shift
       remove(head).data
@@ -141,6 +120,27 @@ module DS
           x.next = el
         end
       end
+    end
+
+    # Removes element x from list.
+    def remove(x)
+      if x == head
+        self.head = head.next
+        x.next = nil
+      else
+
+        el = head
+        while el && el != x
+          prev = el
+          el = el.next
+        end
+
+        fail ListError, 'Element not found' unless el
+
+        prev.next = el.next
+        el.next = nil
+      end
+      x
     end
 
     # Checks if list is empty.

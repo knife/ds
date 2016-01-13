@@ -55,8 +55,9 @@ Creating new Pair
 Accessors defined on Pair object:
 
   p.key #=> 3
-  p.first #=> 3
   p.value #=> 9
+
+  p.first #=> 3
   p.second #=> 9
   p.second = 27
 
@@ -158,8 +159,7 @@ Creating new List
   l = List.new(1)
   l.append(2)
 or 
-  arr = [1,2,3,4]
-  list = List.from_array(arr)
+  list = List.from_array([1,2,3,4])
 
 Examples:
 
@@ -177,19 +177,31 @@ Accessing first and last element
   list.first #=> 2
   list.last #=> 5
 
+Accessing by index
+  list[2] #=> 2
+  list.at(2) #=> 2
+
+Modifying elements on given index:
+  list[2] = 8 
+  list[2] #=> 8
+
+Checking if given element exists on list
+  list.get(el) #=> nil
+  list.get!(el) #=> raises Exception if not found
+
 Reversing
   list.reverse!.to_a #=> [5,4,3,1,0]
 
 Enumerable methods are also available
   
   list.map{ |e| e.data } #=> [1,2,3,4]
-  list.inject(0){ |mem, var| mem = mem + var.data } #=> 10
+  list.inject(0){ |a, e|  a + e.data } #=> 10
 
 Other operations
+* get
 * insert_before
 * insert_after
 * zip?
-* merge
 
 
 ==== Ring
@@ -203,7 +215,6 @@ Creating new Ring
 Examples:
   ring.looped? #=> true
   ring.cycle_size #=> 7
-  ring.eliminate_by(2) #=> 1
  
 
 
@@ -246,7 +257,7 @@ Enumerable Module is included.
 
 ==== Binary Tree
 
-BinaryTree is sublass of Tree class. In BinaryTree each node can have at most two children.
+BinaryTree is sublass of Tree. In BinaryTree each node can have at most two children.
 More: {BinaryTree}[http://en.wikipedia.org/wiki/Binary_tree]
 
 Building tree
