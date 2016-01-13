@@ -3,10 +3,8 @@ module DS
   class Ring < List
     # Creates ring from array.
     def self.from_array(arr)
-      list = Ring.new(arr.shift)
-      tail = list.head
-      arr.each { |e| tail = tail.append(e) }
-      tail.next = list.head
+      list = super(arr)
+      list.tail.next = list.head
       list
     end
 

@@ -4,9 +4,29 @@ describe List do
   before do
     @list = List.from_array([1, 2, 3, 4])
     @list2 = List.from_array([4, 5, 7])
-
+    @empty_list = List.new
     @numbers = List.from_array((1..10).to_a)
     @even_numbers = List.from_array([2, 4, 6, 8, 10])
+  end
+
+  describe 'Empty list' do
+    it '#empty? should be true' do
+      assert @empty_list.empty?
+    end
+
+    it '#append should add element to list' do
+      @empty_list.append(8)
+      @empty_list.to_a.must_equal [8]
+    end
+
+    it '#unshift should add element to list' do
+      @empty_list.unshift(8)
+      @empty_list.to_a.must_equal [8]
+    end
+
+    it '#shift raises exception' do
+      proc { @empty_list.shift }.must_raise Exception
+    end
   end
 
   it '#from_array should transform array to list.' do
@@ -53,9 +73,9 @@ describe List do
     @list.last.must_be_same_as x
   end
 
-  it '#prepend should add element at the beginning of the list.' do
+  it '#unshift should add element at the beginning of the list.' do
     x = 0
-    @list.prepend(x)
+    @list.unshift(x)
     @list.length.must_equal 5
     @list.first.must_be_same_as x
   end
@@ -64,6 +84,13 @@ describe List do
     second = @list.head.next
     @list.remove(second)
     @list.to_a.must_equal [1, 3, 4]
+  end
+
+  it '#pop should remove last list element.' do
+    last = @list.pop
+    last.must_equal 4
+    @list.last.must_equal 3
+    @list.to_a.must_equal [1, 2, 3]
   end
 
   it '#insert_before should insert new element before another.' do

@@ -32,7 +32,36 @@ describe Stack do
     end
   end
 
-  describe 'Not empty stack' do
+  describe 'Not empty stack implemented as List' do
+    before do
+      @stack = Stack.create
+      @stack.push :first
+      @stack.push :second
+    end
+
+    it 'should not be empty.' do
+      refute @stack.empty?
+    end
+
+    it '#peek should return element from the top of the stack.' do
+      @stack.peek.must_equal :second
+    end
+
+    it '#pop should remove element form the top of the stack.' do
+      last = @stack.pop
+      last.must_equal :second
+      @stack.size.must_equal 1
+      @stack.peek.must_equal :first
+    end
+
+    it '#push should insert element to the top of the stack.' do
+      @stack.push(:third)
+      @stack.peek.must_equal :third
+      @stack.size.must_equal 3
+    end
+  end
+
+  describe 'Not empty stack implemented as Array' do
     it 'should not be empty.' do
       refute @stack.empty?
     end

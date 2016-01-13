@@ -12,7 +12,6 @@ The DS gem supports the folowing data structures:
   * PriorityQueue
 * Lists
   * List
-  * CyclicList
   * Ring
 * Trees
   * Tree
@@ -156,7 +155,7 @@ element (last element points to nil).
 More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 
 Creating new List
-  l = List.new(1)
+  l = List.new
   l.append(2)
 or 
   list = List.from_array([1,2,3,4])
@@ -166,7 +165,7 @@ Examples:
 Simple operation on lists
   list.length #=> 4
   list.append(5).to_a #=> [1,2,3,4,5] 
-  list.prepend(0).to_a #=> [0,1,2,3,4,5]
+  list.unshift(0).to_a #=> [0,1,2,3,4,5]
   list.remove(list.head).to_a #=> [1,2,3,4,5]
   list.shift #=> 1
 
@@ -206,7 +205,7 @@ Other operations
 
 ==== Ring
 
-Ring is a Cyclic List where the last element(head) points to the first element(tail).
+Ring is a List where the last element(head) points to the first element(tail).
 More: {Ring}[http://en.wikipedia.org/wiki/Ring_(data_structure)]
 
 Creating new Ring

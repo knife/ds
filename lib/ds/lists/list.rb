@@ -8,55 +8,70 @@ module DS
     attr_accessor :head, :tail
 
     # Creates new list.
-    def initialize(x = nil)
-      @head = ListElement.new(x)
+    def initialize
+      @size = 0
+      @head = nil
       @tail = @head
     end
 
     # Creates list from array.
     def self.from_array(arr)
-      list = new(arr.shift)
-      tail = list.head
-      arr.each { |e| tail = tail.append(e) }
-      list.tail = tail
+      list = new
+      list = list.create_first(arr.shift)
+      arr.each { |e| list.append(e) }
       list
     end
 
-    # Appends new element to list.
+    # Creates first element in list.
+    def create_first(x)
+      first = unshift(x)
+      self.head = first
+      self.tail = first
+      self
+    end
+
+    # Appends new element to list. Returns list tail
     def append(x)
       if !empty?
         @tail = tail.append(x)
+        increment_size
       else
-        @head = ListElement.new(x)
-        @tail = @head
+        create_first(x)
       end
+      @tail
     end
 
     alias_method :<<, :append
+    alias_method :push, :append
 
-    # Prepends new element to list.
-    def prepend(x)
+    # Prepends new element to list. Returns list head
+    def unshift(x)
       el = ListElement.new(x)
       el.next = @head
+      increment_size
       @head = el
     end
 
     # Removes list head.
     def shift
+      fail 'List is already empty' if empty?
       remove(head).data
     end
 
+    # Return ListElement if it is on list otherwise returns nil
     def get(x)
       el = head
       el = el.next while el && el != x
       el
     end
 
+    # Return ListElement if it is on list or raises error
     def get!(x)
       found = get(x)
       fail 'Element not found' unless found
     end
 
+    # Returns list element on given index.
     def at(index)
       found = nil
       each_with_index do |element, i|
@@ -68,10 +83,12 @@ module DS
       found
     end
 
+    # Returns list element on given index.
     def [](index)
       at(index)
     end
 
+    # Sets list element on given index.
     def []=(index, val)
       found = at(index)
       if found
@@ -93,6 +110,7 @@ module DS
       el.next = x
 
       self.tail = x if x.tail?
+      @size += 1
     end
 
     # Inserts element x before another element.
@@ -120,6 +138,7 @@ module DS
           x.next = el
         end
       end
+      @size += 1
     end
 
     # Removes element x from list.
@@ -128,7 +147,6 @@ module DS
         self.head = head.next
         x.next = nil
       else
-
         el = head
         while el && el != x
           prev = el
@@ -137,15 +155,22 @@ module DS
 
         fail ListError, 'Element not found' unless el
 
+        self.tail = prev if el == tail
         prev.next = el.next
         el.next = nil
+
       end
+      decrement_size
       x
+    end
+
+    def pop
+      remove(tail).data
     end
 
     # Checks if list is empty.
     def empty?
-      head.data.nil?
+      @size.zero?
     end
 
     # Returns last element of the list.
@@ -159,8 +184,10 @@ module DS
 
     # Returns length of the list.
     def length
-      count
+      @size
     end
+
+    alias_method :size, :length
 
     # Checks if list is linked at the end with other list.
     def zip?(other)
@@ -263,6 +290,16 @@ module DS
         yield elem
         elem = elem.next
       end
+    end
+
+    private
+
+    def increment_size
+      @size += 1
+    end
+
+    def decrement_size
+      @size -= 1
     end
   end
 end

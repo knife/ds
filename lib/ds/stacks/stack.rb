@@ -2,8 +2,17 @@ module DS
   # Class implements Stack data structure.
   # Internaly uses array to store elements.
   class Stack
-    def initialize
-      @store = []
+    def initialize(store = nil)
+      if store == :list
+        @store = List.new
+      else
+        @store = []
+      end
+    end
+
+    # Creates stack with List as store
+    def self.create
+      new(:list)
     end
 
     # Returns the stack size.
