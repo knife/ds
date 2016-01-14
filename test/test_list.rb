@@ -25,7 +25,7 @@ describe List do
     end
 
     it '#shift raises exception' do
-      proc { @empty_list.shift }.must_raise Exception
+      proc { @empty_list.shift }.must_raise ListError
     end
   end
 
@@ -47,7 +47,7 @@ describe List do
 
   it '#get! should raise error if element is not found on the list' do
     x = @list2.head.next
-    proc { @list.get!(x) }.must_raise Exception
+    proc { @list.get!(x) }.must_raise ListError
   end
 
   it 'at should return element on given index' do

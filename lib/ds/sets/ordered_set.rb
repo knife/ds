@@ -24,7 +24,9 @@ module DS
     end
 
     def to_a
-      @store.sort { |a, b| a[1] <=> b[1] }.map(&:first)
+      arr = Array.new(@size)
+      @store.each { |e, i| arr[i] = e }
+      arr
     end
   end
 end
