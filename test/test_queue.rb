@@ -62,39 +62,41 @@ describe Queue do
       @queue2.length.must_equal 1
       x.must_equal 1
     end
+  end
+end
 
-    if ENV['BENCH']
-      describe 'performance' do
-        before do
-          100_000.times do
-            @queue.push 4
-            @queue2.push 4
-          end
-        end
+if ENV['BENCHK']
+  describe 'performance Bench' do
+    before do
+      @queue = DS::Queue.new
+      @queue2 = DS::Queue.create
+      100_000.times do
+        @queue.push 4
+        @queue2.push 4
+      end
+    end
 
-        bench_performance_constant '#shift(array implementation) should be const operation.', 0.999 do |n|
-          n.times do
-            @queue.shift
-          end
-        end
+    bench_performance_constant '#shift(array implementation) should be const operation.', 0.999 do |n|
+      n.times do
+        @queue.shift
+      end
+    end
 
-        bench_performance_constant '#shift(list implementation) should be const operation.', 0.999 do |n|
-          n.times do
-            @queue2.shift
-          end
-        end
+    bench_performance_constant '#shift(list implementation) should be const operation.', 0.999 do |n|
+      n.times do
+        @queue2.shift
+      end
+    end
 
-        bench_performance_constant '#push(array implementation) should be const operation.', 0.999 do |n|
-          n.times do
-            @queue.push 2
-          end
-        end
+    bench_performance_constant '#push(array implementation) should be const operation.', 0.999 do |n|
+      n.times do
+        @queue.push 2
+      end
+    end
 
-        bench_performance_constant '#push(list implementation) should be const operation.', 0.999 do |n|
-          n.times do
-            @queue2.push 2
-          end
-        end
+    bench_performance_constant '#push(list implementation) should be const operation.', 0.999 do |n|
+      n.times do
+        @queue2.push 2
       end
     end
   end

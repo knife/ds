@@ -125,7 +125,6 @@ Examples:
 
 ==== Priority Queue 
 
-PriorityQueue is special form of Queue (PriorityQueue inherits from Queue).
 In opposite to simple Queue, in PriorityQueue each element is associated with a "priority".
 More: {Priority Queue}[http://en.wikipedia.org/wiki/Priority_queue]
 

@@ -81,26 +81,48 @@ describe Stack do
       @stack.peek.must_equal :third
       @stack.size.must_equal 3
     end
+  end
+end
 
-    if ENV['BENCH']
-      describe 'performance' do
-        before do
-          100_000.times do
-            @stack.push 4
-          end
-        end
+if ENV['BENCH']
+  describe 'implement as Array Bench' do
+    before do
+      @stack = Stack.new
+      100_000.times do
+        @stack.push 4
+      end
+    end
 
-        bench_performance_constant '#pop should be const operation.', 0.999 do |n|
-          n.times do
-            @stack.pop
-          end
-        end
+    bench_performance_constant '#pop should be const operation.', 0.999 do |n|
+      n.times do
+        @stack.pop
+      end
+    end
 
-        bench_performance_constant '#push should be const operation.', 0.999 do |n|
-          n.times do
-            @stack.push 3
-          end
-        end
+    bench_performance_constant '#push should be const operation.', 0.999 do |n|
+      n.times do
+        @stack.push 3
+      end
+    end
+  end
+
+  describe 'implement as List Bench' do
+    before do
+      @stack = Stack.create
+      100_000.times do
+        @stack.push 4
+      end
+    end
+
+    bench_performance_constant '#pop should be const operation.', 0.999 do |n|
+      n.times do
+        @stack.pop
+      end
+    end
+
+    bench_performance_constant '#push should be const operation.', 0.999 do |n|
+      n.times do
+        @stack.push 3
       end
     end
   end

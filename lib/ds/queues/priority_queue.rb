@@ -1,13 +1,9 @@
 module DS
   # Class implements Priority Queue
-  class PriorityQueue < Queue
+  class PriorityQueue
     # Create new priority queue. Internaly uses heap to store elements.
     def initialize
       @store = BinaryHeap.new { |parent, child| parent.key >= child.key }
-    end
-
-    def self.create
-      fail 'Method is not defined on PriorityQueue'
     end
 
     # Adds element to queue with given priority.
@@ -34,6 +30,18 @@ module DS
     # Returns element with highest priority.
     def peek
       @store.data.first.value
+    end
+
+    # Returns length of queue. If queue is empty returns 0.
+    def length
+      @store.length
+    end
+
+    alias_method :size, :length
+
+    # Checks if queue is empty.
+    def empty?
+      @store.empty?
     end
   end
 end
