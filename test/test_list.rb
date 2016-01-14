@@ -111,8 +111,6 @@ describe List do
 
     @list.insert_before(7, @list.tail)
     @list.to_a.must_equal [8, 1, 9, 2, 3, 7, 4]
-
-    #proc { @list.insert_before(1, nil) }.must_raise ListError
   end
 
   it '#insert_after should insert new element after another.' do
@@ -162,11 +160,6 @@ describe List do
     @list.reverse!.length.must_equal 4
   end
 
-  it '#orderize should order elements by evaluating block.' do
-    not_sorted_list = List.from_array([3, -1, 0, -8, 2, 0, 1])
-    not_sorted_list.orderize { |elem| elem <=> 0 }.to_a.must_equal [-1, -8, 0, 0, 3, 2, 1]
-  end
-
   it '#looped? should check if list has cycle.' do
     refute @list2.looped?
     refute @list.looped?
@@ -174,7 +167,7 @@ describe List do
 
   it '#reverse_each should iterate list in reverse order.' do
     arr = []
-    @list.reverse_each { |e, i| arr.push e.data }
+    @list.reverse_each { |e| arr.push e.data }
     arr.must_equal [4, 3, 2, 1]
   end
 

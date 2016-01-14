@@ -105,9 +105,9 @@ module DS
       x = ListElement.new(x)
 
       el = rel
-      _next = el.next
-      x.next = _next
-      _next.prev = x if _next
+      nxt = el.next
+      x.next = nxt
+      nxt.prev = x if nxt
       el.next = x
       x.prev = el
       self.tail = x if x.nil?
@@ -124,9 +124,9 @@ module DS
       else
         x = ListElement.new(x)
 
-        _prev = rel.prev
-        _prev.next = x
-        x.prev = _prev
+        prev = rel.prev
+        prev.next = x
+        x.prev = prev
         x.next = rel
         rel.prev = x
       end
@@ -139,16 +139,16 @@ module DS
       if x == head
         self.head = head.next
         x.next = nil
-        self.head.prev = nil if self.head
+        head.prev = nil if head
       else
-        _next = x.next
-        _prev = x.prev
-        _prev.next = _next
-        _next.prev = _prev if _next
+        nxt = x.next
+        prev = x.prev
+        prev.next = nxt
+        nxt.prev = prev if nxt
         x.next = nil
         x.prev = nil
 
-        self.tail = _prev if _next.nil?
+        self.tail = prev if nxt.nil?
       end
       decrement_size
       x
@@ -222,34 +222,6 @@ module DS
         end
       end
       counter
-    end
-
-    # Orderize list by evaluating block. Block should evaluate to one of these
-    # values: 1,0,-1 (same as Comparable).
-    def orderize
-      zero = List.new
-      plus = List.new
-      minus = List.new
-
-      el = head
-
-      while el
-        case yield el.data
-        when 0
-          zero_tail = zero.append(el.data)
-        when 1
-          plus_tail = plus.append(el.data)
-        when -1
-          minus_tail = minus.append(el.data)
-        end
-        el = el.next
-      end
-
-      minus_tail.next = zero.head
-      zero.head.prev = minus_tail
-      zero_tail.next = plus.head
-      plus.head.prev = zero_tail
-      minus
     end
 
     # Reverses list.
