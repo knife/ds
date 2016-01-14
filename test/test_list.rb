@@ -82,8 +82,16 @@ describe List do
 
   it '#remove should remove element from list.' do
     second = @list.head.next
+    third = second.next
+    forth = third.next
     @list.remove(second)
     @list.to_a.must_equal [1, 3, 4]
+    @list.remove(@list.head)
+    @list.to_a.must_equal [3, 4]
+    @list.remove(forth)
+    @list.to_a.must_equal [3]
+    @list.remove(third)
+    @list.to_a.must_equal []
   end
 
   it '#pop should remove last list element.' do
@@ -104,7 +112,7 @@ describe List do
     @list.insert_before(7, @list.tail)
     @list.to_a.must_equal [8, 1, 9, 2, 3, 7, 4]
 
-    proc { @list.insert_before(1, nil) }.must_raise ListError
+    #proc { @list.insert_before(1, nil) }.must_raise ListError
   end
 
   it '#insert_after should insert new element after another.' do
@@ -164,10 +172,20 @@ describe List do
     refute @list.looped?
   end
 
+  it '#reverse_each should iterate list in reverse order.' do
+    arr = []
+    @list.reverse_each { |e, i| arr.push e.data }
+    arr.must_equal [4, 3, 2, 1]
+  end
+
   it '#each_with_index should iterate list.' do
     h = {}
     @list.each_with_index { |e, i| h[i] = e.data }
     h.must_equal(0 => 1, 1 => 2, 2 => 3, 3 => 4)
+  end
+
+  it '#to_s should print list in human friendly format.' do
+    @list.to_s.must_equal '1=2=3=4'
   end
 
   it 'should include Enumerable methods.' do

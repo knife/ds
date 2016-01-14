@@ -19,11 +19,21 @@ describe 'List Element' do
       assert @empty_el.tail?
     end
 
+    it '#append should return appended element.' do
+      el = @empty_el.append(2)
+      el.must_be_instance_of ListElement
+      el.data.must_equal 2
+      el.must_equal @empty_el.next
+    end
+
     it '#append should link element with another.' do
-      @empty_el.append(2).must_be_instance_of ListElement
+      @next = @empty_el.append(2)
+      @next.must_be_instance_of ListElement
       @empty_el.next.wont_be_nil
       @empty_el.next.must_be_instance_of ListElement
       @empty_el.next.data.must_equal 2
+      @next.prev.wont_be_nil
+      @next.prev.must_be_instance_of ListElement
     end
   end
 
@@ -41,10 +51,16 @@ describe 'List Element' do
     end
 
     it '#append should link element with another.' do
+      @next = @el.append(2)
+      @next.must_be_instance_of ListElement
       @el.append(2).must_be_instance_of ListElement
       @el.next.wont_be_nil
       @el.next.must_be_instance_of ListElement
       @el.next.data.must_equal 2
+
+      @next.prev.wont_be_nil
+      @next.prev.must_be_instance_of ListElement
+      @next.prev.data.must_equal 1
     end
   end
 end

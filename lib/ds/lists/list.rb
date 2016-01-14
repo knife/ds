@@ -48,6 +48,8 @@ module DS
     def unshift(x)
       el = ListElement.new(x)
       el.next = @head
+      @head.prev = el if @head
+
       increment_size
       @head = el
     end
@@ -102,43 +104,34 @@ module DS
     def insert_after(x, rel)
       x = ListElement.new(x)
 
-      el = head
-      el = el.next while el && el != rel
-      fail 'Element not found' unless el
-
-      x.next = el.next
+      el = rel
+      _next = el.next
+      x.next = _next
+      _next.prev = x if _next
       el.next = x
+      x.prev = el
+      self.tail = x if x.nil?
 
-      self.tail = x if x.tail?
-      @size += 1
+      increment_size
+
+      self
     end
 
     # Inserts element x before another element.
     def insert_before(x, rel)
-      x = ListElement.new(x)
-
-      # inserting at the beginnig of the list
       if rel == head
-        x.next = head
-        self.head = x
-
-      # inserting in the tail of the list
+        unshift(x)
       else
-        el = head
-        prev = head
-        while el && el != rel
-          prev = el
-          el = el.next
-        end
+        x = ListElement.new(x)
 
-        if el.nil?
-          fail ListError, 'List element not found'
-        else
-          prev.next = x
-          x.next = el
-        end
+        _prev = rel.prev
+        _prev.next = x
+        x.prev = _prev
+        x.next = rel
+        rel.prev = x
       end
-      @size += 1
+      increment_size
+      self
     end
 
     # Removes element x from list.
@@ -146,19 +139,16 @@ module DS
       if x == head
         self.head = head.next
         x.next = nil
+        self.head.prev = nil if self.head
       else
-        el = head
-        while el && el != x
-          prev = el
-          el = el.next
-        end
+        _next = x.next
+        _prev = x.prev
+        _prev.next = _next
+        _next.prev = _prev if _next
+        x.next = nil
+        x.prev = nil
 
-        fail ListError, 'Element not found' unless el
-
-        self.tail = prev if el == tail
-        prev.next = el.next
-        el.next = nil
-
+        self.tail = _prev if _next.nil?
       end
       decrement_size
       x
@@ -210,7 +200,6 @@ module DS
 
         return elem if elem2.equal? elem
       end
-
       nil
     end
 
@@ -257,7 +246,9 @@ module DS
       end
 
       minus_tail.next = zero.head
+      zero.head.prev = minus_tail
       zero_tail.next = plus.head
+      plus.head.prev = zero_tail
       minus
     end
 
@@ -270,6 +261,7 @@ module DS
       while elem
         nxt = elem.next
         elem.next = prev
+        prev.prev = elem
         prev = elem
         elem = nxt
       end
@@ -285,11 +277,24 @@ module DS
 
     # Default list iterator.
     def each
-      elem = @head
+      elem = head
       while elem
         yield elem
         elem = elem.next
       end
+    end
+
+    # Reverse list iterator.
+    def reverse_each
+      elem = tail
+      while elem
+        yield elem
+        elem = elem.prev
+      end
+    end
+
+    def to_s
+      to_a.join('=')
     end
 
     private

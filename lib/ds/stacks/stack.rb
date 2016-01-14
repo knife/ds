@@ -22,7 +22,7 @@ module DS
 
     # Removes element from stack and returns it.
     def pop
-      @store.pop
+      @store.pop unless empty?
     end
 
     # Adds element to the top of the stack.
