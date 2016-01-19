@@ -4,9 +4,9 @@ module DS
     # Creates new tree (stored in array).
     def initialize(*args)
       if args.empty?
-        @data = []
+        @data = [nil]
       else
-        @data = args.to_a
+        @data = [nil] + args.to_a
       end
     end
 
@@ -17,22 +17,22 @@ module DS
 
     # Returns root element.
     def root
-      @data.first
+      @data[1]
     end
 
     # Returns index of left child.
     def left_index(i)
-      2 * i + 1
+      2 * i
     end
 
     # Returns index of right child.
     def right_index(i)
-      2 * i + 2
+      2 * i + 1
     end
 
     # Returns index of parent.
     def parent_index(i)
-      (i + 1) / 2 - 1
+      i / 2
     end
 
     # Returns children of node i.

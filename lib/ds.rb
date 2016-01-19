@@ -6,6 +6,7 @@ require 'ds/pair'
 require 'ds/matrixes/expandable_array'
 require 'ds/matrixes/array_2d'
 require 'ds/matrixes/tri_matrix'
+require 'ds/matrixes/heap_store'
 
 require 'ds/sets/ordered_set'
 

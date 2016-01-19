@@ -1,7 +1,7 @@
 module DS
   # Create new Heap from args.
-  class BinaryHeap < CompleteBinaryTree
-    attr_accessor :data
+  class BinaryHeap
+    attr_reader :store
 
     # Create new Heap from args.
     # Given block sets the heap relation. Default heap relation is Max Heap.
@@ -9,9 +9,9 @@ module DS
       if block_given?
         @relation = block
       else
-        @relation = proc { |parent, child| parent >= child }
+        @relation = -> (parent, child) { parent >= child }
       end
-      @data = args.to_a
+      @store = HeapStore.new(*args)
       heapify!
     end
 
@@ -27,43 +27,22 @@ module DS
 
     # Evaluates Heap relation.
     def relation(parent, child)
-      @relation.call(@data[parent], @data[child])
+      @relation.call(store[parent], store[child])
     end
 
     # Arranges data in heap.
     # O(n)
     def heapify!
-      (@data.size / 2).downto(0) do |i|
-        heapify(i)
-      end
-    end
-
-    # Maintains heap condition for i node.
-    # O(log)
-    def heapify(i)
-      left = left_index(i)
-      left = nil if left >= @data.size
-
-      right = right_index(i)
-      right = nil if right >= @data.size
-
-      largest = [i, left, right].compact.sort { |x, y| relation(x, y) ? -1 : 1 }.first
-
-      if largest != i
-        temp = @data[i]
-        @data[i] = @data[largest]
-        @data[largest] = temp
-        heapify(largest)
-      end
+      (length / 2).downto(1) { |i| sink(i) }
     end
 
     # Removes element from heap maintaining heap relation.
     def shift
-      if @data.size > 0
-        result = @data.shift
-        return result if @data.size.zero?
-        @data.unshift @data.pop
-        heapify(0)
+      if length > 0
+        result = store.first
+        swap(1, length)
+        store.pop
+        sink(1)
       end
       result
     end
@@ -72,32 +51,53 @@ module DS
     # Returns heap itself.
     # O(log)
     def insert(value)
-      @data.push value
-      child = @data.size - 1
-      parent = parent_index(child)
-
-      while parent >= 0 && !relation(parent, child)
-        temp = @data[child]
-        @data[child] = @data[parent]
-        @data[parent] = temp
-        child = parent
-        parent = parent_index(child)
-      end
+      store.push value
+      swim(length)
       self
     end
 
     def length
-      @data.size
+      store.length
     end
 
     alias_method :size, :length
 
     def empty?
-      @data.empty?
+      store.empty?
     end
 
     def to_a
-      @data
+      store.to_a
+    end
+
+    private
+
+    def swim(k)
+      while k > 1 && less(k / 2, k)
+        swap(k, k / 2)
+        k /= 2
+      end
+    end
+
+    def sink(k)
+      n = length
+      while (2 * k <= n)
+        j = 2 * k
+        j += 1 if j < n && less(j, j + 1)
+        break unless less(k, j)
+        swap(k, j)
+        k = j
+      end
+    end
+
+    def less(x, y)
+      !relation(x, y)
+    end
+
+    def swap(x, y)
+      temp = store[y]
+      store[y] = store[x]
+      store[x] = temp
     end
   end
 end

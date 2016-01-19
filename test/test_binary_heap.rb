@@ -14,7 +14,9 @@ describe BinaryHeap do
   end
 
   it '#insert should insert new element to the heap maintaining heap relation.' do
+    @heap.size.must_equal 6
     @heap.insert(13).to_a.must_equal [13, 9, 11, 5, 8, 4, 6]
+    @heap.size.must_equal 7
   end
 
   it '#shift should remove element from heap maintaining heap relation.' do

@@ -17,13 +17,13 @@ describe CompleteBinaryTree do
   end
 
   it '#left_index should return index of left child' do
-    @tree.left_index(0).must_equal 1
-    @tree.left_index(1).must_equal 3
+    @tree.left_index(1).must_equal 1
+    @tree.left_index(2).must_equal 4
   end
 
   it '#right_index should return index of left child' do
-    @tree.right_index(0).must_equal 2
-    @tree.right_index(1).must_equal 4
+    @tree.right_index(1).must_equal 2
+    @tree.right_index(2).must_equal 5
   end
 
   it '#parent_index should return index of left child' do

@@ -68,6 +68,9 @@ More: {Stack}[http://en.wikipedia.org/wiki/Stack_(abstract_data_type)]
 Creating new Stack (implemented as Array).  
   stack = Stack.new
 
+Creating new Stack (implemented as List).  
+  stack = Stack.create
+
 The following methods are available on a Stack:
 
 * push
