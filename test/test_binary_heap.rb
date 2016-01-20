@@ -19,6 +19,12 @@ describe BinaryHeap do
     @heap.size.must_equal 7
   end
 
+  it '#top should return max or min heap element' do
+    @heap.top.must_equal 11
+    @heap.shift
+    @heap.top.must_equal 9
+  end
+
   it '#shift should remove element from heap maintaining heap relation.' do
     @heap.shift.must_equal 11
     @heap.to_a.must_equal [9, 8, 6, 5, 4]
@@ -48,6 +54,25 @@ describe BinaryHeap do
     it '#insert should insert new element to the heap maintaining heap relation.' do
       @min_heap.insert(3).to_a.must_equal [3, 5, 4, 8, 11, 9, 6]
       @min_heap2.insert(3).to_a.must_equal [3, 5, 4, 8, 11, 9, 6]
+    end
+  end
+end
+
+if ENV['BENCH']
+  describe 'performance Bench' do
+    before do
+      @arr = (1..10_000).to_a.shuffle
+      @heap = BinaryHeap.new(*@arr)
+    end
+
+    bench_performance_constant 'creating new heap should be linear operation.', 0.999 do |n|
+      BinaryHeap.new(*@arr)
+    end
+
+    bench_performance_constant 'accessing max element should be const operation.', 0.999 do |n|
+      n.times do
+        @heap.shift
+      end
     end
   end
 end

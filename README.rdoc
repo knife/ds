@@ -16,7 +16,6 @@ The DS gem supports the folowing data structures:
 * Trees
   * Tree
   * BinaryTree
-  * CompleteBinaryTree
   * BinaryHeap
   * BinarySearchTree
   * Trie
@@ -309,27 +308,27 @@ Examples
 
 ==== Binary Heap
 
-BinaryHeap is  Complete Binary Tree  in which every node satisfies heap property. Binary Heap allows very fast
-access to maximum or minimum element of the tree.
+BinaryHeap is tree in which every node satisfies heap property. Binary Heap allows very fast
+access to maximum or minimum element of the tree (const access).
 More: {Binary Heap}[http://en.wikipedia.org/wiki/Binary_heap]
 
 Creating
 
 Maximum Binary Heap 
-  max_heap = BinaryHeap.new(9,8,4,5,11,6)
+  max_heap = BinaryHeap.new(9, 8, 4, 5, 11, 6)
 or
-  max_heap = BinaryHeap.max(9,8,4,5,11,6)
+  max_heap = BinaryHeap.max(9, 8, 4, 5, 11, 6)
 
 Minimum Binary Heap
-  min_heap = BinaryHeap.min(9,8,4,5,11,6)
+  min_heap = BinaryHeap.min(9, 8, 4, 5, 11, 6)
 or
-  BinaryHeap.new(9,8,4,5,11,6){|parent,child| parent < child}
+  BinaryHeap.new(9, 8, 4, 5, 11, 6){ |parent, child| parent < child }
 
 You can set heap relation by passing block to BinaryHeap constructor.
 
 Examples
   max_heap.shift #returns max element (11)
-  max_heap.to_a #=> [9,8,6,5,4]
+  max_heap.to_a #=> [9, 8, 6, 5, 4]
   max_heap.insert 15
   max_heap.shift #=> 15
 

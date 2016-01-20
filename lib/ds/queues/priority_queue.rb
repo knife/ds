@@ -29,7 +29,7 @@ module DS
 
     # Returns element with highest priority.
     def peek
-      @store.data.first.value
+      @store.top.value
     end
 
     # Returns length of queue. If queue is empty returns 0.

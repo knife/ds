@@ -56,6 +56,10 @@ module DS
       self
     end
 
+    def top
+      store.first
+    end
+
     def length
       store.length
     end

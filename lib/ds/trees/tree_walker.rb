@@ -19,7 +19,7 @@ module DS
     # Returns values of nodes  in given order
 
     def traverse(order = :bfs, &block)
-      reset
+      reset!
       tree = @tree
 
       case order
@@ -55,7 +55,7 @@ module DS
     end
 
     # Resets tree walker.
-    def reset
+    def reset!
       @visited.clear
       self
     end
@@ -77,20 +77,15 @@ module DS
 
         case order
         when :postorder
-
           arr =  tree.children.map { |t| recalculate!(t, order, memo, &block) }
           result =  block.call(arr.push tree.data)
           tree.data = result
-
         when :preorder
-
           tree.data = yield tree, memo
           memo = tree.data
-
           tree.children.each do |t|
             recalculate!(t, order, memo, &block)
           end
-
         when :inorder
           fail ArgumentError unless self.tree.is_a? BinaryTree
           recalculate!(tree.left, order, memo, &block)
@@ -121,44 +116,36 @@ module DS
 
     private
 
+    def visit_node(node)
+      if block_given?
+        yield node
+      else
+        @visited << node.data
+      end
+    end
+
+    def visit_children(node, order, &block)
+      node.children.each do |t|
+        walk(t, order, &block)
+      end
+    end
+
     def walk(tree, order, &block)
       if tree
 
         case order
         when :postorder
-          tree.children.each do |t|
-            walk(t, order, &block)
-          end
-
-          if block_given?
-            yield tree
-          else
-            @visited << tree.data
-          end
-
+          visit_children(tree, order, &block)
+          visit_node(tree, &block)
         when :preorder
-          if block_given?
-            yield tree
-          else
-            @visited << tree.data
-          end
-
-          tree.children.each do |t|
-            walk(t, order, &block)
-          end
-
+          visit_node(tree, &block)
+          visit_children(tree, order, &block)
         when :inorder
           fail ArgumentError unless self.tree.is_a? BinaryTree
+
           walk(tree.left, order, &block)
-
-          if block_given?
-            yield tree
-          else
-            @visited << tree.data
-          end
-
+          visit_node(tree, &block)
           walk(tree.right, order, &block)
-
         end
       end
     end
