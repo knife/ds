@@ -2,11 +2,15 @@ module DS
   class TreeWalker
     attr_accessor :visited
     attr_accessor :tree
+    attr_accessor :action
+    attr_accessor :order
 
     # Creates new tree iterator.
-    def initialize(tree = nil)
+    def initialize(tree, options = {}, &block)
       @visited = []
       @tree = tree
+      @order = options[:order] || :bfs
+      @action = block
     end
 
     # Traversing tree in given order:
@@ -18,38 +22,29 @@ module DS
     # If block is  given, passes each visited subtree to block.
     # Returns values of nodes  in given order
 
-    def traverse(order = :bfs, &block)
+    def traverse(traverse_order = nil, &block)
+      self.action = block if block_given?
+      self.order = traverse_order if traverse_order
       reset!
-      tree = @tree
 
-      case order
-      when :bfs
-        traverse_bfs(&block)
-      when :postorder
-        walk(tree, :postorder, &block)
-      when :preorder
-        walk(tree, :preorder, &block)
-      when :inorder
-        fail ArgumentError unless tree.is_a? BinaryTree
-        walk(tree, order, &block)
+      if order == :bfs
+        traverse_bfs
+      else
+        walk(tree)
       end
-
       visited
     end
 
     # Traverses tree in BFS order.
-    def traverse_bfs
+    def traverse_bfs(&block)
+      self.action = block if block_given?
       q = Queue.new
-      q.push @tree
+      q.push tree
 
       loop do
         break if q.empty?
         node = q.shift
-        if block_given?
-          yield node
-        else
-          @visited << node.data
-        end
+        visit_node(node)
         node.children.each { |n| q.push n } if node.children
       end
     end
@@ -66,86 +61,56 @@ module DS
         traverse_with_h(t, height + 1, &block)
       end
 
-      if block_given?
-        yield tree, height
-      end
+      yield tree, height if block_given?
     end
 
     # Recalculates tree by evaluating block on every node.
     def recalculate!(tree, order, memo = nil, &block)
       if tree
-
         case order
         when :postorder
-          arr =  tree.children.map { |t| recalculate!(t, order, memo, &block) }
-          result =  block.call(arr.push tree.data)
-          tree.data = result
+          arr = tree.children.map { |t| recalculate!(t, order, memo, &block) }
+          tree.data = yield tree, arr
         when :preorder
           tree.data = yield tree, memo
-          memo = tree.data
           tree.children.each do |t|
-            recalculate!(t, order, memo, &block)
+            recalculate!(t, order, tree.data, &block)
           end
         when :inorder
           fail ArgumentError unless self.tree.is_a? BinaryTree
           recalculate!(tree.left, order, memo, &block)
-
           tree.data = yield tree, memo
-          memo = tree.data
-
-          recalculate!(tree.right, order, memo, &block)
-
+          recalculate!(tree.right, order, tree.data, &block)
         end
-      end
-    end
-
-    # Summarize tree
-    def summarize(direction = :bottomup)
-      case direction
-      when :bottomup
-        recalculate!(tree, :postorder, 0) { |ar| ar.inject(0) { |x, memo| memo + x } }
-        tree
-      when :topdown
-        recalculate!(tree, :preorder, 0) { |x, memo| memo + x.data }
-        tree
-      when :inorder
-        recalculate!(tree, :inorder, 0) { |x, memo| memo + x.data if x.data && memo }
-        tree
       end
     end
 
     private
 
     def visit_node(node)
-      if block_given?
-        yield node
-      else
-        @visited << node.data
-      end
+      action.call(node) if action
+      @visited << node.data
     end
 
-    def visit_children(node, order, &block)
-      node.children.each do |t|
-        walk(t, order, &block)
-      end
+    def visit_children(node)
+      node.children.each { |t| walk(t) }
     end
 
-    def walk(tree, order, &block)
-      if tree
-
+    def walk(node)
+      if node
         case order
         when :postorder
-          visit_children(tree, order, &block)
-          visit_node(tree, &block)
+          visit_children(node)
+          visit_node(node)
         when :preorder
-          visit_node(tree, &block)
-          visit_children(tree, order, &block)
+          visit_node(node)
+          visit_children(node)
         when :inorder
-          fail ArgumentError unless self.tree.is_a? BinaryTree
+          fail ArgumentError unless node.is_a? BinaryTree
 
-          walk(tree.left, order, &block)
-          visit_node(tree, &block)
-          walk(tree.right, order, &block)
+          walk(node.left)
+          visit_node(node)
+          walk(node.right)
         end
       end
     end

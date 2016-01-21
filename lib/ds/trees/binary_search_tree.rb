@@ -25,8 +25,8 @@ module DS
 
     # Checks if tree is valid Binary Search Tree.
     def self.valid?(other)
-      walker = TreeWalker.new(other)
-      walker.traverse(:inorder)
+      walker = TreeWalker.new(other,order: :inorder)
+      walker.traverse
       walker.visited.extend(ArrayX).sorted?
     end
   end

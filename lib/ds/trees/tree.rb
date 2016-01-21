@@ -9,6 +9,7 @@ module DS
     def initialize(value = nil)
       @data = value
       @children = []
+      @iterator = TreeWalker.new(self)
     end
 
     # Inserts a new subtree.
@@ -26,8 +27,8 @@ module DS
     # Returns leaf list.
     def get_leaves(tree = self)
       list = List.new
-      walker = TreeWalker.new(tree)
-      walker.traverse(:postorder) { |t| list.append(t) if t.leaf? }
+      walker = TreeWalker.new(tree, order: :postorder)
+      walker.traverse { |t| list.append(t) if t.leaf? }
       list
     end
 
@@ -103,7 +104,7 @@ module DS
 
     # Iterates tree in BFS order.
     def each
-      TreeWalker.new(self).traverse { |t| yield t }
+      @iterator.traverse { |t| yield t }
     end
 
     def to_a
