@@ -24,6 +24,7 @@ require 'ds/trees/binary_tree'
 require 'ds/trees/binary_search_tree'
 require 'ds/trees/complete_binary_tree'
 require 'ds/trees/binary_heap'
+require 'ds/trees/red_black_tree'
 require 'ds/trees/trie'
 
 require 'ds/graphs/edge'
