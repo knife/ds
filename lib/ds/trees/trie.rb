@@ -13,43 +13,43 @@ module DS
 
     def insert(s, value = true)
       letters = s.scan(/./)
-      fail ArgumentError, 'Not allowed symbol.' unless (letters - alphabet).empty?
-      priv_insert(letters, value)
+      fail ArgumentError, 'Not allowed symbol.' unless  allowed?(letters)
+      put(letters, value)
     end
 
     def find(s)
       letters = s.scan(/./)
-      fail ArgumentError, 'Not allowed symbol.' unless (letters - alphabet).empty?
-      priv_find(letters)
+      fail ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
+      get(letters)
     end
 
     protected
+
+    def allowed?(letters)
+      (letters - alphabet).empty?
+    end
+
 
     def key(chr)
       alphabet.index(chr)
     end
 
-    def priv_insert(s, value)
+    def put(s, value)
       if s.empty?
         @data = value
       else
         index = key(s.first)
-        subtree = if @children[index]
-                    @children[index]
-                  else
-                    @children[index] = Trie.new
-                  end
-
-        subtree.priv_insert(s[1..-1], value)
+        @children[index] ||= Trie.new 
+        @children[index].put(s[1..-1], value)
       end
     end
 
-    def priv_find(search)
-      if search.empty?
+    def get(s)
+      if s.empty?
         @data
       else
-        index = key(search.first)
-        @children[index].priv_find(search[1..-1]) if @children[index]
+        index = key(s.first)
+        @children[index].get(s[1..-1]) if @children[index]
       end
     end
   end
