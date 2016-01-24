@@ -22,6 +22,12 @@ describe Trie do
     @dict.find('blah').must_be_nil
   end
 
+  it '#alphabet= sets Trie alphabet' do
+    @trie = Trie.new
+    @trie.alphabet = %w(a b c d)
+    proc { @trie.insert('thing') }.must_raise ArgumentError
+  end
+
   it 'should raise error if character is not in trie alphabet.' do
     proc { @dict.find('m%$r') }.must_raise ArgumentError
     proc { @dict.insert('m%$r') }.must_raise ArgumentError
