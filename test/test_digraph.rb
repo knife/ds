@@ -10,7 +10,7 @@ describe Digraph do
       edges << Edge.new('Jack', 'Marc')
       edges << Edge.new('Tom', 'Marc')
 
-      @digraph = Digraph.create(edges)
+      @digraph = Digraph.new(edges, :list)
     end
 
     it '#degree should return vertex degree.' do
@@ -43,7 +43,6 @@ describe Digraph do
       refute @digraph.edge?('Marc', 'Tom')
       refute @digraph.edge?('Jack', 'Tom')
       refute @digraph.edge?('Tom', 'Lukas')
-
       assert @digraph.edge?('Tom', 'Marc')
       assert @digraph.edge?('Lukas', 'Marc')
     end

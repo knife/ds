@@ -7,15 +7,18 @@ module DS
     def initialize
       @size = 0
       @store = {}
+      @cache = []
     end
 
     # Adds new element to set
     def push(e)
       unless @store[e]
-        @store[e] = @size
+        index = size
+        @store[e] = index
         @size += 1
+        @cache[index] = e
       end
-      return @store[e]
+      @store[e]
     end
 
     # Returns element index.
@@ -24,9 +27,7 @@ module DS
     end
 
     def to_a
-      arr = Array.new(@size)
-      @store.each { |e, i| arr[i] = e }
-      arr
+      @cache
     end
   end
 end
