@@ -2,9 +2,7 @@ module DS
   class GraphAsTriMatrix < GraphAsMatrix
     def initialize(edges)
       @store = TriMatrix.new(0)
-      @max = 0
       @map = OrderedSet.new
-
       add_edges(edges)
     end
 
@@ -12,7 +10,7 @@ module DS
     def degree(x)
       x = @map.index(x)
       sum = 0
-      0.upto @max do |i|
+      vc.each do |i|
         sum += @store[x, i] if @store[x, i]
       end
       sum

@@ -7,6 +7,8 @@ module DS
     # Matrix), :matrix (Matrix).
     def initialize(edges, store = :matrix)
       case store
+      when :list
+        @g = GraphAsList.new(edges)
       when :matrix
         @g = GraphAsMatrix.new(edges)
       when :tri_matrix
