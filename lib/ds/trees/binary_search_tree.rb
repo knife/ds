@@ -25,9 +25,11 @@ module DS
 
     # Checks if tree is valid Binary Search Tree.
     def self.valid?(other)
-      walker = TreeWalker.new(other, order: :inorder)
-      walker.traverse
-      walker.visited.extend(ArrayX).sorted?
+      visited = TreeWalker.new(other, order: :inorder).traverse
+      (0...visited.size).each do |i|
+        return false if visited[i + 1] && visited[i] > visited[i + 1]
+      end
+      true
     end
   end
 end

@@ -1,6 +1,5 @@
 require 'ds/version'
 
-require 'ds/ext/array_x'
 require 'ds/pair'
 
 require 'ds/matrixes/expandable_array'
@@ -22,7 +21,6 @@ require 'ds/trees/tree'
 require 'ds/trees/tree_walker'
 require 'ds/trees/binary_tree'
 require 'ds/trees/binary_search_tree'
-require 'ds/trees/complete_binary_tree'
 require 'ds/trees/binary_heap'
 require 'ds/trees/red_black_tree'
 require 'ds/trees/trie'
