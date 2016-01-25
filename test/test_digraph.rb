@@ -119,7 +119,8 @@ describe Digraph do
     end
 
     it '#bfs should iterate over graph in bfs order.' do
-      @wdigraph.bfs(:A).must_equal [:A, :C, :D, :G, :E, :F, :B]
+      searcher = BreadthFirstSearch.new(@wdigraph)
+      searcher.search(:A).must_equal [:A, :C, :D, :G, :E, :F, :B]
     end
   end
 end

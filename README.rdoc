@@ -19,6 +19,7 @@ The DS gem supports the folowing data structures:
   * BinaryHeap
   * BinarySearchTree
   * Trie
+  * RedBlackTree
 * Graphs
   * Graph
   * Digraph
@@ -283,29 +284,6 @@ Examples
   walker = TreeWalker.new(b)
   walker.traverse(:inorder).must_equal [1,2,3,5,6,7,8]
 
-
-==== CompleteBinaryTree
-
-A complete binary tree is a binary tree in which every level, except possibly
-the last, is completely filled, and all nodes are as far left as possible. 
-CompleteBinaryTree is binary tree but does not inherit from Tree and BinaryTree class! Nodes are stored
-internally in array.
-More: {Complete Binary Tree}[http://en.wikipedia.org/wiki/Complete_binary_tree]
-
-Creating
-  cbt = CompleteBinaryTree.new(1,2,3,4,5,6,7)
-
-Examples
-  cbt.root #=> 1
-  cbt.left(0) #=> 2
-  cbt.right(0) #=> 3
-  cbt.parent(1) #=> 0
-  
-  cbt.left_index(0) #=> 1
-  cbt.right_index(1) #=> 4
-  cpt.parent_index(1) #=> 0
-
-
 ==== Binary Heap
 
 BinaryHeap is tree in which every node satisfies heap property. Binary Heap allows very fast
@@ -370,7 +348,7 @@ You can also pass block to traverse method
   walker.traverse(:inorder){|n| p n.data**2}
 
 If you want to change value of tree nodes, use recalculate! method
-  walker.recalculate!(b,:preorder,0){|x,memo| memo = memo+x.data} 
+  walker.recalculate!(b, :preorder, 0){ |x, memo| memo = memo + x.data } 
 
 
 
@@ -440,7 +418,9 @@ Examples
   wdigraph.degree(:E) #=> 4
   wdigraph.in_degree(:E) #=> 3
   wdigraph.out_degree(:E) #=> 1
-  wdigraph.bfs(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
+
+Breadth First Search :
+  BreadthFirstSearch.new(widgraph).search(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
 
 
 

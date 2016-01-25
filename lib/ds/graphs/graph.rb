@@ -68,39 +68,5 @@ module DS
     def each_edge(&block)
       @g.each_edge(&block)
     end
-
-    def bfs(s)
-      colors = {}
-      parents = {}
-      visited = []
-      d = {}
-      q = Queue.new
-
-      @g.each_vertex do |v|
-        colors[v] = :white
-        parents[v] = nil
-        d[v] = Float::INFINITY
-      end
-
-      colors[s] = :white
-      parents[s] = nil
-      d[s] = 0
-
-      q.enqueue s
-
-      until q.empty?
-        u = q.dequeue
-        @g.neighbors(u).each do |v|
-          next unless colors[v] == :white
-          colors[v] = :grey
-          d[v] = d[u] + 1
-          parents[v] = u
-          q.enqueue v
-        end
-        colors[u] = :black
-        visited << u
-      end
-      visited
-    end
   end
 end
