@@ -1,6 +1,5 @@
 module DS
   class Graph
-    Infinity = 1 << 64
 
     # Create new graph from array of edges. Second parameter determines
     # graph internal implementation: :list (Adjency List), :tri_matrix (Triangular
@@ -73,14 +72,14 @@ module DS
     def bfs(s)
       colors = {}
       parents = {}
-      res = []
+      visited = []
       d = {}
       q = Queue.new
 
       @g.each_vertex do |v|
         colors[v] = :white
         parents[v] = nil
-        d[v] = Infinity
+        d[v] = Float::INFINITY
       end
 
       colors[s] = :white
@@ -89,7 +88,7 @@ module DS
 
       q.enqueue s
 
-      while !q.empty?
+      until q.empty?
         u = q.dequeue
         @g.neighbors(u).each do |v|
           if colors[v] == :white
@@ -100,9 +99,9 @@ module DS
           end
         end
         colors[u] = :black
-        res << u
+        visited << u
       end
-      res
+      visited
     end
   end
 end

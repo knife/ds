@@ -12,7 +12,7 @@ module DS
     # elements from size to index are filled with extender.
     def [](x)
       if x >= size
-        for i in size..x
+        (size..x).each do |i|
           self[i] = @extender
         end
       end

@@ -64,10 +64,10 @@ module DS
 
     # Returns subtree height.
     def self.h(tree)
-      unless tree.leaf?
-        tree.children.map { |t| h(t) }.max + 1
-      else
+      if tree.leaf?
         1
+      else
+        tree.children.map { |t| h(t) }.max + 1
       end
     end
 

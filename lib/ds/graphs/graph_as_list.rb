@@ -1,4 +1,5 @@
 module DS
+  # Graph implemented as Adjency List
   class GraphAsList
     def initialize(edges)
       @store = []
@@ -21,7 +22,7 @@ module DS
 
     # Adds new edges to graph.
     def add_edges(edges)
-      for e in edges
+      edges.each do |e|
         x = @map.push e.from
         y = @map.push e.to
         @store[x] ||= []

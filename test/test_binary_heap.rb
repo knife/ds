@@ -65,7 +65,7 @@ if ENV['BENCH']
       @heap = BinaryHeap.new(*@arr)
     end
 
-    bench_performance_constant 'creating new heap should be linear operation.', 0.999 do |n|
+    bench_performance_constant 'creating new heap should be linear operation.', 0.999 do |_n|
       BinaryHeap.new(*@arr)
     end
 

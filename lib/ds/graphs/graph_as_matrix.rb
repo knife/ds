@@ -14,14 +14,14 @@ module DS
     def vertexes
       @map.to_a
     end
-    
+
     def vertex_size
       @map.size
     end
 
     # Adds new edges to graph.
     def add_edges(edges)
-      for e in edges
+      edges.each do |e|
         x = @map.push e.from
         y = @map.push e.to
 
@@ -85,8 +85,8 @@ module DS
 
     # Edge iterator
     def each_edge
-      for v0 in vc
-        for v1 in 0..v0 - 1
+      vc.each do |v0|
+        (0...v0).each do |v1|
           yield Edge.new(vertexes[v0], vertexes[v1], @store[v0, v1]) if @store[v0, v1] > 0
         end
       end

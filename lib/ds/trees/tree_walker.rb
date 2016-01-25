@@ -66,23 +66,21 @@ module DS
 
     # Recalculates tree by evaluating block on every node.
     def recalculate!(tree, order, memo = nil, &block)
-      if tree
-        case order
-        when :postorder
-          arr = tree.children.map { |t| recalculate!(t, order, memo, &block) }
-          tree.data = yield tree, arr
-        when :preorder
-          tree.data = yield tree, memo
-          tree.children.each do |t|
-            recalculate!(t, order, tree.data, &block)
-          end
-        when :inorder
-          fail ArgumentError unless self.tree.is_a? BinaryTree
-          recalculate!(tree.left, order, memo, &block)
-          tree.data = yield tree, memo
-          recalculate!(tree.right, order, tree.data, &block)
+      case order
+      when :postorder
+        arr = tree.children.map { |t| recalculate!(t, order, memo, &block) }
+        tree.data = yield tree, arr
+      when :preorder
+        tree.data = yield tree, memo
+        tree.children.each do |t|
+          recalculate!(t, order, tree.data, &block)
         end
-      end
+      when :inorder
+        fail ArgumentError unless self.tree.is_a? BinaryTree
+        recalculate!(tree.left, order, memo, &block)
+        tree.data = yield tree, memo
+        recalculate!(tree.right, order, tree.data, &block)
+      end if tree
     end
 
     private
@@ -97,22 +95,20 @@ module DS
     end
 
     def walk(node)
-      if node
-        case order
-        when :postorder
-          visit_children(node)
-          visit_node(node)
-        when :preorder
-          visit_node(node)
-          visit_children(node)
-        when :inorder
-          fail ArgumentError unless node.is_a? BinaryTree
+      case order
+      when :postorder
+        visit_children(node)
+        visit_node(node)
+      when :preorder
+        visit_node(node)
+        visit_children(node)
+      when :inorder
+        fail ArgumentError unless node.is_a? BinaryTree
 
-          walk(node.left)
-          visit_node(node)
-          walk(node.right)
-        end
-      end
+        walk(node.left)
+        visit_node(node)
+        walk(node.right)
+      end if node
     end
   end
 end
