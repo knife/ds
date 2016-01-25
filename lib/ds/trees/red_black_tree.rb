@@ -65,10 +65,22 @@ module DS
     end
 
     def balance(n)
-      n = rotate_left(n)    if red?(n.right) && !red?(n.left)
-      n = rotate_right(n)   if red?(n.left) && red?(n.left.left)
-      flip_colors(n)        if red?(n.left) && red?(n.right)
+      n = rotate_left(n)    if right_red?(n)
+      n = rotate_right(n)   if two_red_in_row?(n)
+      flip_colors(n)        if red_children?(n)
       n
+    end
+
+    def red_children?(n)
+      red?(n.left) && red?(n.right)
+    end
+
+    def two_red_in_row?(n)
+      red?(n.left) && red?(n.left.left)
+    end
+
+    def right_red?(n)
+      red?(n.right) && !red?(n.left)
     end
 
     def red?(n)

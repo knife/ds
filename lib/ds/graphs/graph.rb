@@ -1,6 +1,6 @@
 module DS
+  # Graph class
   class Graph
-
     # Create new graph from array of edges. Second parameter determines
     # graph internal implementation: :list (Adjency List), :tri_matrix (Triangular
     # Matrix), :matrix (Matrix).
@@ -91,12 +91,11 @@ module DS
       until q.empty?
         u = q.dequeue
         @g.neighbors(u).each do |v|
-          if colors[v] == :white
-            colors[v] = :grey
-            d[v] = d[u] + 1
-            parents[v] = u
-            q.enqueue v
-          end
+          next unless colors[v] == :white
+          colors[v] = :grey
+          d[v] = d[u] + 1
+          parents[v] = u
+          q.enqueue v
         end
         colors[u] = :black
         visited << u

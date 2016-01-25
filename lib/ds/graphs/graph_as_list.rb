@@ -48,29 +48,26 @@ module DS
     def get_edge(x, y)
       s = @map.index x
       t = @map.index y
-      Edge.new(x, y) if @store[s] && @store[s].include?(t)
+      Edge.new(x, y) if connected?(s, t)
     end
 
     # Checks if two elements are connected.
     def edge?(x, y)
       v1 = @map.index(x)
       v2 = @map.index(y)
-      @store[v1] && @store[v1].include?(v2)
+      connected?(v1, v2)
     end
 
     # Returns vertex degree. Second parameter determines direction - :in incoming
     # edges, :out - outcoming edges, :all - incoming and outcoming edges.
     def degree(x, direction = :all)
       x = @map.index(x)
-      r = {}
-      r[:in] = 0
-      r[:out] = 0
+      r = Hash.new(0)
       vc.each do |i|
-        r[:in] += 1 if  @store[i] && @store[i].include?(x)
-        r[:out] += 1 if @store[x] && @store[x].include?(i)
+        r[:in] += 1 if  connected?(i, x)
+        r[:out] += 1 if connected?(x, i)
       end
       r[:all] = r[:in] + r[:out]
-
       r[direction]
     end
 
@@ -86,6 +83,12 @@ module DS
           yield Edge.new(vertexes[i], vertexes[e], @store[v0, v1])
         end
       end
+    end
+
+    private
+
+    def connected?(x, y)
+      @store[x] && @store[x].include?(y)
     end
   end
 end

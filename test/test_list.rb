@@ -183,7 +183,7 @@ describe List do
 
   it 'should include Enumerable methods.' do
     @list.map(&:data).must_equal [1, 2, 3, 4]
-    @list.inject(0) { |mem, var| mem + var.data }.must_equal 10
+    @list.inject(0) { |a, e| a + e.data }.must_equal 10
     @list.find { |e| e.data == 1.0 }.data.must_equal 1
   end
 

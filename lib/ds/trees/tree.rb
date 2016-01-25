@@ -37,7 +37,7 @@ module DS
       if tree.leaf?
         1
       else
-        tree.children.inject(0) { |m, t| m + leaf_count(t) }
+        tree.children.inject(0) { |a, e| a + leaf_count(e) }
       end
     end
 

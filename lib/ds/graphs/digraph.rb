@@ -1,4 +1,5 @@
 module DS
+  # Class implements directed graph
   class Digraph < Graph
     def self.create(args)
       new(args, :matrix)

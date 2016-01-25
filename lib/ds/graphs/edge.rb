@@ -1,4 +1,5 @@
 module DS
+  # Class implements graph edge
   class Edge
     attr_accessor :from, :to, :weight
 

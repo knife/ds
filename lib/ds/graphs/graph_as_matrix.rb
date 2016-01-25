@@ -1,4 +1,5 @@
 module DS
+  # Graph implemented as Matrix
   class GraphAsMatrix
     def initialize(edges)
       @store = Array2D.new
@@ -35,7 +36,7 @@ module DS
       v = @map.index(v)
 
       vc.each do |i|
-        n << vertexes[i] if @store[v, i] > 0
+        n << vertexes[i] if connected?(v, i)
       end
       n
     end
@@ -52,7 +53,7 @@ module DS
     def get_edge(x, y)
       s = @map.index x
       t = @map.index y
-      Edge.new(x, y, @store[s, t]) if @store[s, t] > 0
+      Edge.new(x, y, @store[s, t]) if connected?(s, t)
     end
 
     # Checks if two elements are connected.
@@ -66,12 +67,10 @@ module DS
     # edges, :out - outcoming edges, :all - incoming and outcoming edges.
     def degree(x, direction = :all)
       x = @map.index(x)
-      r = {}
-      r[:in] = 0
-      r[:out] = 0
+      r = Hash.new(0)
       vc.each do |i|
-        r[:in] += 1 if @store[i, x] && @store[i, x] > 0
-        r[:out] += 1 if @store[x, i] && @store[x, i] > 0
+        r[:in] += 1 if connected?(i, x)
+        r[:out] += 1 if connected?(x, i)
       end
       r[:all] = r[:in] + r[:out]
 
@@ -87,9 +86,15 @@ module DS
     def each_edge
       vc.each do |v0|
         (0...v0).each do |v1|
-          yield Edge.new(vertexes[v0], vertexes[v1], @store[v0, v1]) if @store[v0, v1] > 0
+          yield Edge.new(vertexes[v0], vertexes[v1], @store[v0, v1]) if connected?(v0, v1)
         end
       end
+    end
+
+    private
+
+    def connected?(x, y)
+      @store[x, y] > 0
     end
   end
 end

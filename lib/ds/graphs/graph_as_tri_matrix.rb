@@ -1,4 +1,5 @@
 module DS
+  # Graph implemented as Triangular Matrix
   class GraphAsTriMatrix < GraphAsMatrix
     def initialize(edges)
       @store = TriMatrix.new(0)
