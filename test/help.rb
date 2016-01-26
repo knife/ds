@@ -1,5 +1,3 @@
-gem 'minitest'
-
 if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start do
