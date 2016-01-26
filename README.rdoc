@@ -8,7 +8,7 @@ The DS gem supports the folowing data structures:
 * Stacks
   * Stack
 * Queues
-  * Queue
+  * SimpleQueue
   * PriorityQueue
 * Lists
   * List
@@ -49,7 +49,7 @@ The DS gem supports the folowing data structures:
 Pair is simple key-value data structure.
 
 Creating new Pair
-  p = Pair.new(3,9)
+  p = Pair.new(3, 9)
 
 Accessors defined on Pair object:
 
@@ -98,14 +98,14 @@ Which means that first element added to the queue will be the first one to be re
 More: {Queue}[http://en.wikipedia.org/wiki/Queue_(data_structure)]
 
 
-==== Queue
+==== SimpleQueue
 
-Creating new Queue (implemented as Array).  
-  q = Queue.new
+Creating new SimpleQueue (implemented as Array).  
+  q = SimpleQueue.new
 
-Creating new Queue (implemented as List)
-  q1 = Queue.create
-  q1 = Queue.new(:list)
+Creating new SimpleQueue (implemented as List)
+  q1 = SimpleQueue.create
+  q1 = SimpleQueue.new(:list)
 
 The following methods are available on a Queue:
 
@@ -135,6 +135,9 @@ Creating new Priority Queue (implemented as BinaryHeap)
   
   q = PriorityQueue.new
 
+To add new element to priority queue use #push method:
+  q.push(value, priority)
+
 Examples:
   q.push(:important, 3)
   q.push(:very_important, 5)
@@ -147,7 +150,6 @@ Examples:
   q.peek  #=> :nevermind
 
 
-
 === Lists
 
 === List
@@ -156,7 +158,7 @@ List is an ordered collection of values. Each element of list has pointer to the
 element (last element points to nil).
 More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 
-Creating new List
+Creating new List (double linked)
   l = List.new
   l.append(2)
 or 
@@ -207,11 +209,11 @@ Other operations
 
 ==== Ring
 
-Ring is a List where the last element(head) points to the first element(tail).
+Ring is a List where the last element(tail) points to the first element(head).
 More: {Ring}[http://en.wikipedia.org/wiki/Ring_(data_structure)]
 
 Creating new Ring
-  ring = Ring.from_array([1,2,3,4,5,6,7])
+  ring = Ring.from_array([1, 2, 3, 4, 5, 6, 7])
 
 Examples:
   ring.looped? #=> true
@@ -253,7 +255,7 @@ Other methods
 * mirror!
 
 Enumerable Module is included.
-  t.map{ |node| node.data } #=> [2,5,8,9,4,10,3]
+  t.map { |node| node.data } #=> [2, 5, 8, 9, 4, 10, 3]
 
 
 ==== Binary Tree
@@ -263,11 +265,11 @@ More: {BinaryTree}[http://en.wikipedia.org/wiki/Binary_tree]
 
 Building tree
   bin_tree = BinaryTree.new
-  [2,5,8,9,11,12,14].each{|x| bin_tree.insert(x)} #build complete binary Tree
+  [2, 5, 8, 9, 11, 12, 14].each {|x| bin_tree.insert(x)} #build complete binary Tree
 
 Accessors defined on BinaryTree object:
-  bin_tree.left #=> 5
-  bin_tree.right #=> 8
+  bin_tree.left.data #=> 5
+  bin_tree.right.data #=> 8
 
 
 ==== BinarySearchTree
@@ -278,11 +280,22 @@ BST is Binary Tree which has the following properties:
 * Both the left and right subtrees must also be binary search trees.
 
 Creating
-  bst = BinarySearchTree.from_array([8,1,5,2,7,6,3])
+  bst = BinarySearchTree.from_array([8, 1, 5, 2, 7, 6, 3])
 
 Examples
-  walker = TreeWalker.new(b)
-  walker.traverse(:inorder).must_equal [1,2,3,5,6,7,8]
+  walker = TreeWalker.new(bst)
+  walker.traverse(:inorder).must_equal [1, 2, 3, 5, 6, 7, 8]
+
+==== Red Black Tree
+
+Red-black tree is symbol table data structure. It's very simmilar to hash. But internally
+uses tree (perfect balanced binary tree) and not depends on hash function. Red
+black trees aren't as fast as hashes but supports ordered operation. 
+
+    map = RedBlackTree.new
+    map.insert(:a, 1)
+    map.get(:a) #=> 1
+
 
 ==== Binary Heap
 
@@ -322,13 +335,13 @@ Creating
   trie = Trie.new
   
 Examples
-  trie.insert("thing",true);
+  trie.insert("thing", true);
   trie.find("thing")  # =>  true
 
 
 ==== Traversing Tree 
 
-  b= BinaryTree.new
+  b = BinaryTree.new
   [2,5,8,9,11,12,14].each{|x| b.insert(x)} 
 
 walker = TreeWalker.new(b)
@@ -345,11 +358,10 @@ Iterating in BFS order
 
 
 You can also pass block to traverse method
-  walker.traverse(:inorder){|n| p n.data**2}
+  walker.traverse(:inorder){ |n| n.data**2 }
 
 If you want to change value of tree nodes, use recalculate! method
   walker.recalculate!(b, :preorder, 0){ |x, memo| memo = memo + x.data } 
-
 
 
 === Graphs
@@ -365,10 +377,10 @@ More: {Graph}[http://en.wikipedia.org/wiki/Graph_(data_structure)]
 Creating new Graph
     
   edges = []
-  edges << Edge.new('Lukas','Marc')
-  edges << Edge.new('Lukas','Tom')
-  edges << Edge.new('Marc','Jack')
-  edges << Edge.new('Tom','Marc')
+  edges << Edge.new('Jim','Bob')
+  edges << Edge.new('Jim','Tom')
+  edges << Edge.new('Bob','Jack')
+  edges << Edge.new('Tom','Bob')
 
 New graph implemented as Triangular Matrix
   graph = Graph.create(edges)
@@ -380,12 +392,12 @@ New graph implemented as Matrix
 Examples:
 
   graph.vertex_size #=> 4
-  graph.degree("Marc") #=> 3
-  graph.edge?("Marc","Tom") #=> true
+  graph.degree("Bob") #=> 3
+  graph.edge?("Bob","Tom") #=> true
   graph.edge?("Tom","Jack") #=> false
-  graph.add_edges([Edge.new("Marc","Kate")])
-  graph.remove("Marc","Jack")
-  graph.neighbors('Tom') #=> ["Marc","Lucas"]
+  graph.add_edges([Edge.new("Bob","Kate")])
+  graph.remove("Bob","Jack")
+  graph.neighbors('Tom') #=> ["Bob","Lucas"]
 
 Iterating
   graph.each_edge{|e| p e}
@@ -394,7 +406,7 @@ Iterating
 
 ==== Digraph
 
-Creating Directed Weighted Graph is simple like that:
+Creating Directed Weighted Graph is also very simple:
   
   edges = []
 
@@ -422,8 +434,7 @@ Examples
 Breadth First Search :
   BreadthFirstSearch.new(widgraph).search(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
 
-
-=== Matrixes
+=== Arrays
 
 ==== Array2D
 
@@ -431,12 +442,13 @@ Simple two dimensional array(matrix).
 Array2D extends automatically like simple Array.
 
 Creating
-  discrete_matrix = Array2D.new(2,0)
+  discrete_matrix = Array2D.new(2, 0)
+
+First argument is size of row(or column) and second is default value of matrix.
 
 Examples
   discrete_matrix.to_a  #=> [[0,0],[0,0]]
   discrete_matrix[3,3] #=> 0
-
 
 
 ==== ExpandableArray
@@ -461,17 +473,16 @@ Examples
 
 === Sets
 
-==== OrderedSet
-OrderedSet is a set whose elements are ordered. In opposite to Array duplicates
+==== IndexedSet
+IndexedSet is a set whose elements are indexed. In opposite to Array duplicates
 are not allowed.
 
-Creating new Ordered Set
-  set = OrderedSet.new
+Creating new Indexed Set
+  set = IndexedSet.new
 
 Examples
   set.push(:first)  #=>  0
   set.push(:second) #=> 1
   set.index(:first) #=> 0
   set.to_a #=> [:first, :second]
-
 
