@@ -423,8 +423,6 @@ Breadth First Search :
   BreadthFirstSearch.new(widgraph).search(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
 
 
-
-
 === Matrixes
 
 ==== Array2D

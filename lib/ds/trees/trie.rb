@@ -1,7 +1,9 @@
 module DS
+  # Trie dictionary data structure
   class Trie < Tree
     attr_accessor :alphabet, :root
 
+    # Trie node
     class Node
       def initialize(value = nil)
         @children = []

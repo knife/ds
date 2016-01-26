@@ -3,7 +3,7 @@ module DS
   class GraphAsList
     def initialize(edges)
       @store = []
-      @map = OrderedSet.new # maps objects to matrix indexes.
+      @map = IndexedSet.new # maps objects to matrix indexes.
 
       add_edges(edges)
     end

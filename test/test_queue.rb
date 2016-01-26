@@ -1,9 +1,9 @@
 require 'help'
 
-describe Queue do
-  describe 'Empty Queue' do
+describe SimpleQueue do
+  describe 'empty queue' do
     before do
-      @empty_queue = Queue.new
+      @empty_queue = SimpleQueue.new
     end
 
     it 'should be empty.' do
@@ -15,13 +15,13 @@ describe Queue do
     end
   end
 
-  describe 'Not empty queue' do
+  describe 'not empty queue' do
     before do
-      @queue = DS::Queue.new
+      @queue = SimpleQueue.new
       @queue.enqueue 1
       @queue.enqueue 2
 
-      @queue2 = DS::Queue.create
+      @queue2 = SimpleQueue.create
       @queue2.enqueue 1
       @queue2.enqueue 2
     end
@@ -68,8 +68,8 @@ end
 if ENV['BENCHK']
   describe 'performance Bench' do
     before do
-      @queue = DS::Queue.new
-      @queue2 = DS::Queue.create
+      @queue = SimpleQueue.new
+      @queue2 = SimpleQueue.create
       100_000.times do
         @queue.push 4
         @queue2.push 4

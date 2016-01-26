@@ -1,6 +1,6 @@
 module DS
-  # OrderedSet Class
-  class OrderedSet
+  # IndexedSet Class
+  class IndexedSet
     attr_reader :size
 
     # Creates new Ordered Set.

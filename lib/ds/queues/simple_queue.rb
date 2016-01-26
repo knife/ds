@@ -1,6 +1,6 @@
 module DS
   # Class implements queue data structure.
-  class Queue
+  class SimpleQueue
     # Create new queue.
     # First parameter determines how the queue will be represented internally.
     def initialize(store = :array)

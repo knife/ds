@@ -1,7 +1,7 @@
 require 'help'
 
 describe PriorityQueue do
-  describe 'Empty Priority Queue' do
+  describe 'Empty priority queue' do
     before do
       @empty_queue = PriorityQueue.new
     end
@@ -47,7 +47,7 @@ describe PriorityQueue do
     end
   end
 
-  describe 'Priority Queue with duplications' do
+  describe 'PriorityQueue with duplications' do
     before do
       @dup_queue = PriorityQueue.new
       @dup_queue.enqueue :same_important, 2

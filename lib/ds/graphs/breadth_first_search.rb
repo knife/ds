@@ -8,7 +8,7 @@ class BreadthFirstSearch
     @parents = {}
     @visited = []
     @distance = {}
-    @to_visit = DS::Queue.new
+    @to_visit = SimpleQueue.new
   end
 
   def search(s)

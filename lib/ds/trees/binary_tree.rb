@@ -1,4 +1,5 @@
 module DS
+  # Class implements binary tree
   class BinaryTree < Tree
     # Inserts a new subtree.
     def <<(value)
@@ -37,7 +38,7 @@ module DS
 
     # Inserts new element in BSF order
     def insert(x)
-      q = Queue.new
+      q = SimpleQueue.new
       if @data.nil?
         @data = x
       elsif left.nil?

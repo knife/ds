@@ -1,8 +1,8 @@
 require 'help'
 
-describe 'OrderedSet' do
+describe 'IndexedSet' do
   before do
-    @set = OrderedSet.new
+    @set = IndexedSet.new
     @set.push(:first)
   end
 

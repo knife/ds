@@ -3,7 +3,7 @@ module DS
   class GraphAsTriMatrix < GraphAsMatrix
     def initialize(edges)
       @store = TriMatrix.new(0)
-      @map = OrderedSet.new
+      @map = IndexedSet.new
       add_edges(edges)
     end
 

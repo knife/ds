@@ -7,14 +7,14 @@ require 'ds/arrays/array_2d'
 require 'ds/arrays/tri_matrix'
 require 'ds/arrays/heap_store'
 
-require 'ds/sets/ordered_set'
+require 'ds/sets/indexed_set'
 
 require 'ds/lists/list_element'
 require 'ds/lists/list'
 require 'ds/lists/ring'
 
 require 'ds/stacks/stack'
-require 'ds/queues/queue'
+require 'ds/queues/simple_queue'
 require 'ds/queues/priority_queue'
 
 require 'ds/trees/tree'

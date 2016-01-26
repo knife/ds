@@ -1,4 +1,5 @@
 module DS
+  # Tree class
   class Tree
     include Enumerable
 

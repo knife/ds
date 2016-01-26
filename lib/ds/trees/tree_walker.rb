@@ -1,4 +1,5 @@
 module DS
+  # Tree enumerator
   class TreeWalker
     attr_accessor :visited
     attr_accessor :tree
@@ -38,7 +39,7 @@ module DS
     # Traverses tree in BFS order.
     def traverse_bfs(&block)
       self.action = block if block_given?
-      q = Queue.new
+      q = SimpleQueue.new
       q.push tree
 
       loop do
