@@ -135,6 +135,11 @@ Creating new Priority Queue (implemented as BinaryHeap)
   
   q = PriorityQueue.new
 
+You can also pass block to constructor with custom priority order:
+
+  PriorityQueue.new { |a, b| a < b }
+
+
 To add new element to priority queue use #push method:
   q.push(value, priority)
 
@@ -158,19 +163,19 @@ List is an ordered collection of values. Each element of list has pointer to the
 element (last element points to nil).
 More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 
-Creating new List (double linked)
+Creating new double linked List
   l = List.new
   l.append(2)
 or 
-  list = List.from_array([1,2,3,4])
+  list = List.from_array([1, 2, 3, 4])
 
 Examples:
 
 Simple operation on lists
   list.length #=> 4
-  list.append(5).to_a #=> [1,2,3,4,5] 
-  list.unshift(0).to_a #=> [0,1,2,3,4,5]
-  list.remove(list.head).to_a #=> [1,2,3,4,5]
+  list.append(5).to_a #=> [1, 2, 3, 4, 5] 
+  list.unshift(0).to_a #=> [0, 1, 2, 3, 4, 5]
+  list.remove(list.head).to_a #=> [1, 2, 3, 4, 5]
   list.shift #=> 1
 
 Accessing first and last element
@@ -193,11 +198,11 @@ Checking if given element exists on list
   list.get!(el) #=> raises Exception if not found
 
 Reversing
-  list.reverse!.to_a #=> [5,4,3,1,0]
+  list.reverse!.to_a #=> [5, 4, 3, 1, 0]
 
 Enumerable methods are also available
   
-  list.map{ |e| e.data } #=> [1,2,3,4]
+  list.map{ |e| e.data } #=> [1, 2, 3, 4]
   list.inject(0){ |a, e|  a + e.data } #=> 10
 
 Other operations
@@ -225,7 +230,7 @@ Examples:
 
 ==== Tree
 
-A tree is a data structure consisting of nodes organised as a hierarchy. 
+A tree is a data structure consisting nodes organised as a hierarchy. 
 More: {Tree}[http://en.wikipedia.org/wiki/Tree_(data_structure)]
 
 Building Tree
@@ -247,7 +252,7 @@ Examples:
   t.width #=> 3
   t.leaf_count #=> 4
   
-  t.levels #=> {1=>1,2=>3, 3=>3} 
+  t.levels #=> {1=>1, 2=>3, 3=>3} 
 
 Other methods
 * get_leaves

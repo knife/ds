@@ -1,6 +1,6 @@
 module DS
   # Class implements Stack data structure.
-  # Internaly uses array to store elements.
+  # Internaly uses array or linked list to store elements.
   class Stack
     def initialize(store = nil)
       if store == :list

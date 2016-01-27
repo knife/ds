@@ -65,7 +65,7 @@ describe SimpleQueue do
   end
 end
 
-if ENV['BENCHK']
+if ENV['BENCH']
   describe 'performance Bench' do
     before do
       @queue = SimpleQueue.new

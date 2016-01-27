@@ -93,13 +93,13 @@ if ENV['BENCH']
       end
     end
 
-    bench_performance_constant '#pop should be const operation.', 0.999 do |n|
+    bench_performance_constant 'array #pop should be const op', 0.999 do |n|
       n.times do
         @stack.pop
       end
     end
 
-    bench_performance_constant '#push should be const operation.', 0.999 do |n|
+    bench_performance_constant 'array #push should be const op', 0.999 do |n|
       n.times do
         @stack.push 3
       end
@@ -114,13 +114,13 @@ if ENV['BENCH']
       end
     end
 
-    bench_performance_constant '#pop should be const operation.', 0.999 do |n|
+    bench_performance_constant 'list #pop should be const op', 0.999 do |n|
       n.times do
         @stack.pop
       end
     end
 
-    bench_performance_constant '#push should be const operation.', 0.999 do |n|
+    bench_performance_constant 'list #push should be const op.', 0.999 do |n|
       n.times do
         @stack.push 3
       end

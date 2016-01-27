@@ -47,6 +47,34 @@ describe PriorityQueue do
     end
   end
 
+  describe 'Not empty priority queue with custom order' do
+    before do
+      @queue = PriorityQueue.new{ |a, b| a < b } 
+      @queue.enqueue 'gamma', 'g'
+      @queue.enqueue 'alpha', 'a'
+      @queue.enqueue 'beta', 'b'
+    end
+
+    it 'should not be empty.' do
+      refute @queue.empty?
+      @queue.length.must_equal 3
+    end
+
+    it '#peek should return element with highest priority.' do
+      @queue.peek.must_equal 'alpha'
+    end
+
+    it '#dequeue and #shift should remove element with highest priority.' do
+      x = @queue.dequeue
+      @queue.length.must_equal 2
+      x.must_equal 'alpha'
+      @queue.dequeue.must_equal 'beta'
+      @queue.length.must_equal 1
+    end
+  end
+
+
+
   describe 'PriorityQueue with duplications' do
     before do
       @dup_queue = PriorityQueue.new
