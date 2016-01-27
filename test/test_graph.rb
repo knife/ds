@@ -7,7 +7,7 @@ describe Graph do
     edges << Edge.new('Lukas', 'Tom')
     edges << Edge.new('Marc', 'Jack')
     edges << Edge.new('Tom', 'Marc')
-    @graph = Graph.create(edges)
+    @graph = Graph.new_dense(edges)
   end
 
   it '#vertex_size should return number of vertexes' do

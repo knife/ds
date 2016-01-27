@@ -29,6 +29,10 @@ describe Tree do
     assert @tree.children.last.leaf?
   end
 
+  it '#children returns node child nodes.' do
+    @tree.children.map(&:data).must_equal ([5,8,9])
+  end
+
   it '#get_leaves should return list of tree leaves.' do
     leaves = @tree.get_leaves
     leaves.must_be_kind_of List

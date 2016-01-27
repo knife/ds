@@ -10,7 +10,7 @@ describe Digraph do
       edges << Edge.new('Jack', 'Marc')
       edges << Edge.new('Tom', 'Marc')
 
-      @digraph = Digraph.new(edges, :list)
+      @digraph = Digraph.new(edges)
     end
 
     it '#degree should return vertex degree.' do
@@ -89,7 +89,7 @@ describe Digraph do
       edges << Edge.new(:G, :B, 6)
       edges << Edge.new(:F, :B, 7)
 
-      @wdigraph = Digraph.create(edges)
+      @wdigraph = Digraph.new_dense(edges)
     end
 
     it 'edge should be assigned a weight.' do

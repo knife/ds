@@ -4,10 +4,8 @@ module DS
     # Create new graph from array of edges. Second parameter determines
     # graph internal implementation: :list (Adjency List), :tri_matrix (Triangular
     # Matrix), :matrix (Matrix).
-    def initialize(edges, store = :matrix)
+    def initialize(edges, store = :tri_matrix)
       case store
-      when :list
-        @g = GraphAsList.new(edges)
       when :matrix
         @g = GraphAsMatrix.new(edges)
       when :tri_matrix
@@ -17,7 +15,7 @@ module DS
 
     # Create new graph from array of edges. Internally graph will be represented
     # by Triangular Matrix.
-    def self.create(edges)
+    def self.new_dense(edges)
       new(edges, :tri_matrix)
     end
 
