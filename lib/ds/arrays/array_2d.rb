@@ -30,5 +30,9 @@ module DS
     def flatten
       @store.flatten
     end
+
+    def size
+      @store.size
+    end
   end
 end
