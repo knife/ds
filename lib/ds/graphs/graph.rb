@@ -47,7 +47,7 @@ module DS
 
     # Returns all neighbors for given vertex.
     def neighbors(x)
-      @g.neighbors(index(x)).map{ |i| vertexes[i] }
+      @g.neighbors(index(x)).map { |i| vertexes[i] }
     end
 
     # Returns vertex degree.
@@ -62,7 +62,7 @@ module DS
 
     # Returns Edge(x,y) if exist.
     def get_edge(x, y)
-      return nil unless edge?(x,y)
+      return nil unless edge?(x, y)
       w = @g.get_edge(index(x), index(y))
       Edge.new(x, y, w) if w
     end
@@ -85,7 +85,7 @@ module DS
     end
 
     # Edge iterator
-    def each_edge &block
+    def each_edge(&block)
       @g.each_edge(vertexes, &block)
     end
 

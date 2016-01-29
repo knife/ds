@@ -1,5 +1,7 @@
 = DS - Data Structures
 
+[![Build Status](https://travis-ci.org/knife/ds.svg?branch=master)](https://travis-ci.org/knife/ds)
+
 DS provides some common data structures not implement in Ruby natively.
 
 The DS gem supports the folowing data structures:

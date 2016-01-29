@@ -49,7 +49,7 @@ describe PriorityQueue do
 
   describe 'Not empty priority queue with custom order' do
     before do
-      @queue = PriorityQueue.new{ |a, b| a < b } 
+      @queue = PriorityQueue.new { |a, b| a < b }
       @queue.enqueue 'gamma', 'g'
       @queue.enqueue 'alpha', 'a'
       @queue.enqueue 'beta', 'b'
@@ -72,8 +72,6 @@ describe PriorityQueue do
       @queue.length.must_equal 1
     end
   end
-
-
 
   describe 'PriorityQueue with duplications' do
     before do

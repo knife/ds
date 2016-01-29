@@ -1,4 +1,5 @@
 module DS
+  # Bag for Edge objects
   class EdgeBag
     include Enumerable
     def initialize
@@ -16,7 +17,7 @@ module DS
     def get(x)
       @store.find { |edge| edge[:v] == x }
     end
-    
+
     def each(&block)
       @store.each(&block)
     end
@@ -26,4 +27,3 @@ module DS
     end
   end
 end
-

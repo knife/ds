@@ -30,7 +30,7 @@ describe Tree do
   end
 
   it '#children returns node child nodes.' do
-    @tree.children.map(&:data).must_equal ([5,8,9])
+    @tree.children.map(&:data).must_equal([5, 8, 9])
   end
 
   it '#get_leaves should return list of tree leaves.' do

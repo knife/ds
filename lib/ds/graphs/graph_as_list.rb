@@ -49,7 +49,7 @@ module DS
         r[:out] += 1 if connected?(x, i)
       end
       r[:all] = r[:in] + r[:out]
-      return r[direction] / 2 if undirected 
+      return r[direction] / 2 if undirected
       r[direction]
     end
 

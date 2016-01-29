@@ -27,7 +27,7 @@ module DS
     end
 
     def size
-      @max 
+      @max
     end
   end
 end
