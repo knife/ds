@@ -371,13 +371,12 @@ If you want to change value of tree nodes, use recalculate! method
 
 === Graphs
 
-A graph data structure consists of a finite (and possibly mutable) set of
-ordered pairs, called edges or arcs, of certain entities called nodes or
-vertices.
+Graph consist of vertices connected with edges. There are many types of graphs:
+sparse, dense, directed, undirected, weighted and more...
 More: {Graph}[http://en.wikipedia.org/wiki/Graph_(data_structure)]
 
 
-====Graph
+==== Graph
 
 Creating new Graph
     
@@ -387,57 +386,64 @@ Creating new Graph
   edges << Edge.new('Bob','Jack')
   edges << Edge.new('Tom','Bob')
 
-New graph implemented as Triangular Matrix
-  graph = Graph.create(edges)
+New undirected graph (implemented as adjency list)
+  graph = Graph.new(edges)
 
-New graph implemented as Matrix
-  graph = Graph.new(edges,:matrix)
+New undirected dense graph (implemented as triangular matrix)
+  graph = Graph.create(edges)
+or
+  graph = Graph.new(edges, :tri_matrix)
 
 
 Examples:
-
   graph.vertex_size #=> 4
   graph.degree("Bob") #=> 3
-  graph.edge?("Bob","Tom") #=> true
-  graph.edge?("Tom","Jack") #=> false
-  graph.add_edges([Edge.new("Bob","Kate")])
-  graph.remove("Bob","Jack")
-  graph.neighbors('Tom') #=> ["Bob","Lucas"]
+  graph.edge?("Bob", "Tom") #=> true
+  graph.edge?("Tom", "Jack") #=> false
+  graph.add_edge(Edge.new("Bob", "Kate"))
+  graph.remove("Bob", "Jack")
+  graph.neighbors('Tom') #=> ["Bob", "Jim"]
 
 Iterating
-  graph.each_edge{|e| p e}
+  graph.each_edge{ |e| p e }
   graph.each_vertex{ |v| p v }
 
 
 ==== Digraph
 
-Creating Directed Weighted Graph is also very simple:
+Directed Weighted Graph
   
   edges = []
+  edges << Edge.new(:A, :C, 5)
+  edges << Edge.new(:A, :D, 3)
+  edges << Edge.new(:A, :G, 14)
+  edges << Edge.new(:C, :E, 3)
+  edges << Edge.new(:C, :F, 2)
+  edges << Edge.new(:D, :C, 11)
+  edges << Edge.new(:D, :E, 7)
+  edges << Edge.new(:D, :G, 6)
+  edges << Edge.new(:G, :E, 7)
+  edges << Edge.new(:E, :B, 5)
+  edges << Edge.new(:G, :B, 6)
+  edges << Edge.new(:F, :B, 7)
 
-  edges << Edge.new(:A,:C,5)
-  edges << Edge.new(:A,:D,3)
-  edges << Edge.new(:A,:G,14)
-  edges << Edge.new(:C,:E,3)
-  edges << Edge.new(:C,:F,2)
-  edges << Edge.new(:D,:C,11)
-  edges << Edge.new(:D,:E,7)
-  edges << Edge.new(:D,:G,6)
-  edges << Edge.new(:G,:E,7)
-  edges << Edge.new(:E,:B,5)
-  edges << Edge.new(:G,:B,6)
-  edges << Edge.new(:F,:B,7)
 
+New directed graph (implemented as adjency list)
+  wdigraph = Digraph.new(edges)
+
+New directed dense graph (implemented as matrix)
   wdigraph = Digraph.create(edges)
+or
+  wdigraph = Digraph.new(edges, :matrix)
 
 Examples
-  wdigraph.get_edge(:D,:C).weight #=> 11
+  wdigraph.get_edge(:D, :C).weight #=> 11
   wdigraph.degree(:E) #=> 4
   wdigraph.in_degree(:E) #=> 3
   wdigraph.out_degree(:E) #=> 1
 
-Breadth First Search :
-  BreadthFirstSearch.new(widgraph).search(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
+Breadth First Search:
+  BreadthFirstSearch.new(wdigraph).search(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
 
 === Arrays
 

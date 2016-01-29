@@ -26,6 +26,7 @@ require 'ds/trees/red_black_tree'
 require 'ds/trees/trie'
 
 require 'ds/graphs/edge'
+require 'ds/graphs/edge_bag'
 require 'ds/graphs/graph_as_matrix'
 require 'ds/graphs/graph_as_tri_matrix'
 require 'ds/graphs/graph_as_list'

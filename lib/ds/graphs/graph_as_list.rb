@@ -2,25 +2,25 @@ module DS
   # Graph implemented as Adjency List
   class GraphAsList
     attr_accessor :undirected
-    def initialize(opts={})
+    def initialize(opts = {})
       @store = []
       @undirected = opts[:undirected] || false
     end
 
     # Adds new edges to graph.
     def add(x, y, weight)
-      @store[x] ||= []
-      @store[x].push v: y, weight: weight
+      @store[x] ||= EdgeBag.new
+      @store[x].add(y, weight)
       if undirected
-        @store[y] ||= []
-        @store[y].push v: x, weight: weight
+        @store[y] ||= EdgeBag.new
+        @store[y].add(x, weight)
       end
     end
 
     # Removes conection between vertex x and y.
     def remove(x, y)
-      @store[x].delete_if { |edge| edge[:v] == y }
-      @store[y].delete_if { |edge| edge[:v] == x } if undirected
+      @store[x].remove(y)
+      @store[y].remove(x) if undirected
     end
 
     # Checks if two elements are connected.
@@ -30,7 +30,7 @@ module DS
 
     # Returns Edge(x,y) if exist.
     def get_edge(x, y)
-      edge = connected?(x, y)
+      edge = get(x, y)
       edge[:weight] if edge
     end
 
@@ -57,7 +57,7 @@ module DS
       @store.each_with_index do |list, i|
         list.each do |vertex|
           j = vertex[:v]
-          next if i < j and undirected
+          next if i > j && undirected
           w = get_edge(i, j)
           yield Edge.new(vertexes[i], vertexes[j], w) if w
         end
@@ -66,8 +66,12 @@ module DS
 
     private
 
+    def get(x, y)
+      @store[x] && @store[x].get(y)
+    end
+
     def connected?(x, y)
-      @store[x] && @store[x].find { |edge| edge[:v] == y }
+      !!get(x, y)
     end
   end
 end

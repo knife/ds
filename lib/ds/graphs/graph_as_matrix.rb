@@ -48,7 +48,8 @@ module DS
       size = vertexes.size
       (0...size).each do |v0|
         (0...size).each do |v1|
-          yield Edge.new(vertexes[v0], vertexes[v1], @store[v0, v1]) if connected?(v0, v1)
+          weight = @store[v0, v1]
+          yield Edge.new(vertexes[v0], vertexes[v1], weight) if weight
         end
       end
     end
