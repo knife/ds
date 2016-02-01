@@ -10,11 +10,7 @@ module DS
 
     # Returns left subtree
     def left
-      if @children.empty?
-        nil
-      else
-        @children[0]
-      end
+      @children[0]
     end
 
     # Sets left subtree
@@ -24,11 +20,7 @@ module DS
 
     # Returns right subtree
     def right
-      if @children.empty?
-        nil
-      else
-        @children[1]
-      end
+      @children[1]
     end
 
     # Sets right subtree
@@ -48,20 +40,24 @@ module DS
       else
         q.push left
         q.push right
-        loop do
-          node = q.shift
-          if node.left.nil?
-            node.insert(x)
-            break
-          else
-            q.push node.left
-          end
-          if node.right.nil?
-            node.insert(x)
-            break
-          else
-            q.push node.right
-          end
+        insert_next(q, x)
+      end
+    end
+
+    def insert_next(q, x)
+      loop do
+        node = q.shift
+        if node.left.nil?
+          node.insert(x)
+          break
+        else
+          q.push node.left
+        end
+        if node.right.nil?
+          node.insert(x)
+          break
+        else
+          q.push node.right
         end
       end
     end

@@ -11,23 +11,23 @@ module DS
     # Returns element at index. If index is greater than size of array then
     # elements from size to index are filled with extender.
     def [](x)
-      if x >= size
-        (size..x).each do |i|
-          self[i] = @extender
-        end
-      end
+      expand(size, x) if x >= size
       super(x)
     end
 
     # Sets the element at index. If index is greater than size of array then
     # elements from size to index are filled with extender.
     def []=(x, v)
-      max = size
+      old_size = size
       super(x, v)
-      if size - max > 1
-        (max..size - 2).each do |i|
-          self[i] = @extender
-        end
+      expand(old_size, size - 2) if size - old_size > 1
+    end
+
+    private
+
+    def expand(from, to)
+      (from..to).each do |i|
+        self[i] = @extender
       end
     end
   end

@@ -84,10 +84,9 @@ module DS
 
     # Mirrors tree.
     def mirror!(tree = self)
-      unless tree.leaf?
-        tree.children.reverse!
-        tree.children.each { |t| mirror!(t) }
-      end
+      return if tree.leaf?
+      tree.children.reverse!
+      tree.children.each { |t| mirror!(t) }
     end
 
     # Checks if tree is isometric to another tree.

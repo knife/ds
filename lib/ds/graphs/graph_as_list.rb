@@ -72,7 +72,7 @@ module DS
     end
 
     def connected?(x, y)
-      !!get(x, y)
+      !get(x, y).nil?
     end
   end
 end
