@@ -30,7 +30,7 @@ The DS gem supports the folowing data structures:
   * ExpandableArray
   * TriMatrix
 * Sets
-  * OrderedSet
+  * IndexedSet
 
 
 == Instalation
