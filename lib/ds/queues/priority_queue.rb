@@ -24,11 +24,7 @@ module DS
     # Removes element with highest priority from queue .
     def dequeue
       x = @store.shift
-      if x
-        x.value
-      else
-        x
-      end
+      x ? x.value : nil
     end
 
     alias_method :shift, :dequeue

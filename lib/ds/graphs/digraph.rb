@@ -6,7 +6,6 @@ module DS
       case store
       when :list
         @g = GraphAsList.new
-        @g.undirected = false
       when :matrix
         @g = GraphAsMatrix.new
       end

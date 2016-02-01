@@ -10,6 +10,20 @@ module DS
       tree
     end
 
+    def get(data, node = self)
+      x = node
+      while x
+        case data <=> x.data
+        when -1
+          x = x.left
+        when 1
+          x = x.right
+        else
+          return x.data
+        end
+      end
+    end
+
     # Inserts new element.
     def insert(x)
       if x > @data && right.nil?

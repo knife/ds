@@ -3,7 +3,7 @@ module DS
   class IndexedSet
     attr_reader :size
 
-    # Creates new Ordered Set.
+    # Creates new Indexed Set.
     def initialize
       @size = 0
       @store = {}

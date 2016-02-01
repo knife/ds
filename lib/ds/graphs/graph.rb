@@ -8,7 +8,7 @@ module DS
       @map = IndexedSet.new
       case store
       when :list
-        @g = GraphAsList.new(undirected: true)
+        @g = GraphAsList.new(directed: false)
       when :matrix
         @g = GraphAsMatrix.new
       when :tri_matrix

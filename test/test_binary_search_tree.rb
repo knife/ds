@@ -21,6 +21,19 @@ describe BinarySearchTree do
     assert BinarySearchTree.valid?(@bst)
   end
 
+
+  it '#get should return element if it exists in tree.' do
+    @bst.get(6).must_equal(6)
+    refute @bst.get(9)
+  end
+
+
+  it '#insert should add element to tree.' do
+    @bst.insert(11)
+    @bst.get(11).must_equal(11)
+  end
+
+
   it '#from_array should create new valid BinarySearchTree.' do
     b = BinarySearchTree.from_array([8, 1, 5, 2, 7, 6, 3])
     assert BinarySearchTree.valid?(b)
