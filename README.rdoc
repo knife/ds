@@ -1,10 +1,10 @@
-= DS - Data Structures
+= DS - Data Structures for Ruby
 
 {<img src="https://travis-ci.org/knife/ds.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/knife/ds]
 
-DS provides some common data structures not implement in Ruby natively.
+DS provides some common data structures not implemented in Ruby natively.
 
-The DS gem supports the folowing data structures:
+Data structures included in DS gem:
 
 * Pair
 * Stacks
@@ -14,7 +14,6 @@ The DS gem supports the folowing data structures:
   * PriorityQueue
 * Lists
   * List
-  * Ring
 * Trees
   * Tree
   * BinaryTree
@@ -34,7 +33,7 @@ The DS gem supports the folowing data structures:
 
 
 == Instalation
-  
+
   gem install ds
 
 == Usage
@@ -57,6 +56,7 @@ Accessors defined on Pair object:
 
   p.key #=> 3
   p.value #=> 9
+  p.value = 27
 
   p.first #=> 3
   p.second #=> 9
@@ -67,19 +67,19 @@ Accessors defined on Pair object:
 Stack is very simple data structure which allows access only to the top element.
 More: {Stack}[http://en.wikipedia.org/wiki/Stack_(abstract_data_type)]
 
-Creating new Stack (implemented as Array).  
+Creating new Stack (implemented as Array).
   stack = Stack.new
 
-Creating new Stack (implemented as List).  
+Creating new Stack (implemented as List).
   stack = Stack.create
 
 The following methods are available on a Stack:
 
 * push
 * pop
+* peek
 * size
 * empty?
-* size
 
 Examples:
   stack.empty? #=> true
@@ -92,17 +92,16 @@ Examples:
   stack.size #=> 1
 
 
-
 === Queues
 
-Queues is First-In-First-Out (FIFO) data structure.
+Queue is First-In-First-Out (FIFO) data structure.
 Which means that first element added to the queue will be the first one to be removed.
 More: {Queue}[http://en.wikipedia.org/wiki/Queue_(data_structure)]
 
 
 ==== SimpleQueue
 
-Creating new SimpleQueue (implemented as Array).  
+Creating new SimpleQueue (implemented as Array).
   q = SimpleQueue.new
 
 Creating new SimpleQueue (implemented as List)
@@ -114,7 +113,7 @@ The following methods are available on a Queue:
 * enqueue(push)
 * dequeue(shift)
 * peek
-* length
+* length(size)
 * empty?
 
 Examples:
@@ -128,22 +127,26 @@ Examples:
   q.empty? #=> true
 
 
-==== Priority Queue 
+==== Priority Queue
 
 In opposite to simple Queue, in PriorityQueue each element is associated with a "priority".
 More: {Priority Queue}[http://en.wikipedia.org/wiki/Priority_queue]
 
 Creating new Priority Queue (implemented as BinaryHeap)
-  
+
   q = PriorityQueue.new
 
-You can also pass block to constructor with custom priority order:
+By default higher value means higher priority but you can define own priority
+order by passing block to constructor:
 
   PriorityQueue.new { |a, b| a < b }
 
 
-To add new element to priority queue use #push method:
+To add new element to priority queue use #unshift or #push method:
   q.push(value, priority)
+
+To remove element from priority queue use #shift or #pop method. The interface
+of PriorityQueue is the same as SimpleQueue.
 
 Examples:
   q.push(:important, 3)
@@ -168,14 +171,14 @@ More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 Creating new double linked List
   l = List.new
   l.append(2)
-or 
-  list = List.from_array([1, 2, 3, 4])
+or
+  list = List.new(1, 2, 3, 4)
 
 Examples:
 
 Simple operation on lists
   list.length #=> 4
-  list.append(5).to_a #=> [1, 2, 3, 4, 5] 
+  list.append(5).to_a #=> [1, 2, 3, 4, 5]
   list.unshift(0).to_a #=> [0, 1, 2, 3, 4, 5]
   list.remove(list.head).to_a #=> [1, 2, 3, 4, 5]
   list.shift #=> 1
@@ -192,7 +195,7 @@ Accessing by index
   list.at(2) #=> 2
 
 Modifying elements on given index:
-  list[2] = 8 
+  list[2] = 8
   list[2] #=> 8
 
 Checking if given element exists on list
@@ -203,7 +206,7 @@ Reversing
   list.reverse!.to_a #=> [5, 4, 3, 1, 0]
 
 Enumerable methods are also available
-  
+
   list.map{ |e| e.data } #=> [1, 2, 3, 4]
   list.inject(0){ |a, e|  a + e.data } #=> 10
 
@@ -212,21 +215,7 @@ Other operations
 * insert_before
 * insert_after
 * zip?
-
-
-==== Ring
-
-Ring is a List where the last element(tail) points to the first element(head).
-More: {Ring}[http://en.wikipedia.org/wiki/Ring_(data_structure)]
-
-Creating new Ring
-  ring = Ring.from_array([1, 2, 3, 4, 5, 6, 7])
-
-Examples:
-  ring.looped? #=> true
-  ring.cycle_size #=> 7
- 
-
+* to_s
 
 === Trees
 

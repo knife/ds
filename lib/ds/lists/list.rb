@@ -8,26 +8,11 @@ module DS
     attr_accessor :head, :tail
 
     # Creates new list.
-    def initialize
+    def initialize(*arr)
       @size = 0
       @head = nil
       @tail = @head
-    end
-
-    # Creates list from array.
-    def self.from_array(arr)
-      list = new
-      list = list.create_first(arr.shift)
-      arr.each { |e| list.append(e) }
-      list
-    end
-
-    # Creates first element in list.
-    def create_first(x)
-      first = unshift(x)
-      self.head = first
-      self.tail = first
-      self
+      from_array(arr) if arr.any?
     end
 
     # Appends new element to list. Returns list tail
@@ -270,6 +255,19 @@ module DS
     end
 
     private
+
+    def from_array(arr)
+      create_first(arr.shift)
+      arr.each { |e| append(e) }
+    end
+
+    # Creates first element in list.
+    def create_first(x)
+      first = unshift(x)
+      self.head = first
+      self.tail = first
+      self
+    end
 
     def increment_size
       @size += 1

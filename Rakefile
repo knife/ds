@@ -3,7 +3,14 @@ require 'rake/testtask'
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
-  t.test_files = FileList['test/test*.rb', 'test/performance/*test.rb']
+  t.test_files = FileList['test/test*.rb']
+  t.verbose = true
+end
+
+Rake::TestTask.new do |t|
+  t.name = 'test:performance'
+  t.libs << 'test'
+  t.test_files = FileList['test/performance/*test.rb']
   t.verbose = true
 end
 

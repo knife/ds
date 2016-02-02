@@ -2,11 +2,11 @@ require 'help'
 
 describe List do
   before do
-    @list = List.from_array([1, 2, 3, 4])
-    @list2 = List.from_array([4, 5, 7])
+    @list = List.new(1, 2, 3, 4)
+    @list2 = List.new(4, 5, 7)
     @empty_list = List.new
-    @numbers = List.from_array((1..10).to_a)
-    @even_numbers = List.from_array([2, 4, 6, 8, 10])
+    @numbers = List.new(*(1..10).to_a)
+    @even_numbers = List.new(2, 4, 6, 8, 10)
   end
 
   describe 'Empty list' do
@@ -190,7 +190,7 @@ describe List do
   describe 'Zipped list' do
     before do
       last = @list.tail
-      @zipped = List.from_array([1, 2])
+      @zipped = List.new(1, 2)
       @zipped.tail = last
     end
 

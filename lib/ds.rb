@@ -11,7 +11,6 @@ require 'ds/sets/indexed_set'
 
 require 'ds/lists/list_element'
 require 'ds/lists/list'
-require 'ds/lists/ring'
 
 require 'ds/stacks/stack'
 require 'ds/queues/simple_queue'
