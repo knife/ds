@@ -44,6 +44,8 @@ module DS
       end
     end
 
+    private
+
     def insert_next(q, x)
       loop do
         node = q.shift
