@@ -6,16 +6,22 @@ module DS
 
     # Red Black Tree Node
     class Node
-      attr_accessor :color, :right, :left, :value, :key
+      attr_accessor :color, :right, :left, :data, :key
 
       def initialize(key, value, color)
         @key = key
-        @value = value
+        @data = value
         @color = color
         @left = nil
         @right = nil
       end
+
+      def children
+        [@left, @right]
+      end
     end
+
+    include Enumerable
 
     attr_accessor :root
     attr_reader :size
@@ -23,6 +29,7 @@ module DS
     def initialize
       @root = nil
       @size = 0
+      @iterator = TreeWalker.new(self.root)
     end
 
     def insert(key, value)
@@ -39,9 +46,14 @@ module DS
         when 1
           x = x.right
         else
-          return x.value
+          return x.data
         end
       end
+    end
+
+    def each
+      iterator = TreeWalker.new(root)
+      iterator.traverse(:inorder) { |t| yield t }
     end
 
     private
@@ -58,7 +70,7 @@ module DS
       when 1
         n.right = put(n.right, key, value)
       else
-        n.value = value
+        n.data = value
       end
 
       balance(n)

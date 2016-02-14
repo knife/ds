@@ -104,8 +104,6 @@ module DS
         visit_node(node)
         visit_children(node)
       when :inorder
-        fail ArgumentError unless node.is_a? BinaryTree
-
         walk(node.left)
         visit_node(node)
         walk(node.right)

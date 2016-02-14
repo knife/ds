@@ -20,4 +20,11 @@ describe Tree do
   it '#size returns tree size' do
     @tree.size.must_equal(2)
   end
+
+  it '#map return nodes in order' do
+    @tree.insert(:e, 3)
+    @tree.insert(:d, 3)
+    @tree.insert(:c, 3)
+    @tree.map { |n| n.key }.must_equal [:a, :b, :c, :d, :e]
+  end
 end
