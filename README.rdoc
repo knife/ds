@@ -2,7 +2,7 @@
 
 {<img src="https://travis-ci.org/knife/ds.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/knife/ds]
 
-DS provides some common data structures not implemented in Ruby natively.
+DS provides some popular data structures not implemented in Ruby natively.
 
 Data structures included in DS gem:
 
@@ -18,12 +18,8 @@ Data structures included in DS gem:
   * Tree
   * BinaryTree
   * BinaryHeap
-  * BinarySearchTree
   * Trie
   * RedBlackTree
-* Graphs
-  * Graph
-  * Digraph
 * Matrixes
   * Array2D
   * ExpandableArray
@@ -165,10 +161,11 @@ Examples:
 === List
 
 List is an ordered collection of values. Each element of list has pointer to the next
-element (last element points to nil).
+element (last element points to nil). This implementation uses doubly linked
+list.
 More: {List}[http://en.wikipedia.org/wiki/List_(data_structure)]
 
-Creating new double linked List
+Creating new List
   l = List.new
   l.append(2)
 or
@@ -242,7 +239,7 @@ Examples:
   t.height #=> 3
   t.width #=> 3
   t.leaf_count #=> 4
-  
+
   t.levels #=> {1=>1, 2=>3, 3=>3} 
 
 Other methods
@@ -268,30 +265,15 @@ Accessors defined on BinaryTree object:
   bin_tree.right.data #=> 8
 
 
-==== BinarySearchTree
-
-BST is Binary Tree which has the following properties:
-* The left subtree of a node contains only nodes with keys less than the node's key.
-* The right subtree of a node contains only nodes with keys greater than the node's key.
-* Both the left and right subtrees must also be binary search trees.
-
-Creating
-  bst = BinarySearchTree.from_array([8, 1, 5, 2, 7, 6, 3])
-
-Examples
-  walker = TreeWalker.new(bst)
-  walker.traverse(:inorder).must_equal [1, 2, 3, 5, 6, 7, 8]
-
 ==== Red Black Tree
 
 Red-black tree is symbol table data structure. It's very simmilar to hash. But internally
 uses tree (perfect balanced binary tree) and not depends on hash function. Red
-black trees aren't as fast as hashes but supports ordered operation. 
+black trees aren't as fast as hashes but supports ordered operation.
 
     map = RedBlackTree.new
     map.insert(:a, 1)
     map.get(:a) #=> 1
-
 
 ==== Binary Heap
 
@@ -301,7 +283,7 @@ More: {Binary Heap}[http://en.wikipedia.org/wiki/Binary_heap]
 
 Creating
 
-Maximum Binary Heap 
+Maximum Binary Heap
   max_heap = BinaryHeap.new(9, 8, 4, 5, 11, 6)
 or
   max_heap = BinaryHeap.max(9, 8, 4, 5, 11, 6)
@@ -322,27 +304,27 @@ Examples
   min_heap.shift #returns min element (4)
 
 
-==== Trie 
+==== Trie
 
 Trie is an ordered tree data structure which allows very quick search: O(k), where k is word length.
 More: {Trie}[http://en.wikipedia.org/wiki/Trie]
 
-Creating 
+Creating
   trie = Trie.new
-  
+
 Examples
   trie.insert("thing", true);
   trie.find("thing")  # =>  true
 
 
-==== Traversing Tree 
+==== Traversing Tree
 
   b = BinaryTree.new
   [2,5,8,9,11,12,14].each{|x| b.insert(x)} 
 
 walker = TreeWalker.new(b)
 
-Iterating in postorder  
+Iterating in postorder
   walker.traverse(:postorder) #=> [9,11,5,12,14,8,2]
 Iterating in inorder
   walker.traverse(:inorder) #=> [9,5,11,2,12,8,14] 
@@ -357,90 +339,14 @@ You can also pass block to traverse method
   walker.traverse(:inorder){ |n| n.data**2 }
 
 If you want to change value of tree nodes, use recalculate! method
-  walker.recalculate!(b, :preorder, 0){ |x, memo| memo = memo + x.data } 
+  walker.recalculate!(b, :preorder, 0){ |x, memo| memo = memo + x.data }
 
-
-=== Graphs
-
-Graph consist of vertices connected with edges. There are many types of graphs:
-sparse, dense, directed, undirected, weighted and more...
-More: {Graph}[http://en.wikipedia.org/wiki/Graph_(data_structure)]
-
-
-==== Graph
-
-Creating new Graph
-    
-  edges = []
-  edges << Edge.new('Jim','Bob')
-  edges << Edge.new('Jim','Tom')
-  edges << Edge.new('Bob','Jack')
-  edges << Edge.new('Tom','Bob')
-
-New undirected graph (implemented as adjency list)
-  graph = Graph.new(edges)
-
-New undirected dense graph (implemented as triangular matrix)
-  graph = Graph.create(edges)
-or
-  graph = Graph.new(edges, :tri_matrix)
-
-
-Examples:
-  graph.vertex_size #=> 4
-  graph.degree("Bob") #=> 3
-  graph.edge?("Bob", "Tom") #=> true
-  graph.edge?("Tom", "Jack") #=> false
-  graph.add_edge(Edge.new("Bob", "Kate"))
-  graph.remove("Bob", "Jack")
-  graph.neighbors('Tom') #=> ["Bob", "Jim"]
-
-Iterating
-  graph.each_edge{ |e| p e }
-  graph.each_vertex{ |v| p v }
-
-
-==== Digraph
-
-Directed Weighted Graph
-  
-  edges = []
-  edges << Edge.new(:A, :C, 5)
-  edges << Edge.new(:A, :D, 3)
-  edges << Edge.new(:A, :G, 14)
-  edges << Edge.new(:C, :E, 3)
-  edges << Edge.new(:C, :F, 2)
-  edges << Edge.new(:D, :C, 11)
-  edges << Edge.new(:D, :E, 7)
-  edges << Edge.new(:D, :G, 6)
-  edges << Edge.new(:G, :E, 7)
-  edges << Edge.new(:E, :B, 5)
-  edges << Edge.new(:G, :B, 6)
-  edges << Edge.new(:F, :B, 7)
-
-
-New directed graph (implemented as adjency list)
-  wdigraph = Digraph.new(edges)
-
-New directed dense graph (implemented as matrix)
-  wdigraph = Digraph.create(edges)
-or
-  wdigraph = Digraph.new(edges, :matrix)
-
-Examples
-  wdigraph.get_edge(:D, :C).weight #=> 11
-  wdigraph.degree(:E) #=> 4
-  wdigraph.in_degree(:E) #=> 3
-  wdigraph.out_degree(:E) #=> 1
-
-Breadth First Search:
-  BreadthFirstSearch.new(wdigraph).search(:A) #=> [:A, :C, :D, :G, :E, :F, :B]
 
 === Arrays
 
 ==== Array2D
 
-Simple two dimensional array(matrix).  
+Simple two dimensional array(matrix).
 Array2D extends automatically like simple Array.
 
 Creating
