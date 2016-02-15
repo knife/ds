@@ -2,9 +2,7 @@ require 'help'
 
 describe Stack do
   before do
-    @stack = Stack.new
-    @stack.push :first
-    @stack.push :second
+    @stack = Stack.new(:first, :second)
   end
 
   describe 'Empty stack' do
@@ -34,9 +32,7 @@ describe Stack do
 
   describe 'Not empty stack implemented as List' do
     before do
-      @stack = Stack.create
-      @stack.push :first
-      @stack.push :second
+      @stack = Stack.create(:first, :second)
     end
 
     it 'should not be empty.' do

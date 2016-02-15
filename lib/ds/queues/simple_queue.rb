@@ -3,17 +3,19 @@ module DS
   class SimpleQueue
     # Create new queue.
     # First parameter determines how the queue will be represented internally.
-    def initialize(store = :array)
-      if store == :array
-        @store = []
-      else
-        @store = List.new
-      end
+    def initialize(*args)
+      @store = args || []
     end
 
     # Create new queue. Internaly uses list to store elements.
-    def self.create
-      new(:list)
+    def self.create(*args)
+      instance = allocate
+      instance.init_store(List.new(*args))
+      instance
+    end
+
+    def init_store(store)
+      @store = store
     end
 
     # Adds element to queue and returns queue itself.

@@ -17,13 +17,8 @@ describe SimpleQueue do
 
   describe 'not empty queue' do
     before do
-      @queue = SimpleQueue.new
-      @queue.enqueue 1
-      @queue.enqueue 2
-
-      @queue2 = SimpleQueue.create
-      @queue2.enqueue 1
-      @queue2.enqueue 2
+      @queue = SimpleQueue.new(1, 2)
+      @queue2 = SimpleQueue.create(1, 2)
     end
 
     it 'should not be empty.' do

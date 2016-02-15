@@ -66,6 +66,22 @@ describe List do
     @list[2].data.must_equal 11
   end
 
+  it '#= should return true only if two lists are equal' do
+    @eq_list = List.new(1, 2, 3, 4)
+    @other_empty = List.new
+    assert @list == @eq_list
+    assert @eq_list == @list
+    refute @list == @empty_list
+    refute @list == @list2
+    assert @empty_list == @other_empty
+  end
+
+  it '#+ should join two lists into one' do
+    sum = @list + @list2
+    sum.to_a.must_equal [1, 2, 3, 4, 4, 5, 7]
+    assert sum == @list
+  end
+
   it '#append should add element to the end of the list.' do
     x = 5
     @list.append(x)

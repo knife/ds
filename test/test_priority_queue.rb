@@ -75,8 +75,7 @@ describe PriorityQueue do
 
   describe 'PriorityQueue with duplications' do
     before do
-      @dup_queue = PriorityQueue.new
-      @dup_queue.enqueue :same_important, 2
+      @dup_queue = PriorityQueue.new(Pair.new(2, :same_important))
       @dup_queue.enqueue :important, 2
       @dup_queue.enqueue :not_important, 1
     end

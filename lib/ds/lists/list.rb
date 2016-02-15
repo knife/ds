@@ -85,6 +85,26 @@ module DS
       end
     end
 
+    # Checks if two lists are equal
+    def ==(other)
+      a = self.head
+      b = other.head
+      while a && b && a.data == b.data
+        a = a.next
+        b = b.next
+      end
+      return true if a.nil? && b.nil?
+      false
+    end
+
+    # Appends first list to other
+    def +(other)
+      other.head.prev = self.tail
+      self.tail.next = other.head
+      self.tail = other.tail
+      self
+    end
+
     # Inserts element x after another element.
     def insert_after(x, rel)
       x = ListElement.new(x)
