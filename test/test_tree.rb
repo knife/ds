@@ -3,13 +3,13 @@ require 'help'
 describe Tree do
   before do
     t = Tree.new(2)
-    c1 = t << 5
-    c2 = t << 8
-    t << 9
+    @child1 = t << 5
+    @child2 = t << 8
+    @child3 = t << 9
 
-    c1 << 4
-    c1 << 10
-    c2 << 3
+    @grand1 = @child1 << 4
+    @grand2 = @child1 << 10
+    @grand3 = @child2 << 3
 
     @tree = t
   end
@@ -22,6 +22,20 @@ describe Tree do
     subtree = @tree << 7
     subtree.must_be_kind_of Tree
     @tree.children.size.must_equal 4
+  end
+
+  it '#parent should return node parent' do
+    @child1.parent.must_equal @tree
+    @child2.parent.must_equal @tree
+    @grand1.parent.must_equal @child1
+    @grand3.parent.must_equal @child2
+  end
+
+  it '#sibblings should return node sibblings' do
+    @child1.sibblings.must_equal [@child2, @child3]
+    @child2.sibblings.must_equal [@child1, @child3]
+    @grand1.sibblings.must_equal [@grand2]
+    @grand3.sibblings.must_equal []
   end
 
   it '#leaf? should check if node is a leaf.' do

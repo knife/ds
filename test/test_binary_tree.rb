@@ -19,6 +19,21 @@ describe BinaryTree do
     @bin_tree.to_a.must_equal [2, 5, 8, 9, 11, 12, 14]
   end
 
+  it '#parent should return node parent' do
+    @small_tree.parent.must_equal nil
+    @small_tree.right.parent.must_equal @small_tree
+    @bin_tree.right.parent.must_equal @bin_tree
+  end
+
+  it '#sibblings should return node sibblings' do
+    r = @small_tree.right
+    l = @small_tree.left
+    r.sibblings.must_equal [l]
+    r = @bin_tree.right
+    l = @bin_tree.left
+    r.sibblings.must_equal [l]
+  end
+
   it '#height should return tree height.' do
     @bin_tree.height.must_equal 3
   end

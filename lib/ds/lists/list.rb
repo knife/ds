@@ -87,7 +87,7 @@ module DS
 
     # Checks if two lists are equal
     def ==(other)
-      a = self.head
+      a = head
       b = other.head
       while a && b && a.data == b.data
         a = a.next
@@ -99,8 +99,8 @@ module DS
 
     # Appends first list to other
     def +(other)
-      other.head.prev = self.tail
-      self.tail.next = other.head
+      other.head.prev = tail
+      tail.next = other.head
       self.tail = other.tail
       self
     end

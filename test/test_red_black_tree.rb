@@ -25,6 +25,6 @@ describe Tree do
     @tree.insert(:e, 3)
     @tree.insert(:d, 3)
     @tree.insert(:c, 3)
-    @tree.map { |n| n.key }.must_equal [:a, :b, :c, :d, :e]
+    @tree.map(&:key).must_equal [:a, :b, :c, :d, :e]
   end
 end

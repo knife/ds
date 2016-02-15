@@ -29,7 +29,7 @@ module DS
     def initialize
       @root = nil
       @size = 0
-      @iterator = TreeWalker.new(self.root)
+      @iterator = TreeWalker.new(root)
     end
 
     def insert(key, value)

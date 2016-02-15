@@ -4,20 +4,24 @@ module DS
     include Enumerable
 
     attr_accessor :data
-    attr_reader :children
+    attr_reader :children, :parent
 
     # Returns a new tree.
-    def initialize(value = nil)
+    def initialize(value = nil, parent = nil)
       @data = value
+      @parent = parent
       @children = []
-      @iterator = TreeWalker.new(self)
     end
 
     # Inserts a new subtree.
     def <<(value)
-      subtree = Tree.new(value)
+      subtree = Tree.new(value, self)
       @children << subtree
       subtree
+    end
+
+    def sibblings
+      parent.children.reject { |node| node == self }
     end
 
     # Checks if node is leaf.
@@ -104,7 +108,8 @@ module DS
 
     # Iterates tree in BFS order.
     def each
-      @iterator.traverse { |t| yield t }
+      iterator = TreeWalker.new(self)
+      iterator.traverse { |t| yield t }
     end
 
     def to_a

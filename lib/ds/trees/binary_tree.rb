@@ -3,7 +3,7 @@ module DS
   class BinaryTree < Tree
     # Inserts a new subtree.
     def <<(value)
-      subtree = BinaryTree.new(value)
+      subtree = BinaryTree.new(value, self)
       @children << subtree
       subtree
     end
@@ -34,9 +34,9 @@ module DS
       if @data.nil?
         @data = x
       elsif left.nil?
-        self.left = BinaryTree.new(x)
+        self.left = BinaryTree.new(x, self)
       elsif right.nil?
-        self.right = BinaryTree.new(x)
+        self.right = BinaryTree.new(x, self)
       else
         q.push left
         q.push right

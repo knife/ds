@@ -227,7 +227,7 @@ Other operations
 
 ==== Tree
 
-A tree is a data structure consisting nodes organised as a hierarchy. 
+A tree is a data structure where nodes are organised in hierarchy.
 More: {Tree}[http://en.wikipedia.org/wiki/Tree_(data_structure)]
 
 Building Tree
@@ -241,22 +241,25 @@ Building Tree
   c1 << 10
   c3 = c2 << 3
 
-Examples:
+Methods:
   t.leaf? #=> false
   c3.leaf? #=> true
+
+  c1.sibblings.map &:data #=> [8, 9]
+  c1.parent.data #=> 2
 
   t.height #=> 3
   t.width #=> 3
   t.leaf_count #=> 4
 
-  t.levels #=> {1=>1, 2=>3, 3=>3} 
+  t.levels #=> {1=>1, 2=>3, 3=>3}
 
 Other methods
 * get_leaves
 * isometric?
 * mirror!
 
-Enumerable Module is included.
+Enumerable Module is also included.
   t.map { |node| node.data } #=> [2, 5, 8, 9, 4, 10, 3]
 
 
@@ -267,7 +270,7 @@ More: {BinaryTree}[http://en.wikipedia.org/wiki/Binary_tree]
 
 Building tree
   bin_tree = BinaryTree.new
-  [2, 5, 8, 9, 11, 12, 14].each {|x| bin_tree.insert(x)} #build complete binary Tree
+  [2, 5, 8, 9, 11, 12, 14].each { |x| bin_tree.insert(x) } #build complete binary Tree
 
 Accessors defined on BinaryTree object:
   bin_tree.left.data #=> 5
@@ -276,13 +279,18 @@ Accessors defined on BinaryTree object:
 
 ==== Red Black Tree
 
-Red-black tree is symbol table data structure. It's very simmilar to hash. But internally
+Red-black tree is symbol table data structure. It's very simmilar to hash, but internally
 uses tree (perfect balanced binary tree) and not depends on hash function. Red
-black trees aren't as fast as hashes but supports ordered operation.
+black trees aren't as fast as hashes but supports ordered operations.
 
-    map = RedBlackTree.new
-    map.insert(:a, 1)
-    map.get(:a) #=> 1
+    rb = RedBlackTree.new
+    rb.insert(:z, 3)
+    rb.insert(:p, 2)
+    rb.insert(:a, 1)
+    rb.get(:a) #=> 1
+
+Enumerable is included and traversing is ordered by key
+    rb.map(&:key) #=> [:a, :p, :z]
 
 ==== Binary Heap
 
@@ -321,6 +329,9 @@ More: {Trie}[http://en.wikipedia.org/wiki/Trie]
 Creating
   trie = Trie.new
 
+Setting custom alphabet
+  trie.alphabet = %w(a b c d)
+
 Examples
   trie.insert("thing", true);
   trie.find("thing")  # =>  true
@@ -329,14 +340,14 @@ Examples
 ==== Traversing Tree
 
   b = BinaryTree.new
-  [2,5,8,9,11,12,14].each{|x| b.insert(x)} 
+  [2, 5, 8, 9, 11, 12, 14].each{ |x| b.insert(x) }
 
 walker = TreeWalker.new(b)
 
 Iterating in postorder
   walker.traverse(:postorder) #=> [9,11,5,12,14,8,2]
 Iterating in inorder
-  walker.traverse(:inorder) #=> [9,5,11,2,12,8,14] 
+  walker.traverse(:inorder) #=> [9,5,11,2,12,8,14]
 Iterating in preorder
   walker.traverse(:preorder) #=> [2,5,9,11,8,12,14]
 
