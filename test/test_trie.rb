@@ -18,8 +18,19 @@ describe Trie do
     assert @trie.find('math')
   end
 
-  it 'should not find not added word.' do
+  it '#find should not find not added word.' do
     @dict.find('blah').must_be_nil
+  end
+
+  it '#delete removes word from tree' do
+    @dict.insert('he')
+    @dict.insert('help')
+    @dict.delete('hello')
+    refute @dict.find('hello')
+    refute @dict.find('hell')
+    refute @dict.find('hel')
+    assert @dict.find('he')
+    assert @dict.find('help')
   end
 
   it '#alphabet= sets Trie alphabet' do

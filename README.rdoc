@@ -329,15 +329,16 @@ More: {Trie}[http://en.wikipedia.org/wiki/Trie]
 Creating
   trie = Trie.new
 
-Setting custom alphabet
+Setting custom alphabet (memory usage depends on alphabet size)
   trie.alphabet = %w(a b c d)
 
 Examples
-  trie.insert("thing", true);
-  trie.find("thing")  # =>  true
+  trie.insert('thing', true);
+  trie.find('thing')  # =>  true
+  trie.delete('thing')
 
 
-==== Traversing Tree
+==== Tree Traversals
 
   b = BinaryTree.new
   [2, 5, 8, 9, 11, 12, 14].each{ |x| b.insert(x) }
@@ -345,21 +346,21 @@ Examples
 walker = TreeWalker.new(b)
 
 Iterating in postorder
-  walker.traverse(:postorder) #=> [9,11,5,12,14,8,2]
+  walker.traverse(:postorder) #=> [9, 11, 5, 12, 14, 8, 2]
 Iterating in inorder
-  walker.traverse(:inorder) #=> [9,5,11,2,12,8,14]
+  walker.traverse(:inorder) #=> [9, 5, 11, 2, 12, 8, 14]
 Iterating in preorder
-  walker.traverse(:preorder) #=> [2,5,9,11,8,12,14]
+  walker.traverse(:preorder) #=> [2, 5, 9, 11, 8, 12, 14]
 
 Iterating in BFS order
-  walker.each{ |x| x } #=> [2,5,8,9,11,12,14]
+  walker.each{ |x| x } #=> [2, 5, 8, 9, 11, 12, 14]
 
 
 You can also pass block to traverse method
   walker.traverse(:inorder){ |n| n.data**2 }
 
 If you want to change value of tree nodes, use recalculate! method
-  walker.recalculate!(b, :preorder, 0){ |x, memo| memo = memo + x.data }
+  walker.recalculate!(b, :preorder, 0) { |e, a| a + e.data }
 
 
 === Arrays
@@ -375,35 +376,37 @@ Creating
 First argument is size of row(or column) and second is default value of matrix.
 
 Examples
-  discrete_matrix.to_a  #=> [[0,0],[0,0]]
-  discrete_matrix[3,3] #=> 0
+  discrete_matrix.to_a  #=> [[0, 0], [0, 0]]
+  discrete_matrix[3, 3] #=> 0
 
 
 ==== ExpandableArray
 
-  arr = ExpandableArray.new(0,0)
-  arr[4]  = 1 #=> [0,0,0,0,4]
+Automaticaly fills empty slots with custom value:
+
+  arr = ExpandableArray.new(0, 0)
+  arr[4]  = 1 #=> [0, 0, 0, 0, 4]
 
 
 ==== TriMatrix
 Triangular matrix is a special kind of matrix where M[x,y] = M[y,x].
-More: {Triangular Matrixe}[http://en.wikipedia.org/wiki/Triangular_matrix]
+More: {Triangular Matrix}[http://en.wikipedia.org/wiki/Triangular_matrix]
 
 Creating
   tri_matrix = TriMatrix.new
-  tri_matrix[0,1] = true
-  tri_matrix[0,2] = true
+  tri_matrix[0, 1] = true
+  tri_matrix[0, 2] = true
 
 Examples
-  tri_matrix[0,1] == tri_matrix[1,0] #=> true
+  tri_matrix[0, 1] == tri_matrix[1, 0] #=> true
 
 
 
 === Sets
 
 ==== IndexedSet
-IndexedSet is a set whose elements are indexed. In opposite to Array duplicates
-are not allowed.
+IndexedSet is a set whose elements are indexed. In opposite to Array, duplicates
+are not allowed. Internally uses hash for fast access and array for ordering.
 
 Creating new Indexed Set
   set = IndexedSet.new
