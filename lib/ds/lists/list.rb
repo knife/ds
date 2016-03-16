@@ -26,8 +26,8 @@ module DS
       @tail
     end
 
-    alias_method :<<, :append
-    alias_method :push, :append
+    alias << append
+    alias push append
 
     # Prepends new element to list. Returns list head
     def unshift(x)
@@ -182,7 +182,7 @@ module DS
       @size
     end
 
-    alias_method :size, :length
+    alias size length
 
     # Checks if list is linked at the end with other list.
     def zip?(other)

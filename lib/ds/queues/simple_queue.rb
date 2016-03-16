@@ -24,14 +24,14 @@ module DS
       self
     end
 
-    alias_method :push, :enqueue
+    alias push enqueue
 
     # Removes element from queue and returns it.
     def dequeue
       @store.shift
     end
 
-    alias_method :shift, :dequeue
+    alias shift dequeue
 
     # Returns element from forehead of queue.
     def peek
@@ -43,7 +43,7 @@ module DS
       @store.length
     end
 
-    alias_method :size, :length
+    alias size length
 
     # Checks if queue is empty.
     def empty?

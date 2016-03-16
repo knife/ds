@@ -3,8 +3,8 @@ module DS
   class Pair
     attr_accessor :key, :value
 
-    alias_method :first, :key
-    alias_method :second, :value
+    alias first key
+    alias second value
 
     def initialize(x, y)
       @key = x

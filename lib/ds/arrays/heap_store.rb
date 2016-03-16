@@ -18,7 +18,7 @@ class HeapStore
     @store[1]
   end
 
-  alias_method :size, :length
+  alias size length
 
   def empty?
     length <= 0

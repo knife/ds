@@ -64,7 +64,7 @@ module DS
       store.length
     end
 
-    alias_method :size, :length
+    alias size length
 
     def empty?
       store.empty?

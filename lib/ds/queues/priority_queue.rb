@@ -19,7 +19,7 @@ module DS
       self
     end
 
-    alias_method :push, :enqueue
+    alias push enqueue
 
     # Removes element with highest priority from queue .
     def dequeue
@@ -27,7 +27,7 @@ module DS
       x ? x.value : nil
     end
 
-    alias_method :shift, :dequeue
+    alias shift dequeue
 
     # Returns element with highest priority.
     def peek
@@ -39,7 +39,7 @@ module DS
       @store.length
     end
 
-    alias_method :size, :length
+    alias size length
 
     # Checks if queue is empty.
     def empty?
