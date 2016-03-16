@@ -41,7 +41,7 @@ module DS
 
     # Removes list head.
     def shift
-      fail ListError, 'List is already empty' if empty?
+      raise ListError, 'List is already empty' if empty?
       remove(head).data
     end
 
@@ -55,7 +55,7 @@ module DS
     # Return ListElement if it is on list or raises error
     def get!(x)
       found = get(x)
-      fail ListError, 'Element not found' unless found
+      raise ListError, 'Element not found' unless found
     end
 
     # Returns list element on given index.
@@ -81,7 +81,7 @@ module DS
       if found
         found.data = val
       else
-        fail ListError, 'Element not found'
+        raise ListError, 'Element not found'
       end
     end
 

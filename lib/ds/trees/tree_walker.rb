@@ -77,7 +77,7 @@ module DS
           recalculate!(t, order, tree.data, &block)
         end
       when :inorder
-        fail ArgumentError unless self.tree.is_a? BinaryTree
+        raise ArgumentError unless self.tree.is_a? BinaryTree
         recalculate!(tree.left, order, memo, &block)
         tree.data = yield tree, memo
         recalculate!(tree.right, order, tree.data, &block)

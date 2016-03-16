@@ -3,13 +3,13 @@ module DS
   class PriorityQueue
     # Create new priority queue. Internaly uses heap to store elements.
     def initialize(*args)
-      if block_given?
-        @store = BinaryHeap.new(*args) do |parent, child|
-          yield parent.key, child.key
-        end
-      else
-        @store = BinaryHeap.new(*args) { |parent, child| parent.key >= child.key }
-      end
+      @store = if block_given?
+                 BinaryHeap.new(*args) do |parent, child|
+                   yield parent.key, child.key
+                 end
+               else
+                 BinaryHeap.new(*args) { |parent, child| parent.key >= child.key }
+               end
     end
 
     # Adds element to queue with given priority.

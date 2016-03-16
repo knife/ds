@@ -1,7 +1,7 @@
 module DS
   # Trie dictionary data structure
   class Trie < Tree
-    attr_accessor :alphabet, :root
+    attr_accessor :root
 
     # Trie node
     class Node
@@ -65,13 +65,13 @@ module DS
 
     def insert(s, value = true)
       letters = s.scan(/./)
-      fail ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
+      raise ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
       root.put(letters, value, self)
     end
 
     def find(s)
       letters = s.scan(/./)
-      fail ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
+      raise ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
       root.get(letters, self)
     end
 

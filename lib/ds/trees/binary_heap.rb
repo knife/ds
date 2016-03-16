@@ -6,11 +6,11 @@ module DS
     # Create new Heap from args.
     # Given block sets the heap relation. Default heap relation is Max Heap.
     def initialize(*args, &block)
-      if block_given?
-        @relation = block
-      else
-        @relation = -> (parent, child) { parent >= child }
-      end
+      @relation = if block_given?
+                    block
+                  else
+                    -> (parent, child) { parent >= child }
+                  end
       @store = HeapStore.new(*args)
       heapify!
     end
@@ -85,7 +85,7 @@ module DS
 
     def sink(k)
       n = length
-      while (2 * k <= n)
+      while 2 * k <= n
         j = 2 * k
         j += 1 if j < n && less(j, j + 1)
         break unless less(k, j)
