@@ -37,6 +37,10 @@ module DS
       root.color = BLACK
     end
 
+    def []=(key, value)
+      insert(key, value)
+    end
+
     def get(key, node = root)
       x = node
       while x
@@ -49,6 +53,10 @@ module DS
           return x.data
         end
       end
+    end
+
+    def [](key)
+      get(key)
     end
 
     def each

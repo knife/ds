@@ -289,6 +289,11 @@ black trees aren't as fast as hashes but supports ordered operations.
     rb.insert(:a, 1)
     rb.get(:a) #=> 1
 
+Hash like accessors are defined
+
+  rb[:z] = 3
+  rb[:z] #=> 3
+
 Enumerable is included and traversing is ordered by key
     rb.map(&:key) #=> [:a, :p, :z]
 
