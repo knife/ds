@@ -66,7 +66,7 @@ describe List do
     @list[2].data.must_equal 11
   end
 
-  it '#= should return true only if two lists are equal' do
+  it '#== returns true only if two lists are equal' do
     @eq_list = List.new(1, 2, 3, 4)
     @other_empty = List.new
     assert @list == @eq_list
@@ -75,6 +75,22 @@ describe List do
     refute @list == @list2
     assert @empty_list == @other_empty
   end
+
+  it '#> returns true if first list is grater or longer than second' do
+    @smaller_list = List.new(1, 2, 2, 4)
+    assert @list > @smaller_list
+    @smaller_list2 = List.new(1, 2, 3)
+    assert @list > @smaller_list2
+  end
+
+
+  it '#< returns true if first list is smaller or shorter than second' do
+    @greater_list = List.new(1, 8, 3, 4)
+    assert @list < @greater_list
+    @greater_list2 = List.new(1, 2, 3, 4, 5)
+    assert @list < @greater_list2
+  end
+
 
   it '#+ should join two lists into one' do
     sum = @list + @list2

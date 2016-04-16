@@ -4,6 +4,7 @@ module DS
   # Implements simple list data structure.
   class List
     include Enumerable
+    include Comparable
 
     attr_accessor :head, :tail
 
@@ -86,15 +87,14 @@ module DS
     end
 
     # Checks if two lists are equal
-    def ==(other)
+    def <=>(other)
       a = head
       b = other.head
       while a && b && a.data == b.data
         a = a.next
         b = b.next
       end
-      return true if a.nil? && b.nil?
-      false
+      compare_list_elements(a,b)
     end
 
     # Appends first list to other
@@ -295,6 +295,18 @@ module DS
 
     def decrement_size
       @size -= 1
+    end
+
+    def compare_list_elements(a, b)
+      if a.nil? && b.nil?
+        0
+      elsif a && b
+        a.data <=> b.data
+      elsif a.nil?
+        -1
+      else
+        1
+      end
     end
   end
 end

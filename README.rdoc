@@ -176,7 +176,7 @@ or
 
 Examples:
 
-Simple operation on lists
+Simple operations on lists
   list.length #=> 4
   list.append(5).to_a #=> [1, 2, 3, 4, 5]
   list.unshift(0).to_a #=> [0, 1, 2, 3, 4, 5]
