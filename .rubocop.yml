@@ -1,0 +1,11 @@
+inherit_from: .rubocop_todo.yml
+
+Metrics/ClassLength:
+  Max: 250
+
+Metrics/LineLength:
+  Max: 110
+
+Metrics/MethodLength:
+  Max: 15
+
