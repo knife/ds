@@ -18,6 +18,11 @@ describe Trie do
     assert @trie.find('math')
   end
 
+  it 'has hash like accessors' do
+    @trie['thing'] = 'one'
+    assert_equal @trie['thing'], 'one'
+  end
+
   it '#find should not find not added word.' do
     @dict.find('blah').must_be_nil
   end

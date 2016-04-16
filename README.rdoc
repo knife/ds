@@ -336,14 +336,16 @@ Examples
   trie.insert('thing', true);
   trie.find('thing')  # =>  true
   trie.delete('thing')
-
+or
+  trie['one'] = 'thing'
+  trie['one']  # =>  'thing'
 
 ==== Tree Traversals
 
   b = BinaryTree.new
   [2, 5, 8, 9, 11, 12, 14].each{ |x| b.insert(x) }
 
-walker = TreeWalker.new(b)
+  walker = TreeWalker.new(b)
 
 Iterating in postorder
   walker.traverse(:postorder) #=> [9, 11, 5, 12, 14, 8, 2]

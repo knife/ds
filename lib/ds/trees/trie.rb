@@ -69,10 +69,18 @@ module DS
       root.put(letters, value, self)
     end
 
+    def []=(k, v)
+      insert(k, v)
+    end
+
     def find(s)
       letters = s.scan(/./)
       raise ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
       root.get(letters, self)
+    end
+
+    def [](k)
+      find(k)
     end
 
     def delete(s)
