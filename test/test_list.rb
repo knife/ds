@@ -54,6 +54,10 @@ describe List do
     @list.at(2).data.must_equal 3
     @list2.at(2).data.must_equal 7
     @list.at(42).must_equal nil
+    @list.at(-1).data.must_equal 4
+    @list.at(-2).data.must_equal 3
+    @list.at(-4).data.must_equal 1
+    @list.at(-42).must_equal nil
   end
 
   it '#[] should return element on given index' do
@@ -83,14 +87,12 @@ describe List do
     assert @list > @smaller_list2
   end
 
-
   it '#< returns true if first list is smaller or shorter than second' do
     @greater_list = List.new(1, 8, 3, 4)
     assert @list < @greater_list
     @greater_list2 = List.new(1, 2, 3, 4, 5)
     assert @list < @greater_list2
   end
-
 
   it '#+ should join two lists into one' do
     sum = @list + @list2

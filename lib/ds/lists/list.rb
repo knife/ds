@@ -62,11 +62,16 @@ module DS
     # Returns list element on given index.
     def at(index)
       found = nil
-      each_with_index do |element, i|
+      find_index = lambda do |element, i|
         if i == index
           found = element
           break
         end
+      end
+      if index >= 0
+        each_with_index(&find_index)
+      else
+        reverse_each(&find_index)
       end
       found
     end
@@ -94,7 +99,7 @@ module DS
         a = a.next
         b = b.next
       end
-      compare_list_elements(a,b)
+      compare_list_elements(a, b)
     end
 
     # Appends first list to other
@@ -264,8 +269,10 @@ module DS
     # Reverse list iterator.
     def reverse_each
       elem = tail
+      i = 0
       while elem
-        yield elem
+        i -= 1
+        yield elem, i
         elem = elem.prev
       end
     end
