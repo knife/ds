@@ -1,8 +1,7 @@
 require 'forwardable'
 
-# Simple Array-like data structure with indexing starting from one.
-
 module DS
+  # Simple Array-like data structure with indexing starting from one.
   class HeapStore
     extend Forwardable
 

@@ -194,7 +194,7 @@ Accessing by index
   list[2].data #=> 2
   list.at(2).data #=> 2
   list[-1].data #=> 4
-  list[1..2].map(&:data) #=> [2,3]
+  list[1..2].map(&:data) #=> [2, 3]
   list[1,3].map(&:data) #=> [2, 3, 4]
 
 Modifying elements on given index:
@@ -304,6 +304,9 @@ Hash like accessors are defined
   rb[:z] = 3
   rb[:z] #=> 3
 
+You can convert RedBlackTree to Hash with to_h method:
+  rb.to_h #=> {a: 1, p: 2, z: 3}
+
 Enumerable is included and traversing is ordered by key
     rb.map(&:key) #=> [:a, :p, :z]
 
@@ -354,6 +357,16 @@ Examples
 or
   trie['one'] = 'thing'
   trie['one']  # =>  'thing'
+
+Enumerable module is included so you can iterate through trie:
+ trie.map { |k, v| [k, v] } # => [['he', true], ['hello', true], ['help', true]]
+
+Finding all words matching given prefix:
+  trie.with_prefix('th') # =>  ['the', 'thing']
+  trie.with_prefix('yeti') # =>  []
+
+Alternatively you can pass block to this method:
+  trie.with_prefix('th'){ |word, val| res[word] = val } # =>  {'the' => true, 'thing' => true}
 
 ==== Tree Traversals
 

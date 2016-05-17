@@ -5,6 +5,8 @@ module DS
 
     # Trie node
     class Node
+      attr_reader :children, :data
+
       def initialize(value = nil)
         @children = []
         @data = value
@@ -22,7 +24,7 @@ module DS
 
       def get(s, trie)
         if s.empty?
-          @data
+          self
         else
           index = trie.key(s.first)
           @children[index].get(s[1..-1], trie) if @children[index]
@@ -64,8 +66,7 @@ module DS
     end
 
     def insert(s, value = true)
-      letters = s.scan(/./)
-      raise ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
+      letters = get_letters(s)
       root.put(letters, value, self)
     end
 
@@ -74,9 +75,9 @@ module DS
     end
 
     def find(s)
-      letters = s.scan(/./)
-      raise ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
-      root.get(letters, self)
+      letters = get_letters(s)
+      node = root.get(letters, self)
+      node.data if node
     end
 
     def [](k)
@@ -88,10 +89,47 @@ module DS
       root.delete(letters, self)
     end
 
+    def each(&block)
+      visit(root, '', &block)
+    end
+
+    def visit(node, prefix, &block)
+      yield prefix, node.data if node.data
+      node.children.each_with_index do |n, i|
+        visit(n, prefix + alphabet[i], &block) if n
+      end
+    end
+
+    def with_prefix(prefix, &block)
+      letters = get_letters(prefix)
+      node = root.get(letters, self)
+      if block_given?
+        return nil unless node
+        visit(node, prefix, &block)
+      else
+        arr = []
+        return arr unless node
+        visit(node, prefix) { |n| arr << n }
+        arr
+      end
+    end
+
+    def to_h
+      h = {}
+      each { |k, v| h[k] = v }
+      h
+    end
+
     private
 
     def allowed?(letters)
       (letters - alphabet).empty?
+    end
+
+    def get_letters(s)
+      letters = s.scan(/./)
+      raise ArgumentError, 'Not allowed symbol.' unless allowed?(letters)
+      letters
     end
   end
 end

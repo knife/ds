@@ -64,6 +64,10 @@ module DS
       iterator.traverse(:inorder) { |t| yield t }
     end
 
+    def to_h
+      each_with_object({}) { |n, h| h[n.key] = n.data }
+    end
+
     private
 
     def put(n, key, value)
