@@ -77,8 +77,15 @@ module DS
     end
 
     # Returns list element on given index.
-    def [](index)
-      at(index)
+    def [](i, count = nil)
+      return [] if count && count < 0
+      i = (i...i + count) if count && count > 0
+      case i
+      when Integer
+        at(i)
+      when Range
+        elements_in_range(i)
+      end
     end
 
     # Sets list element on given index.
@@ -294,6 +301,14 @@ module DS
       self.head = first
       self.tail = first
       self
+    end
+
+    def elements_in_range(range)
+      arr = []
+      each_with_index do |e, i|
+        arr << e if range.include?(i)
+      end
+      arr
     end
 
     def increment_size

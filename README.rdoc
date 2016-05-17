@@ -191,16 +191,18 @@ Accessing first and last element
   list.last #=> 5
 
 Accessing by index
-  list[2] #=> 2
-  list.at(2) #=> 2
-  list[-1] #=> 4
+  list[2].data #=> 2
+  list.at(2).data #=> 2
+  list[-1].data #=> 4
+  list[1..2].map(&:data) #=> [2,3]
+  list[1,3].map(&:data) #=> [2, 3, 4]
 
 Modifying elements on given index:
-  list[2] = 8
-  list[2] #=> 8
+  list[2].data = 8
+  list[2].data #=> 8
 
 Checking if given element exists on list
-  list.get(el) #=> nil
+  list.get(el) #=> el or nil
   list.get!(el) #=> raises Exception if not found
 
 Reversing
@@ -214,20 +216,21 @@ Enumerable methods are also available
 Adding one list to other
   list1 + list2
 
-Comparable module is included:
+Comparable module is included so you can:
 
-Checking if lists are equal
+Check if lists are equal
   list1 == list2
 
-Checking if one list is greater than other (same rules as in Array class)
+Check if one list is greater than other (same rules as in Array class)
   list1 > list2
 
 
 Other operations
-* get
 * insert_before
 * insert_after
 * zip?
+* looped?
+* cycle_size
 * to_s
 
 === Trees

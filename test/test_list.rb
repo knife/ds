@@ -63,6 +63,12 @@ describe List do
   it '#[] should return element on given index' do
     @list[2].data.must_equal 3
     @list2[2].data.must_equal 7
+
+    @list[1..2].map(&:data).must_equal [2, 3]
+    @list[1..8].map(&:data).must_equal [2, 3, 4]
+    @list[1, 2].map(&:data).must_equal [2, 3]
+    @list[1, 3].map(&:data).must_equal [2, 3, 4]
+    @list[2, 8].map(&:data).must_equal [3, 4]
   end
 
   it '#[] should return change element on given index' do
@@ -209,6 +215,10 @@ describe List do
     h = {}
     @list.each_with_index { |e, i| h[i] = e.data }
     h.must_equal(0 => 1, 1 => 2, 2 => 3, 3 => 4)
+  end
+
+  it '#take returns frist n elements form list' do
+    @list.take(2).map(&:data).must_equal [1, 2]
   end
 
   it '#to_s should print list in human friendly format.' do
