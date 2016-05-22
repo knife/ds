@@ -200,6 +200,10 @@ Accessing by index
 Modifying elements on given index:
   list[2].data = 8
   list[2].data #=> 8
+  list[2] = [9, 10] #=> [1, 2, 9, 10, 4]
+  list[0,1] = 0 #=> [0, 2, 3, 4]
+  list[2..3] = ['x', 'x'] #=> [1, 2, 'x', 'x']
+
 
 Checking if given element exists on list
   list.get(el) #=> el or nil
@@ -226,6 +230,8 @@ Check if one list is greater than other (same rules as in Array class)
 
 
 Other operations
+* clone
+* clear
 * insert_before
 * insert_after
 * zip?
@@ -298,6 +304,9 @@ black trees aren't as fast as hashes but supports ordered operations.
     rb.insert(:p, 2)
     rb.insert(:a, 1)
     rb.get(:a) #=> 1
+
+You can also create RBT by passing hash to constructor
+  rb = RedBlackTree.new(a: 1, p: 2, z: 3)
 
 Hash like accessors are defined
 

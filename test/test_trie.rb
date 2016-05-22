@@ -30,7 +30,8 @@ describe Trie do
   it '#delete removes word from tree' do
     @dict.insert('he')
     @dict.insert('help')
-    assert @dict.find('hello')
+    @dict.delete('hello')
+    refute @dict.find('hello')
     refute @dict.find('hellp')
     refute @dict.find('hel')
     assert @dict.find('he')

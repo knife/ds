@@ -26,10 +26,11 @@ module DS
     attr_accessor :root
     attr_reader :size
 
-    def initialize
+    def initialize(hash = nil)
       @root = nil
       @size = 0
       @iterator = TreeWalker.new(root)
+      hash.each { |k, v| insert(k, v) } if hash
     end
 
     def insert(key, value)

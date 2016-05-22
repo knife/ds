@@ -19,6 +19,10 @@ describe 'List Element' do
       assert @empty_el.tail?
     end
 
+    it 'should be head.' do
+      assert @empty_el.head?
+    end
+
     it '#append should return appended element.' do
       el = @empty_el.append(2)
       el.must_be_instance_of ListElement
@@ -48,6 +52,10 @@ describe 'List Element' do
 
     it 'should be tail.' do
       assert @el.tail?
+    end
+
+    it 'should be head.' do
+      assert @el.head?
     end
 
     it '#append should link element with another.' do

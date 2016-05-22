@@ -20,5 +20,10 @@ module DS
     def tail?
       @next.nil?
     end
+
+    # Checks if given element is first.
+    def head?
+      @prev.nil?
+    end
   end
 end

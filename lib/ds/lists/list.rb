@@ -12,8 +12,22 @@ module DS
     def initialize(*arr)
       @size = 0
       @head = nil
-      @tail = @head
+      @tail = nil
       from_array(arr) if arr.any?
+    end
+
+    # Clones list
+    def clone
+      list = self.class.new
+      each { |e| list.append(e.data) }
+      list
+    end
+
+    # Clears list by reseting head and tail to nil
+    def clear
+      @size = 0
+      @head = nil
+      @tail = nil
     end
 
     # Appends new element to list. Returns list tail
@@ -89,12 +103,33 @@ module DS
     end
 
     # Sets list element on given index.
-    def []=(index, val)
-      found = at(index)
-      if found
-        found.data = val
+    def []=(i, count = 1, val)
+      if i.is_a? Range
+        index = i.first
+        count = i.size
       else
-        raise ListError, 'Element not found'
+        index = i
+      end
+
+      raise ListError, 'Ivalid count parameter' unless valid_count?(count, index)
+
+      el = at(index)
+      raise ListError, 'Element not found' unless el
+      if val.is_a? Array
+        replace(el, List.new(*val), count)
+      else
+        el.data = val
+      end
+    end
+
+    # Replaces list elements with other list
+    def replace(el, list, count = 1)
+      if el.head?
+        replace_head(el, list, count)
+      elsif el.tail?
+        replace_tail(el, list, count)
+      else
+        replace_inside(el, list, count)
       end
     end
 
@@ -329,6 +364,56 @@ module DS
       else
         1
       end
+    end
+
+    def valid_count?(count, index)
+      return true if count.nil?
+      !(count < 1 || count + index > size)
+    end
+
+    def replace_head(el, list, count)
+      count.times do
+        temp = el.next
+        remove(el)
+        el = temp
+      end
+      list + self
+      self.head = list.head
+    end
+
+    def replace_tail(el, list, count)
+      count.times do
+        temp = el.next
+        remove(el)
+        el = temp
+      end
+      self + list
+    end
+
+    def replace_inside(el, list, count)
+      first = el
+      last = find_last_element(el, count)
+      if last.tail?
+        self.tail = list.tail
+      else
+        nxt = last.next
+        nxt.prev = list.tail
+        list.tail.next = nxt
+        last.next = nil
+      end
+      prev = first.prev
+      list.head.prev = prev
+      prev.next = list.head
+      first.prev = nil
+    end
+
+    def find_last_element(el, count)
+      last = el
+      (count - 1).times do
+        temp = last.next if last.next
+        last = temp
+      end
+      last
     end
   end
 end

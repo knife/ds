@@ -34,6 +34,22 @@ describe List do
     @list.length.must_equal 4
   end
 
+  it '#clone returns new list with identical values' do
+    cloned = @list.clone
+    cloned.must_be_kind_of List
+    cloned.to_a.must_equal [1, 2, 3, 4]
+    @list[0] = 9
+    @list.to_a.must_equal [9, 2, 3, 4]
+    cloned.to_a.must_equal [1, 2, 3, 4]
+  end
+
+  it '#clear resets lists' do
+    @list.clear
+    @list.must_be_kind_of List
+    @list.to_a.must_equal []
+    @list.size.must_equal 0
+  end
+
   it '#length should return list size.' do
     @list.length.must_equal 4
     @list2.length.must_equal 3
@@ -60,7 +76,7 @@ describe List do
     @list.at(-42).must_equal nil
   end
 
-  it '#[] should return element on given index' do
+  it '#[] returns element on given index' do
     @list[2].data.must_equal 3
     @list2[2].data.must_equal 7
 
@@ -71,9 +87,53 @@ describe List do
     @list[2, 8].map(&:data).must_equal [3, 4]
   end
 
-  it '#[] should return change element on given index' do
+  it '#[] changes element on given index' do
     @list[2] = 11
     @list[2].data.must_equal 11
+  end
+
+  it '#[] replaces elelment with elements on Array' do
+    @list[3] = [0, 0]
+    @list.to_a.must_equal [1, 2, 3, 0, 0]
+  end
+
+  it '#[] replaces elements when passed Array and count' do
+    @list[1, 2] = [0, 0]
+    @list.to_a.must_equal [1, 0, 0, 4]
+  end
+
+  it '#[] replaces element when passed Array and count on list tail' do
+    @list[1, 3] = [0, 0, 0]
+    @list.to_a.must_equal [1, 0, 0, 0]
+  end
+
+  it '#[] replaces element when passed Array and range' do
+    @list[1..2] = [0, 0]
+    @list.to_a.must_equal [1, 0, 0, 4]
+  end
+
+  it '#[] should raise error when count or range is invalid' do
+    proc { @list[1, 8] = [0, 0] }.must_raise ListError
+    proc { @list[1, -1] = [0, 0] }.must_raise ListError
+    proc { @list[1..-1] = [0, 0] }.must_raise ListError
+    proc { @list[1..90] = [0, 0] }.must_raise ListError
+    proc { @list[1, 4] = [0, 0] }.must_raise ListError
+  end
+
+  it 'replace element one with other' do
+    list = List.new(8, 9)
+    el = @list.at(2)
+    @list.replace(el, list)
+    @list.to_a.must_equal [1, 2, 8, 9, 4]
+    el = @list.at(0)
+    list = List.new(8, 9)
+    @list.replace(el, list)
+    @list.to_a.must_equal [8, 9, 2, 8, 9, 4]
+
+    list = List.new(8, 9)
+    el = @list.at(5)
+    @list.replace(el, list)
+    @list.to_a.must_equal [8, 9, 2, 8, 9, 8, 9]
   end
 
   it '#== returns true only if two lists are equal' do
