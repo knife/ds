@@ -167,8 +167,8 @@ describe List do
     assert @list < @greater_list2
   end
 
-  it '#+ should join two lists into one' do
-    sum = @list + @list2
+  it '#concat should join two lists into one' do
+    sum = @list.concat(@list2)
     sum.to_a.must_equal [1, 2, 3, 4, 4, 5, 7]
     assert sum == @list
   end

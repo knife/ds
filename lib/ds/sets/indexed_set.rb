@@ -29,5 +29,9 @@ module DS
     def to_a
       @cache
     end
+
+    def empty?
+      @size == 0
+    end
   end
 end

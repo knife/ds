@@ -217,8 +217,8 @@ Enumerable methods are also available
   list.map{ |e| e.data } #=> [1, 2, 3, 4]
   list.inject(0){ |a, e|  a + e.data } #=> 10
 
-Adding one list to other
-  list1 + list2
+Concating two lists
+  list1.concat(list2)
 
 Comparable module is included so you can:
 

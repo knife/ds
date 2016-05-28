@@ -11,7 +11,7 @@ module DS
                end
     end
 
-    # Create new queue. Internaly uses list to store elements.
+    # Create new queue. Internaly uses List to store elements.
     def self.create(*args)
       new(List.new(*args))
     end
@@ -48,8 +48,8 @@ module DS
       store.empty?
     end
 
-    private
+    protected
 
-    attr_accessor :store
+    attr_reader :store
   end
 end

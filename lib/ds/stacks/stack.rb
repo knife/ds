@@ -10,7 +10,7 @@ module DS
                end
     end
 
-    # Creates stack with List as store
+    # Creates stack internally implemented as List
     def self.create(*args)
       new(List.new(*args))
     end
@@ -25,7 +25,7 @@ module DS
       store.pop unless empty?
     end
 
-    # Adds element to the top of the stack.
+    # Adds element on the top of the stack.
     def push(x)
       store.push x
     end
@@ -40,8 +40,8 @@ module DS
       store.empty?
     end
 
-    private
+    protected
 
-    attr_accessor :store
+    attr_reader :store
   end
 end

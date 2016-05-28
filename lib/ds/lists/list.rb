@@ -145,7 +145,7 @@ module DS
     end
 
     # Appends first list to other
-    def +(other)
+    def concat(other)
       other.head.prev = tail
       tail.next = other.head
       self.tail = other.tail
@@ -378,7 +378,7 @@ module DS
         remove(el)
         el = temp
       end
-      list + self
+      list.concat self
       @size = list.size
       self.head = list.head
     end
@@ -389,7 +389,7 @@ module DS
         remove(el)
         el = temp
       end
-      self + list
+      self.concat list
     end
 
     def replace_inside(el, list, count)
