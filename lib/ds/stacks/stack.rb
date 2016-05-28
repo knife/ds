@@ -3,11 +3,11 @@ module DS
   # Internaly uses array or linked list to store elements.
   class Stack
     def initialize(*args)
-      if args.first.is_a? List
-        @store = args.first
-      else
-        @store = args || []
-      end
+      @store = if args.first.is_a? List
+                 args.first
+               else
+                 args || []
+               end
     end
 
     # Creates stack with List as store

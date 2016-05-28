@@ -149,6 +149,7 @@ module DS
       other.head.prev = tail
       tail.next = other.head
       self.tail = other.tail
+      @size += other.size
       self
     end
 
@@ -378,6 +379,7 @@ module DS
         el = temp
       end
       list + self
+      @size = list.size
       self.head = list.head
     end
 
@@ -405,6 +407,7 @@ module DS
       list.head.prev = prev
       prev.next = list.head
       first.prev = nil
+      @size = @size - count + list.size
     end
 
     def find_last_element(el, count)

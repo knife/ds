@@ -21,7 +21,7 @@ module DS
 
     alias push enqueue
 
-    # Removes element with highest priority from queue .
+    # Removes element with highest priority from queue.
     def dequeue
       x = @store.shift
       x ? x.value : nil

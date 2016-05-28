@@ -4,11 +4,11 @@ module DS
     # Create new queue.
     # First parameter determines how the queue will be represented internally.
     def initialize(*args)
-      if args.first.is_a? List
-        @store = args.first
-      else
-        @store = args || []
-      end
+      @store = if args.first.is_a? List
+                 args.first
+               else
+                 args || []
+               end
     end
 
     # Create new queue. Internaly uses list to store elements.

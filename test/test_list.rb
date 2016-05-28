@@ -66,7 +66,7 @@ describe List do
     proc { @list.get!(x) }.must_raise ListError
   end
 
-  it 'at should return element on given index' do
+  it 'at returns element on given index' do
     @list.at(2).data.must_equal 3
     @list2.at(2).data.must_equal 7
     @list.at(42).must_equal nil
@@ -95,21 +95,25 @@ describe List do
   it '#[] replaces elelment with elements on Array' do
     @list[3] = [0, 0]
     @list.to_a.must_equal [1, 2, 3, 0, 0]
+    @list.size.must_equal 5
   end
 
   it '#[] replaces elements when passed Array and count' do
     @list[1, 2] = [0, 0]
     @list.to_a.must_equal [1, 0, 0, 4]
+    @list.size.must_equal 4
   end
 
   it '#[] replaces element when passed Array and count on list tail' do
     @list[1, 3] = [0, 0, 0]
     @list.to_a.must_equal [1, 0, 0, 0]
+    @list.size.must_equal 4
   end
 
   it '#[] replaces element when passed Array and range' do
     @list[1..2] = [0, 0]
     @list.to_a.must_equal [1, 0, 0, 4]
+    @list.size.must_equal 4
   end
 
   it '#[] should raise error when count or range is invalid' do
@@ -125,15 +129,18 @@ describe List do
     el = @list.at(2)
     @list.replace(el, list)
     @list.to_a.must_equal [1, 2, 8, 9, 4]
+    @list.size.must_equal 5
     el = @list.at(0)
     list = List.new(8, 9)
     @list.replace(el, list)
     @list.to_a.must_equal [8, 9, 2, 8, 9, 4]
+    @list.size.must_equal 6
 
     list = List.new(8, 9)
     el = @list.at(5)
     @list.replace(el, list)
     @list.to_a.must_equal [8, 9, 2, 8, 9, 8, 9]
+    @list.size.must_equal 7
   end
 
   it '#== returns true only if two lists are equal' do
