@@ -3,43 +3,45 @@ module DS
   # Internaly uses array or linked list to store elements.
   class Stack
     def initialize(*args)
-      @store = args || []
+      if args.first.is_a? List
+        @store = args.first
+      else
+        @store = args || []
+      end
     end
 
     # Creates stack with List as store
     def self.create(*args)
-      instance = allocate
-      instance.init_store(List.new(*args))
-      instance
-    end
-
-    def init_store(store)
-      @store = store
+      new(List.new(*args))
     end
 
     # Returns the stack size.
     def size
-      @store.size
+      store.size
     end
 
     # Removes element from stack and returns it.
     def pop
-      @store.pop unless empty?
+      store.pop unless empty?
     end
 
     # Adds element to the top of the stack.
     def push(x)
-      @store.push x
+      store.push x
     end
 
     # Returns element from the top of the stack.
     def peek
-      @store.last
+      store.last
     end
 
     # If stack is empty returns true otherwise returns false.
     def empty?
-      @store.empty?
+      store.empty?
     end
+
+    private
+
+    attr_accessor :store
   end
 end

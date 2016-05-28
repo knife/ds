@@ -38,7 +38,7 @@ module DS
 
     # Removes element from heap maintaining heap relation.
     def shift
-      if length > 0
+      unless empty?
         result = store.first
         swap(1, length)
         store.pop

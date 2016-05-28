@@ -4,23 +4,21 @@ module DS
     # Create new queue.
     # First parameter determines how the queue will be represented internally.
     def initialize(*args)
-      @store = args || []
+      if args.first.is_a? List
+        @store = args.first
+      else
+        @store = args || []
+      end
     end
 
     # Create new queue. Internaly uses list to store elements.
     def self.create(*args)
-      instance = allocate
-      instance.init_store(List.new(*args))
-      instance
-    end
-
-    def init_store(store)
-      @store = store
+      new(List.new(*args))
     end
 
     # Adds element to queue and returns queue itself.
     def enqueue(x)
-      @store << x
+      store << x
       self
     end
 
@@ -28,26 +26,30 @@ module DS
 
     # Removes element from queue and returns it.
     def dequeue
-      @store.shift
+      store.shift
     end
 
     alias shift dequeue
 
     # Returns element from forehead of queue.
     def peek
-      @store.first
+      store.first
     end
 
     # Returns length of queue. If queue is empty returns 0.
     def length
-      @store.length
+      store.length
     end
 
     alias size length
 
     # Checks if queue is empty.
     def empty?
-      @store.empty?
+      store.empty?
     end
+
+    private
+
+    attr_accessor :store
   end
 end
