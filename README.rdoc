@@ -217,7 +217,7 @@ Enumerable methods are also available
   list.map{ |e| e.data } #=> [1, 2, 3, 4]
   list.inject(0){ |a, e|  a + e.data } #=> 10
 
-Concating two lists
+Append one list to other list
   list1.concat(list2)
 
 Comparable module is included so you can:
@@ -243,7 +243,7 @@ Other operations
 
 ==== Tree
 
-A tree is a data structure where nodes are organised in hierarchy.
+A tree is a data structure with nodes organised in hierarchy.
 More: {Tree}[http://en.wikipedia.org/wiki/Tree_(data_structure)]
 
 Building Tree
@@ -286,7 +286,7 @@ More: {BinaryTree}[http://en.wikipedia.org/wiki/Binary_tree]
 
 Building tree
   bin_tree = BinaryTree.new
-  [2, 5, 8, 9, 11, 12, 14].each { |x| bin_tree.insert(x) } #build complete binary Tree
+  [2, 5, 8, 9, 11, 12, 14].each { |x| bin_tree.insert(x) } #builds complete binary Tree
 
 Accessors defined on BinaryTree object:
   bin_tree.left.data #=> 5

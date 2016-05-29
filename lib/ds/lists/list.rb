@@ -56,7 +56,7 @@ module DS
 
     # Removes list head.
     def shift
-      raise ListError, 'List is already empty' if empty?
+      raise ListError, 'List already empty' if empty?
       remove(head).data
     end
 
@@ -144,7 +144,7 @@ module DS
       compare_list_elements(a, b)
     end
 
-    # Appends first list to other
+    # Appends one list to other
     def concat(other)
       other.head.prev = tail
       tail.next = other.head
@@ -207,6 +207,7 @@ module DS
       x
     end
 
+    # Removes last element from list.
     def pop
       remove(tail).data
     end
@@ -221,6 +222,7 @@ module DS
       tail.data
     end
 
+    # Returns first element of the list.
     def first
       head.data
     end
@@ -389,7 +391,7 @@ module DS
         remove(el)
         el = temp
       end
-      self.concat list
+      concat list
     end
 
     def replace_inside(el, list, count)
