@@ -4,7 +4,7 @@
 
 DS provides some popular data structures not implemented in Ruby natively.
 
-Data structures included in DS gem:
+Data structures included in this gem:
 
 * Pair
 * Stacks
@@ -37,7 +37,8 @@ Data structures included in DS gem:
   require 'ds'
   stack = DS::Stack.new
 
-  # To not have to type "DS::" before each class, use:
+To not have to type "DS::" before each class, use:
+
   include DS
   stack = Stack.new
 
