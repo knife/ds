@@ -4,23 +4,6 @@ module DS
     RED = true
     BLACK = false
 
-    # Red Black Tree Node
-    class Node
-      attr_accessor :color, :right, :left, :data, :key
-
-      def initialize(key, value, color)
-        @key = key
-        @data = value
-        @color = color
-        @left = nil
-        @right = nil
-      end
-
-      def children
-        [@left, @right]
-      end
-    end
-
     include Enumerable
 
     attr_accessor :root

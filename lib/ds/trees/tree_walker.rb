@@ -1,10 +1,7 @@
 module DS
   # Tree enumerator
   class TreeWalker
-    attr_accessor :visited
-    attr_accessor :tree
-    attr_accessor :action
-    attr_accessor :order
+    attr_accessor :visited, :tree, :action, :order
 
     # Creates new tree iterator.
     def initialize(tree, options = {}, &block)
@@ -21,7 +18,7 @@ module DS
     # inorder - inorder search - only for Binary Trees
     #
     # If block is  given, passes each visited subtree to block.
-    # Returns values of nodes  in given order
+    # Returns values of nodes in given order
 
     def traverse(traverse_order = nil, &block)
       self.action = block if block_given?
@@ -77,7 +74,6 @@ module DS
           recalculate!(t, order, tree.data, &block)
         end
       when :inorder
-        raise ArgumentError unless self.tree.is_a? BinaryTree
         recalculate!(tree.left, order, memo, &block)
         tree.data = yield tree, memo
         recalculate!(tree.right, order, tree.data, &block)
