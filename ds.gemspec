@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = DS::VERSION
   s.authors     = ['knife']
   s.email       = ['satre@o2.pl']
-  s.homepage    = ''
+  s.homepage    = 'https://github.com/knife/ds'
   s.summary     = 'Some common data structures.'
   s.description = 'Data structures (lists, stacks, trees, heaps, graphs..) in pure Ruby.'
   s.rubyforge_project = 'ds'

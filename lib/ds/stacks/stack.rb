@@ -3,8 +3,9 @@ module DS
   # Internaly uses array or linked list to store elements.
   class Stack
     def initialize(*args)
-      @store = if args.first.is_a? List
-                 args.first
+      first = args.first
+      @store = if first.is_a? List
+                 first
                else
                  args || []
                end

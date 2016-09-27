@@ -28,5 +28,11 @@ module DS
     def to_a
       @store[1..-1]
     end
+
+    def swap(x, y)
+      temp = self[y]
+      self[y] = self[x]
+      self[x] = temp
+    end
   end
 end

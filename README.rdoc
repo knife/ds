@@ -160,6 +160,32 @@ Examples:
   q.peek  #=> :nevermind
 
 
+==== Indexed Priority Queue
+
+Indexed Priority Queue is special form of PriorityQueue with constant access to any element.
+Additionaly you can easily change priority of any element stored on queue.
+
+Creating new Indexed Priority Queue
+  q = IndexedPriorityQueue.new
+or
+  IndexedPriorityQueue.new { |a, b| a.key < b.key }
+
+IndexedPriorityQueue inherits from PriorityQueue so all methods from PriorityQueue are available.
+
+Examples:
+  q.push(:important, 3)
+  q.push(:very_important, 5)
+  q.push(:nevermind, 1)
+
+  q.peek #=> :very_important
+
+  q.change(:nevermind, 10)
+  q.peek #=> :nevermind
+
+Elements stored on priority queue are wrapped in Pair object, when you call get method this object is returned:
+  q.get(:very_important) #=> Pair.new(5, :very_important)
+  q.include?(:very_important) #=> true
+
 === Lists
 
 === List

@@ -31,4 +31,9 @@ describe HeapStore do
     @store.to_a.must_equal [1, 2, 3, 4, 5, 6, 7]
     @store.to_a.must_be_kind_of Array
   end
+
+  it '#swap swaps elements in store' do
+    @store.swap(1, 7)
+    @store.to_a.must_equal [7, 2, 3, 4, 5, 6, 1]
+  end
 end
