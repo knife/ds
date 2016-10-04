@@ -2,7 +2,7 @@ module DS
   # HeapStore with constant access to any element
   class IndexedHeapStore < HeapStore
 
-    def_delegators :@store, :pop, :[]
+    def_delegators :@store, :[]
 
     def initialize(*args)
       args = args.to_a

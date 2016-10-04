@@ -12,6 +12,10 @@ module DS
                end
     end
 
+    def self.min(*args)
+      new(*args) { |parent, child| parent < child }
+    end
+
     # Adds element to queue with given priority.
     def enqueue(x, priority)
       pair = Pair.new(priority, x)
